@@ -1,4 +1,5 @@
 import pandas as pd
+import os
 
 with open("BOM-Scraper/stations_list.txt") as f:
   text = f.readlines()[4:]
@@ -32,4 +33,26 @@ for i in range(len(text)-5):
     rows.append(row)
 
 df = pd.DataFrame(rows, columns=['STN', 'Dist', 'Name', 'Start', 'End', 'Lat', 'Lon', 'State', 'Height (m)', 'Bar_ht'])
-print(df)
+
+os.makedirs("BOM-Scraper/data", exist_ok=True)
+df.to_csv('BOM-Scraper/data/stations_list.csv', index=False)
+
+# ---- narrow down to a manageable, spread-out set of candidate stations ----
+
+df['still_operating'] = df['End'] == "Present"
+df = df[df['still_operating']]
+
+df['years_active'] = df['End'].replace('Present', '2026').astype(int) - df['Start'].astype(int)
+df = df[df['years_active'] >= 10]
+
+df['lat_bin'] = (df['Lat'].astype(float) // 2) * 2
+df['lon_bin'] = (df['Lon'].astype(float) // 2) * 2
+
+candidates = (
+    df.sort_values('years_active', ascending=False)
+      .groupby(['lat_bin', 'lon_bin'])
+      .head(2)
+)
+
+candidates.to_csv('BOM-Scraper/data/candidate_stations.csv', index=False)
+print(f"{len(candidates)} candidate stations saved")
