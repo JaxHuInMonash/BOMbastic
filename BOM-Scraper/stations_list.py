@@ -1,43 +1,36 @@
+import re
 import pandas as pd
 import os
 
-with open("BOM-Scraper/stations_list.txt") as f:
-  text = f.readlines()[4:]
+with open("BOM-Scraper/stations_list.txt", encoding="utf-8") as f:
+    lines = f.readlines()
 
-test = text[0].split()
+dash_line = lines[3].rstrip("\r\n")
+spans = [(m.start(), m.end()) for m in re.finditer(r"-+", dash_line)]
+colspecs = [(s, e if i < len(spans) - 1 else None) for i, (s, e) in enumerate(spans)]
 
-rows = []
+names = ['STN', 'Dist', 'Name', 'Start', 'End', 'Lat', 'Lon',
+         'Source', 'State', 'Height (m)', 'Bar_ht', 'WMO']
 
-for i in range(len(text)-5):
+df = pd.read_fwf(
+    "BOM-Scraper/stations_list.txt",
+    colspecs=colspecs,
+    names=names,
+    skiprows=4,
+    dtype=str,
+)
 
-    line = text[i].split()
-    row = [line[0], line[1]]
+for col in df.columns:
+    df[col] = df[col].str.strip()
 
-    j = 3
+df = df[df['STN'].str.fullmatch(r'\d+', na=False)].reset_index(drop=True)
 
-    name = " ".join(line[2:-9])
-
-    row.append(name)
-
-    if line[-8] == "..":
-       line[-8] = "Present"
-
-    if line[-3] == "..":
-        line[-3] = "N/A"
-
-    if line[-2] == "..":
-        line[-2] = "N/A"
-
-    row.extend(line[-9:-5])
-    row.extend(line[-4:-1])
-    rows.append(row)
-
-df = pd.DataFrame(rows, columns=['STN', 'Dist', 'Name', 'Start', 'End', 'Lat', 'Lon', 'State', 'Height (m)', 'Bar_ht'])
+df['End'] = df['End'].replace('..', 'Present')
+df['Height (m)'] = df['Height (m)'].replace('..', 'N/A')
+df['Bar_ht'] = df['Bar_ht'].replace('..', 'N/A')
 
 os.makedirs("BOM-Scraper/data", exist_ok=True)
 df.to_csv('BOM-Scraper/data/stations_list.csv', index=False)
-
-# ---- narrow down to a manageable, spread-out set of candidate stations ----
 
 df['still_operating'] = df['End'] == "Present"
 df = df[df['still_operating']]
@@ -51,7 +44,7 @@ df['lon_bin'] = (df['Lon'].astype(float) // 2) * 2
 candidates = (
     df.sort_values('years_active', ascending=False)
       .groupby(['lat_bin', 'lon_bin'])
-      .head(2)
+      .head(5)
 )
 
 candidates.to_csv('BOM-Scraper/data/candidate_stations.csv', index=False)
