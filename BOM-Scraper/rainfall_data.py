@@ -29,7 +29,26 @@ def get_rainfall(station):
 
     return df
 
-os.makedirs("BOM-Scraper/data/rainfall", exist_ok=True)
+RAIN_DIR = "BOM-Scraper/data/rainfall"
+
+# station_sorter.py moves finished downloads into selected/ and others/, so a
+# resumed run has to look in all three places. Checking only the flat directory
+# meant every re-run after a sort re-downloaded the entire candidate list.
+SEARCH_DIRS = (RAIN_DIR,
+               os.path.join(RAIN_DIR, "selected"),
+               os.path.join(RAIN_DIR, "others"))
+
+
+def find_existing(station):
+    """Path of an already-downloaded CSV for this station, or None."""
+    for directory in SEARCH_DIRS:
+        path = os.path.join(directory, f"{station}.csv")
+        if os.path.exists(path):
+            return path
+    return None
+
+
+os.makedirs(RAIN_DIR, exist_ok=True)
 
 no_data = []
 got_data = []
@@ -39,9 +58,9 @@ df = pd.read_csv('BOM-Scraper/data/candidate_stations.csv', dtype={"STN": str})
 for station in df['STN']:
 
     station = str(station)
-    out_path = f"BOM-Scraper/data/rainfall/{station}.csv"
+    out_path = os.path.join(RAIN_DIR, f"{station}.csv")
 
-    if os.path.exists(out_path):
+    if find_existing(station):
         got_data.append(station)
         continue
 
@@ -63,7 +82,10 @@ for station in df['STN']:
 # their CSV already existed from a previous run
 for station in got_data:
     if station not in days_recorded:
-        existing = pd.read_csv(f"BOM-Scraper/data/rainfall/{station}.csv")
+        path = find_existing(station)
+        if path is None:          # moved or removed between passes
+            continue
+        existing = pd.read_csv(path)
         rain_col = next(c for c in existing.columns if "Rainfall amount" in c)
         days_recorded[station] = existing[rain_col].notna().sum()
 
