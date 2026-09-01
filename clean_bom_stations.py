@@ -10,11 +10,15 @@ values are shown as '..' or '.....'. This script:
      (safer than splitting on whitespace, since site names contain spaces)
   3. Converts '..' / '.....' / blank -> NaN
   4. Casts each column to the right dtype (int, float, string)
-  5. Adds an `is_active` flag (True if End year is missing, i.e. still recording)
-  6. Writes a clean CSV ready for loading into Postgres
+  5. Drops the copyright footer, which sits below the data and would
+     otherwise parse as three rows with no site number
+  6. Adds `station_id`, the zero-padded 6-char code BOM uses in filenames
+     and URLs (site 1000 -> '001000'), for joining to the rainfall data
+  7. Adds an `is_active` flag (True if End year is missing, i.e. still recording)
+  8. Writes a clean CSV ready for loading into Postgres
 
 Usage:
-    python clean_bom_stations.py input.csv output.csv
+    python clean_bom_stations.py BOM-Scraper/stations_list.txt cleaned_stations.csv
 """
 
 import sys
@@ -108,11 +112,17 @@ def clean_bom_station_file(input_path: str, output_path: str) -> pd.DataFrame:
     # site_name has irregular internal spacing from the fixed-width source
     df["site_name"] = df["site_name"].str.replace(r"\s+", " ", regex=True)
 
+    # the file ends with a copyright/privacy footer sitting below the data;
+    # those lines are non-blank so they survive the line filter, but they
+    # have no site number
+    df = df[df["site"].notna()].reset_index(drop=True)
+
+    # BOM identifies stations by a zero-padded 6-char code in filenames and
+    # URLs (001000), which the Int64 cast above strips back to 1000
+    df.insert(0, "station_id", df["site"].astype(str).str.zfill(6))
+
     # station still recording if end_year is missing
     df["is_active"] = df["end_year"].isna()
-
-    # drop fully-empty rows (just in case)
-    df = df.dropna(how="all")
 
     df.to_csv(output_path, index=False)
     return df
