@@ -1,12 +1,14 @@
 -- BOMbastic PostgreSQL database schema and station CSV import
 
-
+\set ON_ERROR_STOP on
 BEGIN;
+
 
 CREATE SCHEMA IF NOT EXISTS bombastic;
 
 -- Final station metadata table used by the dashboard and API.
 CREATE TABLE IF NOT EXISTS bombastic.stations (
+    station_id     CHAR(6) NOT NULL UNIQUE,
     site            INTEGER PRIMARY KEY,
     dist            SMALLINT,
     site_name       VARCHAR(150) NOT NULL,
@@ -84,6 +86,7 @@ CREATE INDEX IF NOT EXISTS idx_weather_date
 DROP TABLE IF EXISTS bombastic.stations_import;
 
 CREATE UNLOGGED TABLE bombastic.stations_import (
+    station_id  TEXT,
     site        TEXT,
     dist        TEXT,
     site_name   TEXT,
@@ -100,12 +103,13 @@ CREATE UNLOGGED TABLE bombastic.stations_import (
 );
 
 -- psql command: the CSV must be in the same folder from which psql is run.
-\copy bombastic.stations_import (site, dist, site_name, start_year, end_year, lat, lon, source, state, height_m, bar_ht_m, wmo, is_active) FROM 'cleaned_stations.csv' WITH (FORMAT csv, HEADER true, NULL '', ENCODING 'UTF8');
+\copy bombastic.stations_import ( station_id,site, dist, site_name, start_year, end_year, lat, lon, source, state, height_m, bar_ht_m, wmo, is_active) FROM 'cleaned_stations.csv' WITH (FORMAT csv, HEADER true, NULL '', ENCODING 'UTF8');
 
 -- Keep only real station rows. The supplied CSV contains three non-station
 -- footer rows with an empty site value; these are retained in the staging table
 -- for validation but are not inserted into the final table.
 INSERT INTO bombastic.stations (
+    station_id,
     site,
     dist,
     site_name,
@@ -121,6 +125,7 @@ INSERT INTO bombastic.stations (
     is_active
 )
 SELECT
+    LPAD(BTRIM(station_id), 6, '0'),
     site::INTEGER,
     NULLIF(BTRIM(dist), '')::SMALLINT,
     BTRIM(site_name),
@@ -137,6 +142,7 @@ SELECT
 FROM bombastic.stations_import
 WHERE BTRIM(site) ~ '^[0-9]+$'
 ON CONFLICT (site) DO UPDATE SET
+    station_id = EXCLUDED.station_id,
     dist = EXCLUDED.dist,
     site_name = EXCLUDED.site_name,
     start_year = EXCLUDED.start_year,
