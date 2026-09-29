@@ -1,0 +1,16 @@
+# BOMbastic runtime dependencies.
+#
+# Install into the interpreter VS Code is using -- the `python -m pip` form
+# matters, because a bare `pip` may belong to a different Python install:
+#
+#     python -m pip install -r requirements.txt
+#
+# Lower bounds, not pins. The pipeline is verified on pandas 2.3.3 and 3.0.2;
+# the candidate selection is deliberately version-independent (see
+# docs/data-sources.md section 6.1), so a newer pandas is safe.
+
+pandas>=2.0
+numpy>=1.24
+requests>=2.28
+
+# Tests use only the standard library (unittest) -- nothing extra to install.
