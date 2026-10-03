@@ -1248,6 +1248,14 @@
     "data_tier": "others"
   },
   {
+    "station_id": "009225",
+    "name": "PERTH METRO",
+    "lat": -31.9192,
+    "lon": 115.8728,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
     "station_id": "009500",
     "name": "ALBANY",
     "lat": -35.0289,
@@ -5424,6 +5432,14 @@
     "data_tier": "selected"
   },
   {
+    "station_id": "040913",
+    "name": "BRISBANE",
+    "lat": -27.4808,
+    "lon": 153.0389,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
     "station_id": "041011",
     "name": "CAMBOOYA POST OFFICE",
     "lat": -27.7072,
@@ -6868,6 +6884,14 @@
     "name": "OUTTRIM",
     "lat": -38.4949,
     "lon": 145.7809,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "086338",
+    "name": "MELBOURNE (OLYMPIC PARK)",
+    "lat": -37.8255,
+    "lon": 144.9816,
     "state": "VIC",
     "data_tier": "others"
   },
