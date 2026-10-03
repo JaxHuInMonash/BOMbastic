@@ -9,8 +9,14 @@ the stations we ACTUALLY have rainfall history for (rainfall_data.py's
 output, sorted by station_sorter.py into selected/ and others/), so
 every marker on the map corresponds to real, explorable data.
 
+Station metadata comes from BOM-Scraper/data/stations.csv, the output of
+station_parser.py, whose columns are fixed by docs/data-contract.md
+section 2. The JSON written here keeps its own short keys (lat, lon) because
+the frontend and backend already read those; only the input side changed.
+
 Usage:
-    python build_map_stations.py <cleaned_stations.csv> <rainfall_dir> <output.json>
+    python build_map_stations.py                                    # repo defaults
+    python build_map_stations.py <stations.csv> <rainfall_dir> <output.json>
 
 <rainfall_dir> is the directory containing selected/ and others/
 subfolders of per-station rainfall CSVs (BOM-Scraper/data/rainfall).
@@ -19,7 +25,23 @@ subfolders of per-station rainfall CSVs (BOM-Scraper/data/rainfall).
 import sys
 import os
 import json
+from pathlib import Path
+
 import pandas as pd
+
+REPO_ROOT = Path(__file__).resolve().parent
+DEFAULT_STATIONS = REPO_ROOT / "BOM-Scraper" / "data" / "stations.csv"
+DEFAULT_RAINFALL_DIR = REPO_ROOT / "BOM-Scraper" / "data" / "rainfall"
+DEFAULT_OUTPUT = REPO_ROOT / "backend" / "map_stations.json"
+
+# Contract column -> key the map JSON has always used.
+OUTPUT_KEYS = {
+    "station_id": "station_id",
+    "name": "name",
+    "latitude": "lat",
+    "longitude": "lon",
+    "state": "state",
+}
 
 
 def stations_with_rainfall(rainfall_dir: str):
@@ -48,17 +70,28 @@ def stations_with_rainfall(rainfall_dir: str):
     return mapping
 
 
-def build_map_stations(stations_csv: str, rainfall_dir: str, output_json: str):
-    df = pd.read_csv(stations_csv, dtype={"station_id": str})
-    df = df.dropna(subset=["lat", "lon"])
+def build_map_stations(stations_csv, rainfall_dir, output_json):
+    # station_id and state stay text: '001006', not 1006.
+    df = pd.read_csv(stations_csv, dtype={"station_id": str, "state": str})
 
-    rainfall_map = stations_with_rainfall(rainfall_dir)
+    missing = [c for c in OUTPUT_KEYS if c not in df.columns]
+    if missing:
+        raise SystemExit(
+            f"{stations_csv} is missing contract columns {missing}. "
+            "Regenerate it with: python BOM-Scraper/station_parser.py"
+        )
+
+    df = df.dropna(subset=["latitude", "longitude"])
+
+    rainfall_map = stations_with_rainfall(str(rainfall_dir))
     df = df[df["station_id"].isin(rainfall_map.keys())].copy()
     df["data_tier"] = df["station_id"].map(rainfall_map)
 
-    records = df[["station_id", "site_name", "lat", "lon", "state", "data_tier"]].rename(
-        columns={"site_name": "name"}
-    ).to_dict(orient="records")
+    records = (
+        df[list(OUTPUT_KEYS) + ["data_tier"]]
+        .rename(columns=OUTPUT_KEYS)
+        .to_dict(orient="records")
+    )
 
     with open(output_json, "w") as f:
         json.dump(records, f, indent=2)
@@ -70,7 +103,10 @@ def build_map_stations(stations_csv: str, rainfall_dir: str, output_json: str):
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 4:
-        print("Usage: python build_map_stations.py <cleaned_stations.csv> <rainfall_dir> <output.json>")
+    if len(sys.argv) == 1:
+        build_map_stations(DEFAULT_STATIONS, DEFAULT_RAINFALL_DIR, DEFAULT_OUTPUT)
+    elif len(sys.argv) == 4:
+        build_map_stations(sys.argv[1], sys.argv[2], sys.argv[3])
+    else:
+        print("Usage: python build_map_stations.py [<stations.csv> <rainfall_dir> <output.json>]")
         sys.exit(1)
-    build_map_stations(sys.argv[1], sys.argv[2], sys.argv[3])

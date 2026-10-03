@@ -13,6 +13,7 @@ Run:
 """
 
 import sys
+import unittest
 import tempfile
 import os
 import pandas as pd
@@ -73,6 +74,14 @@ def run():
         print()
         print("ALL CHECKS PASSED" if all_passed else "SOME CHECKS FAILED")
         return all_passed
+
+
+class TestNFR05StationCleaning(unittest.TestCase):
+    """Lets `python -m unittest discover -s tests` count this evidence.
+    Run the file directly to see the per-check PASS/FAIL report."""
+
+    def test_acceptance_criteria(self):
+        self.assertTrue(run(), "one or more NFR-05 checks failed; run test_nfr05_data_quality.py directly for details")
 
 
 if __name__ == "__main__":
