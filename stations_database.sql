@@ -1,182 +1,265 @@
--- BOMbastic PostgreSQL database schema and station CSV import
+-- BOMbastic PostgreSQL schema and station import
+--
+-- Implements docs/data-contract.md. Where this file and that document disagree,
+-- the document is right and this file is a bug.
+--
+-- The staging-table-then-validate structure is from the original schema by
+-- HW240823 (commit c1be1de) and is kept deliberately: importing every field as
+-- text first means a malformed row is a reportable count rather than an aborted
+-- load.
+--
+-- Changes from that version:
+--   * station_id (zero-padded text) is the primary key; the integer site number
+--     is gone. Leading zeros are data -- they appear in every rainfall filename
+--     and in BOM's own URLs.
+--   * district is text, not SMALLINT: 1,895 values carry a leading zero.
+--   * is_active is a generated column, so it cannot disagree with end_year.
+--   * observations is narrow (one row per station x date x variable) rather than
+--     one column per variable, so quality flags survive and a new variable is an
+--     INSERT rather than a migration. See docs/data-contract.md section 4.
+--   * variables and ingestion_runs added.
+--
+-- Run from the repository root:
+--     psql -v ON_ERROR_STOP=1 -f stations_database.sql
 
 \set ON_ERROR_STOP on
+
 BEGIN;
 
 
 CREATE SCHEMA IF NOT EXISTS bombastic;
 
--- Final station metadata table used by the dashboard and API.
+
+-- ===========================================================================
+-- stations -- docs/data-contract.md section 2
+-- ===========================================================================
 CREATE TABLE IF NOT EXISTS bombastic.stations (
-    station_id     CHAR(6) NOT NULL UNIQUE,
-    site            INTEGER PRIMARY KEY,
-    dist            SMALLINT,
-    site_name       VARCHAR(150) NOT NULL,
-    start_year      SMALLINT NOT NULL,
-    end_year        SMALLINT,
-    latitude        DOUBLE PRECISION NOT NULL,
-    longitude       DOUBLE PRECISION NOT NULL,
-    location_source VARCHAR(30),
-    state           VARCHAR(3),
-    height_m        NUMERIC(8, 2),
-    barometer_height_m NUMERIC(8, 2),
-    wmo             INTEGER UNIQUE,
-    is_active       BOOLEAN NOT NULL DEFAULT FALSE,
-    CONSTRAINT stations_site_positive CHECK (site > 0),
-    CONSTRAINT stations_year_order CHECK (
-        end_year IS NULL OR end_year >= start_year
-    ),
-    CONSTRAINT stations_latitude_range CHECK (latitude BETWEEN -90 AND 90),
-    CONSTRAINT stations_longitude_range CHECK (longitude BETWEEN -180 AND 180),
-    CONSTRAINT stations_state_values CHECK (
+    station_id            CHAR(6)          PRIMARY KEY,
+    name                  VARCHAR(60)      NOT NULL,
+    district              VARCHAR(4),
+    state                 VARCHAR(3),
+    latitude              DOUBLE PRECISION NOT NULL,
+    longitude             DOUBLE PRECISION NOT NULL,
+    start_year            SMALLINT         NOT NULL,
+    end_year              SMALLINT,
+    -- Generated, not stored independently: the two can never drift apart.
+    is_active             BOOLEAN          GENERATED ALWAYS AS (end_year IS NULL) STORED,
+    elevation_m           NUMERIC(8, 2),
+    barometer_elevation_m NUMERIC(8, 2),
+    wmo_id                INTEGER          UNIQUE,
+    location_source       VARCHAR(20),
+    ingested_at           TIMESTAMPTZ      NOT NULL DEFAULT now(),
+
+    CONSTRAINT stations_id_format     CHECK (station_id ~ '^[0-9]{6}$'),
+    CONSTRAINT stations_year_order    CHECK (end_year IS NULL OR end_year >= start_year),
+    CONSTRAINT stations_latitude      CHECK (latitude  BETWEEN  -90 AND  90),
+    CONSTRAINT stations_longitude     CHECK (longitude BETWEEN -180 AND 180),
+    CONSTRAINT stations_state_values  CHECK (
         state IS NULL OR state IN
         ('WA', 'NT', 'SA', 'QLD', 'NSW', 'VIC', 'TAS', 'ANT', 'ISL')
-    ),
-    CONSTRAINT stations_active_end_year CHECK (
-        (is_active = TRUE AND end_year IS NULL)
-        OR (is_active = FALSE AND end_year IS NOT NULL)
     )
 );
 
--- Future daily observations link to stations through the site foreign key.
--- The weather columns can be extended after the cleaned observation CSV is ready.
-CREATE TABLE IF NOT EXISTS bombastic.weather_observations (
-    observation_id  BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    site            INTEGER NOT NULL,
-    observation_date DATE NOT NULL,
-    min_temp_c      NUMERIC(5, 2),
-    max_temp_c      NUMERIC(5, 2),
-    rainfall_mm     NUMERIC(8, 2),
-    humidity_percent NUMERIC(5, 2),
-    wind_speed_kmh  NUMERIC(6, 2),
-    CONSTRAINT weather_station_fk
-        FOREIGN KEY (site)
-        REFERENCES bombastic.stations(site)
-        ON UPDATE CASCADE
-        ON DELETE RESTRICT,
-    CONSTRAINT weather_site_date_unique UNIQUE (site, observation_date),
-    CONSTRAINT weather_temperature_order CHECK (
-        min_temp_c IS NULL OR max_temp_c IS NULL OR min_temp_c <= max_temp_c
+CREATE INDEX IF NOT EXISTS idx_stations_state      ON bombastic.stations (state);
+CREATE INDEX IF NOT EXISTS idx_stations_active     ON bombastic.stations (is_active);
+CREATE INDEX IF NOT EXISTS idx_stations_name_lower ON bombastic.stations (LOWER(name));
+
+
+-- ===========================================================================
+-- variables -- docs/data-contract.md section 3
+-- The front end reads unit and default_chart from here, so neither is hardcoded
+-- in the client (FR-02, FR-07).
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS bombastic.variables (
+    variable_code         TEXT    PRIMARY KEY,
+    label                 TEXT    NOT NULL,
+    unit                  TEXT    NOT NULL,
+    semantic_type         TEXT    NOT NULL,
+    default_chart         TEXT    NOT NULL,
+    interpolation_allowed BOOLEAN NOT NULL DEFAULT FALSE,
+    bom_product_code      TEXT,
+    bom_obs_code          TEXT,
+
+    CONSTRAINT variables_semantic_type CHECK (
+        semantic_type IN ('accumulation', 'instantaneous', 'extreme')
     ),
-    CONSTRAINT weather_rainfall_nonnegative CHECK (
-        rainfall_mm IS NULL OR rainfall_mm >= 0
-    ),
-    CONSTRAINT weather_humidity_range CHECK (
-        humidity_percent IS NULL OR humidity_percent BETWEEN 0 AND 100
-    ),
-    CONSTRAINT weather_wind_nonnegative CHECK (
-        wind_speed_kmh IS NULL OR wind_speed_kmh >= 0
+    CONSTRAINT variables_default_chart CHECK (
+        default_chart IN ('line', 'bar', 'scatter')
     )
 );
 
-CREATE INDEX IF NOT EXISTS idx_stations_state
-    ON bombastic.stations(state);
+INSERT INTO bombastic.variables
+    (variable_code, label, unit, semantic_type, default_chart,
+     interpolation_allowed, bom_product_code, bom_obs_code)
+VALUES
+    ('rainfall', 'Rainfall',            'mm', 'accumulation', 'bar',  FALSE, 'IDCJAC0009', '136'),
+    ('tmax',     'Maximum temperature', 'C',  'extreme',      'line', FALSE, 'IDCJAC0010', NULL),
+    ('tmin',     'Minimum temperature', 'C',  'extreme',      'line', FALSE, 'IDCJAC0011', NULL)
+ON CONFLICT (variable_code) DO UPDATE SET
+    label                 = EXCLUDED.label,
+    unit                  = EXCLUDED.unit,
+    semantic_type         = EXCLUDED.semantic_type,
+    default_chart         = EXCLUDED.default_chart,
+    interpolation_allowed = EXCLUDED.interpolation_allowed,
+    bom_product_code      = EXCLUDED.bom_product_code,
+    bom_obs_code          = EXCLUDED.bom_obs_code;
+-- bom_obs_code for temperature is deliberately NULL: read it off the CDO URL
+-- when the temperature scrape is set up, do not copy a number from elsewhere.
 
-CREATE INDEX IF NOT EXISTS idx_stations_active
-    ON bombastic.stations(is_active);
 
-CREATE INDEX IF NOT EXISTS idx_stations_name_lower
-    ON bombastic.stations(LOWER(site_name));
+-- ===========================================================================
+-- ingestion_runs -- docs/data-contract.md section 6
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS bombastic.ingestion_runs (
+    run_id               BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    started_at           TIMESTAMPTZ NOT NULL DEFAULT now(),
+    completed_at         TIMESTAMPTZ,
+    source               TEXT        NOT NULL,
+    variable_code        TEXT        REFERENCES bombastic.variables (variable_code),
+    status               TEXT        NOT NULL DEFAULT 'running',
+    stations_attempted   INTEGER,
+    stations_loaded      INTEGER,
+    stations_no_product  INTEGER,
+    rows_read            INTEGER,
+    rows_loaded          INTEGER,
+    rows_rejected        INTEGER,
+    notes                TEXT,
 
-CREATE INDEX IF NOT EXISTS idx_weather_date
-    ON bombastic.weather_observations(observation_date);
+    CONSTRAINT runs_status CHECK (status IN ('running', 'success', 'partial', 'failed'))
+);
 
--- Import every CSV field as text first. This prevents invalid footer rows from
--- stopping the whole import and gives the team an auditable validation stage.
+
+-- ===========================================================================
+-- observations -- docs/data-contract.md sections 4 and 5
+-- One row per station x date x variable.
+-- ===========================================================================
+CREATE TABLE IF NOT EXISTS bombastic.observations (
+    station_id        CHAR(6)  NOT NULL REFERENCES bombastic.stations (station_id)
+                               ON UPDATE CASCADE ON DELETE RESTRICT,
+    observed_date     DATE     NOT NULL,
+    variable_code     TEXT     NOT NULL REFERENCES bombastic.variables (variable_code)
+                               ON UPDATE CASCADE ON DELETE RESTRICT,
+    value             NUMERIC(8, 2),
+    quality_state     TEXT     NOT NULL,
+    -- BOM's "period over which rainfall was measured": greater than 1 means the
+    -- figure is a multi-day total reported against its final day.
+    accumulation_days SMALLINT,
+    source_product    TEXT,
+    ingestion_run_id  BIGINT   REFERENCES bombastic.ingestion_runs (run_id),
+
+    -- Makes re-ingestion idempotent (DR-02).
+    PRIMARY KEY (station_id, observed_date, variable_code),
+
+    CONSTRAINT observations_quality_state CHECK (
+        quality_state IN ('observed', 'unverified', 'interpolated', 'missing')
+    ),
+    -- The invariant the whole product rests on: a missing day carries no value,
+    -- and a day that carries a value is not missing. An observed 0.0 is a
+    -- measurement and stays one.
+    CONSTRAINT observations_missing_has_no_value CHECK (
+        (quality_state = 'missing' AND value IS NULL)
+        OR (quality_state <> 'missing' AND value IS NOT NULL)
+    ),
+    CONSTRAINT observations_accumulation CHECK (
+        accumulation_days IS NULL OR accumulation_days >= 1
+    )
+);
+
+CREATE INDEX IF NOT EXISTS idx_observations_query
+    ON bombastic.observations (station_id, variable_code, observed_date);
+CREATE INDEX IF NOT EXISTS idx_observations_date
+    ON bombastic.observations (observed_date);
+
+
+-- ===========================================================================
+-- Station import
+-- Every field lands as text first so a malformed row is counted, not fatal.
+-- ===========================================================================
 DROP TABLE IF EXISTS bombastic.stations_import;
 
 CREATE UNLOGGED TABLE bombastic.stations_import (
-    station_id  TEXT,
-    site        TEXT,
-    dist        TEXT,
-    site_name   TEXT,
-    start_year  TEXT,
-    end_year    TEXT,
-    lat         TEXT,
-    lon         TEXT,
-    source      TEXT,
-    state       TEXT,
-    height_m    TEXT,
-    bar_ht_m    TEXT,
-    wmo         TEXT,
-    is_active   TEXT
+    station_id            TEXT,
+    name                  TEXT,
+    district              TEXT,
+    state                 TEXT,
+    latitude              TEXT,
+    longitude             TEXT,
+    start_year            TEXT,
+    end_year              TEXT,
+    is_active             TEXT,
+    elevation_m           TEXT,
+    barometer_elevation_m TEXT,
+    wmo_id                TEXT,
+    location_source       TEXT
 );
 
--- psql command: the CSV must be in the same folder from which psql is run.
-\copy bombastic.stations_import ( station_id,site, dist, site_name, start_year, end_year, lat, lon, source, state, height_m, bar_ht_m, wmo, is_active) FROM 'cleaned_stations.csv' WITH (FORMAT csv, HEADER true, NULL '', ENCODING 'UTF8');
+-- Produced by BOM-Scraper/station_parser.py. Column order is the contract's.
+-- is_active is read but not inserted: the target column is generated.
+\copy bombastic.stations_import FROM 'BOM-Scraper/data/stations.csv' WITH (FORMAT csv, HEADER true, NULL '', ENCODING 'UTF8');
 
--- Keep only real station rows. The supplied CSV contains three non-station
--- footer rows with an empty site value; these are retained in the staging table
--- for validation but are not inserted into the final table.
 INSERT INTO bombastic.stations (
-    station_id,
-    site,
-    dist,
-    site_name,
-    start_year,
-    end_year,
-    latitude,
-    longitude,
-    location_source,
-    state,
-    height_m,
-    barometer_height_m,
-    wmo,
-    is_active
+    station_id, name, district, state, latitude, longitude,
+    start_year, end_year, elevation_m, barometer_elevation_m,
+    wmo_id, location_source
 )
 SELECT
-    LPAD(BTRIM(station_id), 6, '0'),
-    site::INTEGER,
-    NULLIF(BTRIM(dist), '')::SMALLINT,
-    BTRIM(site_name),
+    BTRIM(station_id),
+    BTRIM(name),
+    NULLIF(BTRIM(district), ''),
+    NULLIF(BTRIM(state), ''),
+    latitude::DOUBLE PRECISION,
+    longitude::DOUBLE PRECISION,
     start_year::SMALLINT,
     NULLIF(BTRIM(end_year), '')::SMALLINT,
-    lat::DOUBLE PRECISION,
-    lon::DOUBLE PRECISION,
-    NULLIF(BTRIM(source), ''),
-    NULLIF(BTRIM(state), ''),
-    NULLIF(BTRIM(height_m), '')::NUMERIC(8, 2),
-    NULLIF(BTRIM(bar_ht_m), '')::NUMERIC(8, 2),
-    NULLIF(BTRIM(wmo), '')::INTEGER,
-    is_active::BOOLEAN
+    NULLIF(BTRIM(elevation_m), '')::NUMERIC(8, 2),
+    NULLIF(BTRIM(barometer_elevation_m), '')::NUMERIC(8, 2),
+    NULLIF(BTRIM(wmo_id), '')::INTEGER,
+    NULLIF(BTRIM(location_source), '')
 FROM bombastic.stations_import
-WHERE BTRIM(site) ~ '^[0-9]+$'
-ON CONFLICT (site) DO UPDATE SET
-    station_id = EXCLUDED.station_id,
-    dist = EXCLUDED.dist,
-    site_name = EXCLUDED.site_name,
-    start_year = EXCLUDED.start_year,
-    end_year = EXCLUDED.end_year,
-    latitude = EXCLUDED.latitude,
-    longitude = EXCLUDED.longitude,
-    location_source = EXCLUDED.location_source,
-    state = EXCLUDED.state,
-    height_m = EXCLUDED.height_m,
-    barometer_height_m = EXCLUDED.barometer_height_m,
-    wmo = EXCLUDED.wmo,
-    is_active = EXCLUDED.is_active;
+WHERE BTRIM(station_id) ~ '^[0-9]{6}$'
+ON CONFLICT (station_id) DO UPDATE SET
+    name                  = EXCLUDED.name,
+    district              = EXCLUDED.district,
+    state                 = EXCLUDED.state,
+    latitude              = EXCLUDED.latitude,
+    longitude             = EXCLUDED.longitude,
+    start_year            = EXCLUDED.start_year,
+    end_year              = EXCLUDED.end_year,
+    elevation_m           = EXCLUDED.elevation_m,
+    barometer_elevation_m = EXCLUDED.barometer_elevation_m,
+    wmo_id                = EXCLUDED.wmo_id,
+    location_source       = EXCLUDED.location_source,
+    ingested_at           = now();
 
 COMMIT;
 
--- Validation results expected for the supplied CSV:
--- imported_rows = 19512, invalid_footer_rows = 3, valid_station_rows = 19509.
-SELECT COUNT(*) AS imported_rows
-FROM bombastic.stations_import;
 
-SELECT COUNT(*) AS invalid_footer_rows
+-- ===========================================================================
+-- Validation. Expected for the current register:
+--   rows_in_staging = 19509, rejected_rows = 0, stations_loaded = 19509,
+--   still_recording = 6316, variables_defined = 3, observations = 0
+-- ===========================================================================
+SELECT COUNT(*) AS rows_in_staging FROM bombastic.stations_import;
+
+SELECT COUNT(*) AS rejected_rows
 FROM bombastic.stations_import
-WHERE COALESCE(BTRIM(site), '') !~ '^[0-9]+$';
+WHERE COALESCE(BTRIM(station_id), '') !~ '^[0-9]{6}$';
 
-SELECT COUNT(*) AS valid_station_rows
-FROM bombastic.stations;
+SELECT COUNT(*) AS stations_loaded FROM bombastic.stations;
+
+SELECT COUNT(*) FILTER (WHERE is_active) AS still_recording FROM bombastic.stations;
+
+SELECT COUNT(*) AS variables_defined FROM bombastic.variables;
+
+SELECT COUNT(*) AS observations FROM bombastic.observations;
+
+-- Leading zeros must survive: these are the filenames the rainfall data uses.
+SELECT station_id, name, state
+FROM bombastic.stations
+WHERE station_id IN ('001006', '074128', '094029', '300000')
+ORDER BY station_id;
 
 SELECT state, COUNT(*) AS station_count
 FROM bombastic.stations
 GROUP BY state
-ORDER BY state;
-
-SELECT site, site_name, state, latitude, longitude
-FROM bombastic.stations
-WHERE is_active = TRUE
-ORDER BY site
-LIMIT 10;
+ORDER BY station_count DESC;

@@ -1,0 +1,25 @@
+{
+  // Use the project virtualenv (.venv, Python 3.14 with pandas/numpy/requests).
+  // This only applies when no interpreter has been picked yet -- if VS Code has
+  // already selected a different one, override it with
+  // Ctrl+Shift+P -> "Python: Select Interpreter" -> ./.venv
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/Scripts/python.exe",
+
+  // Run tests from the repository root. Several scripts resolve data paths
+  // relative to the working directory, so launching from the script's own
+  // folder makes them fail with FileNotFoundError.
+  "python.testing.unittestEnabled": true,
+  "python.testing.pytestEnabled": false,
+  "python.testing.cwd": "${workspaceFolder}",
+  "python.testing.unittestArgs": ["-v", "-s", "tests", "-p", "test_*.py"],
+
+  // BOM-Scraper contains a hyphen, so it cannot be imported as a package.
+  // Putting it on the analysis path lets Pylance resolve station_parser and
+  // stations_list, which the test file reaches via sys.path at runtime.
+  "python.analysis.extraPaths": ["./BOM-Scraper"],
+  "terminal.integrated.env.windows": { "PYTHONPATH": "${workspaceFolder}/BOM-Scraper" },
+  "terminal.integrated.env.linux":   { "PYTHONPATH": "${workspaceFolder}/BOM-Scraper" },
+  "terminal.integrated.env.osx":     { "PYTHONPATH": "${workspaceFolder}/BOM-Scraper" },
+
+  "files.eol": "\r\n"
+}
