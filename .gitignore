@@ -216,4 +216,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+# Combined import inputs, rebuilt by BOM-Scraper/combine_csvs.py
 rainfall_all.csv
+tmax_all.csv
+tmin_all.csv

@@ -26,7 +26,9 @@ is the intended public access path.
 19,509 stations. Fixed-width text, not CSV.
 
 **Observations.** One zipped CSV per station per variable, retrieved from
-`bom.gov.au/jsp/ncc/cdio/weatherData/av` with `p_nccObsCode` selecting the variable.
+`bom.gov.au/jsp/ncc/cdio/weatherData/av` with `p_nccObsCode` selecting the variable:
+`136` rainfall, `122` maximum temperature, `123` minimum temperature (read off BOM's own
+CDO page titles). Since October 2026 these are downloaded by hand; see §4.1.
 
 ---
 
@@ -125,6 +127,31 @@ team prefers to avoid the question entirely, §5 sets out the alternative.
 
 **Whoever adds the temperature scrape should keep the existing rate limiting**, and should
 not increase concurrency to speed it up.
+
+### 4.1 October 2026: BOM now refuses scripted requests
+
+On 3 October 2026 every scripted request for temperature was refused with **HTTP 403
+Forbidden**, starting with the first one, while the same pages still opened in a browser.
+The rainfall files had been fetched in August with the same request pattern, so BOM's
+handling of scripted traffic has changed since. (The first scraper version retried each
+refusal and kept going, so BOM received about 1,100 refused requests over 31 minutes. It
+now stops at the first refusal.)
+
+**Our position:** a 403 is an explicit refusal, not a convention like `robots.txt`. We do
+not change headers, user agents or networks to get past it; doing so would break the
+"not circumventing access controls" point above. Consequences:
+
+- `temperature_data.py` stops at the first 401, 403 or 429 and never retries one.
+- Additional data is obtained by **downloading each station's "All years of data" zip in a
+  browser** and filing it with `temperature_data.py --import`, which checks the product and
+  station inside each file and records the download in `data/temperature/manifest.csv`.
+  This is how the 10 temperature stations and the 3 city-centre rainfall files were
+  obtained.
+- `rainfall_data.py` would be refused in the same way for any station not already held.
+  Do not re-run it to find out.
+- If the project needs more stations than manual downloading allows, the sanctioned
+  alternative is SILO's documented API (§5). That would be a team decision, with the
+  interpolation safeguards §5 describes.
 
 ---
 

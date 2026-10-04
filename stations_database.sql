@@ -93,8 +93,8 @@ INSERT INTO bombastic.variables
      interpolation_allowed, bom_product_code, bom_obs_code)
 VALUES
     ('rainfall', 'Rainfall',            'mm', 'accumulation', 'bar',  FALSE, 'IDCJAC0009', '136'),
-    ('tmax',     'Maximum temperature', 'C',  'extreme',      'line', FALSE, 'IDCJAC0010', NULL),
-    ('tmin',     'Minimum temperature', 'C',  'extreme',      'line', FALSE, 'IDCJAC0011', NULL)
+    ('tmax',     'Maximum temperature', '°C', 'extreme',      'line', FALSE, 'IDCJAC0010', '122'),
+    ('tmin',     'Minimum temperature', '°C', 'extreme',      'line', FALSE, 'IDCJAC0011', '123')
 ON CONFLICT (variable_code) DO UPDATE SET
     label                 = EXCLUDED.label,
     unit                  = EXCLUDED.unit,
@@ -103,8 +103,10 @@ ON CONFLICT (variable_code) DO UPDATE SET
     interpolation_allowed = EXCLUDED.interpolation_allowed,
     bom_product_code      = EXCLUDED.bom_product_code,
     bom_obs_code          = EXCLUDED.bom_obs_code;
--- bom_obs_code for temperature is deliberately NULL: read it off the CDO URL
--- when the temperature scrape is set up, do not copy a number from elsewhere.
+-- bom_obs_code is the CDO p_nccObsCode. 122 and 123 were read off BOM's own CDO
+-- pages ("Daily Maximum Temperature", "Daily Minimum Temperature"), as the
+-- contract requires, when temperature was first downloaded in October 2026.
+-- The unit is shown on every axis and tooltip (FR-02), so it carries the degree sign.
 
 
 -- ===========================================================================
