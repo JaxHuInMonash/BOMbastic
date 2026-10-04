@@ -5,6 +5,8 @@ Implements the first two endpoints of the report's REST contract (section 5.3),
 plus the health check:
 
     GET /api/v1/variables      what can be charted, with label, unit and chart type
+    GET /api/v1/stations       stations with data, and which variables each has
+    GET /api/v1/stations/{id}  one station and its variables
     GET /api/v1/observations   one station, one variable, one date range
     GET /health                is the service up and can it reach the database
 
@@ -29,7 +31,8 @@ from __future__ import annotations
 from datetime import date, timedelta
 from typing import Iterator, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, Depends, FastAPI, HTTPException, Path, Query, Request
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 import db
@@ -58,6 +61,29 @@ class StationRef(BaseModel):
     state: str | None
     latitude: float
     longitude: float
+    is_active: bool | None = None
+
+
+class StationVariable(BaseModel):
+    variable_code: str
+    first_date: date
+    last_date: date
+    days_with_value: int
+
+
+class Station(BaseModel):
+    station_id: str
+    name: str
+    state: str | None
+    latitude: float
+    longitude: float
+    is_active: bool
+    variables: list[StationVariable]
+
+
+class StationList(BaseModel):
+    count: int
+    stations: list[Station]
 
 
 class Availability(BaseModel):
@@ -113,11 +139,40 @@ class ObservationsResponse(BaseModel):
 
 # --------------------------------------------------------------------- dependencies
 def get_store() -> Iterator[db.Store]:
-    try:
-        with db.connect() as conn:
-            yield db.Store(conn)
-    except db.DatabaseUnavailable as error:
-        raise HTTPException(status_code=503, detail=f"Database unavailable: {error}") from error
+    with db.connect() as conn:
+        yield db.Store(conn)
+
+
+def install(app: FastAPI) -> None:
+    """Add the v1 routes and /health to the app, and answer database problems
+    with 503 wherever in a request they surface (report §5.3: a temporary
+    dependency failure is 503, never a bare 500)."""
+    app.include_router(router)
+    app.include_router(health_router)
+
+    @app.exception_handler(db.DatabaseUnavailable)
+    async def _database_unavailable(_request: Request, error: db.DatabaseUnavailable):
+        return JSONResponse(status_code=503, content={"detail": f"Database unavailable: {error}"})
+
+    @app.exception_handler(db.SchemaOutOfDate)
+    async def _schema_out_of_date(_request: Request, error: db.SchemaOutOfDate):
+        return JSONResponse(status_code=503, content={"detail": f"Database schema out of date: {error}"})
+
+
+def group_stations(rows: list[dict]) -> list[Station]:
+    """Fold one-row-per-variable into one Station with a list of variables."""
+    stations: dict[str, Station] = {}
+    for r in rows:
+        st = stations.get(r["station_id"])
+        if st is None:
+            st = stations[r["station_id"]] = Station(
+                station_id=r["station_id"], name=r["name"], state=r["state"],
+                latitude=r["latitude"], longitude=r["longitude"],
+                is_active=r["is_active"], variables=[])
+        st.variables.append(StationVariable(
+            variable_code=r["variable_code"], first_date=r["first_date"],
+            last_date=r["last_date"], days_with_value=r["days_with_value"]))
+    return list(stations.values())
 
 
 # --------------------------------------------------------------------- pure logic
@@ -215,6 +270,50 @@ def list_variables(store: db.Store = Depends(get_store)):
     """Every variable the dashboard can chart, with the label, unit and default
     chart type the frontend should use (FR-02, FR-07)."""
     return store.variables()
+
+
+@router.get("/stations", response_model=StationList)
+def list_stations(
+    variable: str | None = Query(None, description="Only stations that have this variable"),
+    min_lat: float | None = Query(None, ge=-90, le=90),
+    max_lat: float | None = Query(None, ge=-90, le=90),
+    min_lon: float | None = Query(None, ge=-180, le=180),
+    max_lon: float | None = Query(None, ge=-180, le=180),
+    store: db.Store = Depends(get_store),
+):
+    """Stations that have data in the database, each with the variables it has
+    and the dates they cover (FR-03; lets the variable picker offer only what a
+    station records, FR-07). Optionally limited to one variable or a map viewport."""
+    if variable is not None and store.variable(variable) is None:
+        known = ", ".join(v["variable_code"] for v in store.variables())
+        raise HTTPException(404, f"Unknown variable '{variable}'. Known variables: {known}.")
+
+    corners = (min_lat, max_lat, min_lon, max_lon)
+    if any(c is not None for c in corners) and not all(c is not None for c in corners):
+        raise HTTPException(422, "Give all four of min_lat, max_lat, min_lon, max_lon, or none.")
+    bbox = corners if all(c is not None for c in corners) else None
+    if bbox and (min_lat > max_lat or min_lon > max_lon):
+        raise HTTPException(422, "min_lat must not exceed max_lat, nor min_lon max_lon.")
+
+    stations = group_stations(store.station_coverage(variable_code=variable, bbox=bbox))
+    return StationList(count=len(stations), stations=stations)
+
+
+@router.get("/stations/{station_id}", response_model=Station)
+def get_station(
+    station_id: str = Path(..., pattern=r"^\d{1,6}$", description="BOM station number"),
+    store: db.Store = Depends(get_store),
+):
+    """One station and the variables it has. A station that is in the BOM
+    register but has no data loaded returns an empty variables list."""
+    station_id = station_id.zfill(6)
+    station = store.station(station_id)
+    if station is None:
+        raise HTTPException(404, f"Unknown station '{station_id}'.")
+    found = group_stations(store.station_coverage(station_ids=[station_id]))
+    if found:
+        return found[0]
+    return Station(**station, variables=[])
 
 
 @router.get("/observations", response_model=ObservationsResponse)

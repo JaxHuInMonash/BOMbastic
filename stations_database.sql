@@ -174,6 +174,27 @@ CREATE INDEX IF NOT EXISTS idx_observations_date
 
 
 -- ===========================================================================
+-- station_coverage -- which variables each station has, and over which dates
+-- Summarising ten million observation rows takes seconds, too slow for every
+-- map load, so it is computed once per import. observations_database.sql
+-- refreshes it at the end of every run. Read by GET /api/v1/stations.
+-- ===========================================================================
+CREATE MATERIALIZED VIEW IF NOT EXISTS bombastic.station_coverage AS
+SELECT
+    station_id,
+    variable_code,
+    MIN(observed_date) FILTER (WHERE value IS NOT NULL) AS first_date,
+    MAX(observed_date) FILTER (WHERE value IS NOT NULL) AS last_date,
+    COUNT(value)                                         AS days_with_value,
+    COUNT(*) FILTER (WHERE quality_state = 'missing')    AS days_missing
+FROM bombastic.observations
+GROUP BY station_id, variable_code;
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_station_coverage
+    ON bombastic.station_coverage (station_id, variable_code);
+
+
+-- ===========================================================================
 -- Station import
 -- Every field lands as text first so a malformed row is counted, not fatal.
 -- ===========================================================================

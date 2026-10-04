@@ -27,7 +27,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
-from api_v1 import health_router, router as api_v1_router
+import api_v1
 from rainfall import load_flagged_rainfall
 
 STATIONS_FILE = Path(__file__).parent / "map_stations.json"
@@ -48,8 +48,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api_v1_router)
-app.include_router(health_router)
+api_v1.install(app)   # /api/v1/* and /health, plus 503 handling for database errors
 
 _stations_cache = None
 

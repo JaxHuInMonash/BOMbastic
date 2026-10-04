@@ -44,7 +44,9 @@ VARIABLES = {
 }
 STATIONS = {
     "086338": {"station_id": "086338", "name": "MELBOURNE (OLYMPIC PARK)", "state": "VIC",
-               "latitude": -37.8255, "longitude": 144.9816},
+               "latitude": -37.8255, "longitude": 144.9816, "is_active": True},
+    "001006": {"station_id": "001006", "name": "WYNDHAM AERO", "state": "WA",
+               "latitude": -15.51, "longitude": 128.1503, "is_active": True},   # in the register, no data loaded
 }
 
 
@@ -70,6 +72,29 @@ class FakeStore:
 
     def observations(self, sid, var, start, end):
         return [r for r in self.rows.get((sid, var), []) if start <= r["observed_date"] <= end]
+
+    def station_coverage(self, station_ids=None, variable_code=None, bbox=None):
+        if self.coverage_error:
+            raise self.coverage_error
+        out = []
+        for (sid, var), rows in sorted(self.rows.items()):
+            dated = [r["observed_date"] for r in rows if r["value"] is not None]
+            if not dated:
+                continue
+            st = STATIONS[sid]
+            if station_ids is not None and sid not in station_ids:
+                continue
+            if variable_code is not None and not any(
+                    k == (sid, variable_code) and any(r["value"] is not None for r in v)
+                    for k, v in self.rows.items()):
+                continue
+            if bbox and not (bbox[0] <= st["latitude"] <= bbox[1] and bbox[2] <= st["longitude"] <= bbox[3]):
+                continue
+            out.append({**st, "variable_code": var, "first_date": min(dated),
+                        "last_date": max(dated), "days_with_value": len(dated)})
+        return out
+
+    coverage_error = None
 
 
 D = date(2025, 1, 1)
@@ -100,6 +125,62 @@ class TestVariables(ApiCase):
         self.assertEqual(r.status_code, 200)
         tmax = next(v for v in r.json() if v["variable_code"] == "tmax")
         self.assertEqual((tmax["unit"], tmax["default_chart"]), ("°C", "line"))
+
+
+class TestStations(ApiCase):
+    def test_lists_stations_with_their_variables_and_dates(self):
+        body = self.client.get("/api/v1/stations").json()
+        self.assertEqual(body["count"], 1)
+        melb = body["stations"][0]
+        self.assertEqual(melb["station_id"], "086338")
+        vars_ = {v["variable_code"]: v for v in melb["variables"]}
+        self.assertEqual(sorted(vars_), ["rainfall", "tmax"])
+        self.assertEqual(vars_["tmax"]["first_date"], "2025-01-01")
+        self.assertEqual(vars_["tmax"]["days_with_value"], 30)
+
+    def test_stations_without_any_data_are_not_listed(self):
+        ids = [s["station_id"] for s in self.client.get("/api/v1/stations").json()["stations"]]
+        self.assertNotIn("001006", ids)
+
+    def test_filter_by_variable(self):
+        self.assertEqual(self.client.get("/api/v1/stations", params={"variable": "tmax"}).json()["count"], 1)
+
+    def test_unknown_variable_filter_is_404(self):
+        self.assertEqual(self.client.get("/api/v1/stations", params={"variable": "humidity"}).status_code, 404)
+
+    def test_viewport_filter(self):
+        victoria = {"min_lat": -39.5, "max_lat": -34, "min_lon": 140.9, "max_lon": 150}
+        darwin = {"min_lat": -13, "max_lat": -12, "min_lon": 130, "max_lon": 131}
+        self.assertEqual(self.client.get("/api/v1/stations", params=victoria).json()["count"], 1)
+        self.assertEqual(self.client.get("/api/v1/stations", params=darwin).json()["count"], 0)
+
+    def test_partial_viewport_is_422(self):
+        self.assertEqual(self.client.get("/api/v1/stations", params={"min_lat": -40}).status_code, 422)
+
+    def test_inverted_viewport_is_422(self):
+        r = self.client.get("/api/v1/stations", params={"min_lat": -30, "max_lat": -40, "min_lon": 140, "max_lon": 150})
+        self.assertEqual(r.status_code, 422)
+
+    def test_one_station(self):
+        body = self.client.get("/api/v1/stations/86338").json()
+        self.assertEqual(body["station_id"], "086338")
+        self.assertEqual(len(body["variables"]), 2)
+
+    def test_station_in_register_without_data_has_empty_variables(self):
+        r = self.client.get("/api/v1/stations/001006")
+        self.assertEqual(r.status_code, 200)
+        self.assertEqual(r.json()["variables"], [])
+
+    def test_unknown_station_is_404(self):
+        self.assertEqual(self.client.get("/api/v1/stations/999999").status_code, 404)
+
+    def test_missing_coverage_view_is_503_with_the_fix(self):
+        store = FakeStore({("086338", "tmax"): MELB_TMAX})
+        store.coverage_error = db.SchemaOutOfDate("Re-run stations_database.sql")
+        main.app.dependency_overrides[api_v1.get_store] = lambda: store
+        r = self.client.get("/api/v1/stations")
+        self.assertEqual(r.status_code, 503)
+        self.assertIn("stations_database.sql", r.json()["detail"])
 
 
 class TestObservations(ApiCase):
@@ -229,6 +310,21 @@ class TestAgainstDatabase(unittest.TestCase):
         self.assertEqual(body["available"]["last_date"], "2003-06-29")
         self.assertEqual(body["query"]["end"], "2003-06-29")       # defaults to the end of its own record
         self.assertEqual(body["status"], "ok")
+
+    def test_every_temperature_station_has_all_three_variables(self):
+        body = self.client.get("/api/v1/stations", params={"variable": "tmax"}).json()
+        self.assertEqual(body["count"], 10)
+        for st in body["stations"]:
+            with self.subTest(station=st["station_id"]):
+                self.assertEqual(sorted(v["variable_code"] for v in st["variables"]),
+                                 ["rainfall", "tmax", "tmin"])
+
+    def test_stations_endpoint_is_fast(self):
+        import time
+        t = time.perf_counter()
+        body = self.client.get("/api/v1/stations").json()
+        self.assertLess(time.perf_counter() - t, 1.0)
+        self.assertGreater(body["count"], 200)
 
     def test_negative_minimum_temperatures_come_through(self):
         body = self.client.get("/api/v1/observations", params={

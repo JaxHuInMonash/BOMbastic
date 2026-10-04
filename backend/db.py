@@ -30,6 +30,11 @@ class DatabaseUnavailable(Exception):
     """The database could not be reached. The API answers 503, not 500."""
 
 
+class SchemaOutOfDate(Exception):
+    """A table or view the API expects is missing: the schema script is older
+    than the code. The API answers 503 with the fix, rather than a bare 500."""
+
+
 @contextmanager
 def connect(url: str | None = None) -> Iterator[psycopg.Connection]:
     try:
@@ -70,7 +75,7 @@ class Store:
 
     def station(self, station_id: str) -> dict | None:
         return self.conn.execute("""
-            SELECT station_id, name, state, latitude, longitude
+            SELECT station_id, name, state, latitude, longitude, is_active
             FROM bombastic.stations
             WHERE station_id = %s
         """, (station_id,)).fetchone()
@@ -82,6 +87,45 @@ class Store:
             FROM bombastic.observations
             WHERE station_id = %s AND variable_code = %s AND value IS NOT NULL
         """, (station_id, variable_code)).fetchone()
+
+    def station_coverage(self, station_ids: list[str] | None = None,
+                         variable_code: str | None = None,
+                         bbox: tuple[float, float, float, float] | None = None) -> list[dict]:
+        """One row per station and variable that has at least one value.
+
+        station_ids limits to those stations; variable_code keeps only stations
+        that have that variable (all their variables are still returned);
+        bbox is (min_lat, max_lat, min_lon, max_lon).
+        """
+        where = ["c.days_with_value > 0"]
+        params: list = []
+        if station_ids is not None:
+            where.append("s.station_id = ANY(%s)")
+            params.append(station_ids)
+        if variable_code is not None:
+            where.append("""s.station_id IN (SELECT station_id FROM bombastic.station_coverage
+                                             WHERE variable_code = %s AND days_with_value > 0)""")
+            params.append(variable_code)
+        if bbox is not None:
+            where.append("s.latitude BETWEEN %s AND %s AND s.longitude BETWEEN %s AND %s")
+            params.extend(bbox)
+        try:
+            return self.conn.execute(f"""
+                SELECT s.station_id, s.name, s.state, s.latitude, s.longitude, s.is_active,
+                       c.variable_code, c.first_date, c.last_date, c.days_with_value
+                FROM bombastic.station_coverage c
+                JOIN bombastic.stations s USING (station_id)
+                WHERE {" AND ".join(where)}
+                ORDER BY s.station_id, c.variable_code
+            """, params).fetchall()
+        except psycopg.errors.UndefinedTable as error:
+            raise SchemaOutOfDate(
+                "bombastic.station_coverage does not exist. Re-run stations_database.sql, "
+                "which creates it, then any observations import refreshes it.") from error
+        except psycopg.errors.ObjectNotInPrerequisiteState as error:   # created WITH NO DATA
+            raise SchemaOutOfDate(
+                "bombastic.station_coverage has not been populated. Run "
+                "REFRESH MATERIALIZED VIEW bombastic.station_coverage;") from error
 
     def observations(self, station_id: str, variable_code: str,
                      start: date, end: date) -> list[dict]:

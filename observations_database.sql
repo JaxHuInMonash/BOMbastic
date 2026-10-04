@@ -242,6 +242,9 @@ COMMIT;
 
 ANALYZE bombastic.observations;
 
+-- Keep the per-station summary behind GET /api/v1/stations in step with the data.
+REFRESH MATERIALIZED VIEW bombastic.station_coverage;
+
 
 -- ===========================================================================
 -- Validation: this run, and the variable's totals across all runs.
