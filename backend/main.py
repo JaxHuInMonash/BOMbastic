@@ -8,9 +8,16 @@ a static JSON file rather than Postgres, since NFR-05/FR-01 already own
 the real database ingestion path. Swapping the JSON read for a DB query
 later doesn't change the endpoint's contract.
 
-Run:
-    pip install fastapi uvicorn
+The versioned endpoints (/api/v1/variables, /api/v1/observations, /health)
+live in api_v1.py and read PostgreSQL. The endpoints below still read the
+static JSON and the rainfall CSVs, so the existing map keeps working while the
+frontend moves over.
+
+Run, from backend/:
+    pip install -r ../requirements.txt
+    $env:PGPASSWORD = "..."          # PowerShell; the API reads it from the environment
     uvicorn main:app --reload --port 8000
+Then open http://localhost:8000/docs for the generated API documentation (DR-03).
 """
 
 import json
@@ -20,6 +27,7 @@ from pathlib import Path
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
+from api_v1 import health_router, router as api_v1_router
 from rainfall import load_flagged_rainfall
 
 STATIONS_FILE = Path(__file__).parent / "map_stations.json"
@@ -39,6 +47,9 @@ app.add_middleware(
     allow_methods=["GET"],
     allow_headers=["*"],
 )
+
+app.include_router(api_v1_router)
+app.include_router(health_router)
 
 _stations_cache = None
 
