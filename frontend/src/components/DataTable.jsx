@@ -4,6 +4,7 @@
  */
 
 import { useId, useState } from "react";
+import { csvFilename, toCsv } from "../utils/analysis";
 import { formatDate } from "../utils/dates";
 
 const PAGE_SIZE = 50;
@@ -14,6 +15,18 @@ const QUALITY_LABEL = {
   interpolated: "Interpolated",
   missing: "No reading",
 };
+
+/** Download exactly the records on screen (FR-08). */
+function downloadCsv(data) {
+  const url = URL.createObjectURL(new Blob([toCsv(data)], { type: "text/csv;charset=utf-8" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = csvFilename(data);
+  document.body.append(link);
+  link.click();
+  link.remove();
+  URL.revokeObjectURL(url);
+}
 
 export default function DataTable({ data }) {
   const id = useId();
@@ -31,6 +44,10 @@ export default function DataTable({ data }) {
 
   return (
     <section className="data-table" aria-labelledby={`${id}-caption`}>
+      <div className="table-toolbar">
+        <button type="button" onClick={() => downloadCsv(data)}>Download CSV</button>
+        <span className="control-note">{records.length.toLocaleString()} days, with units, quality and days covered</span>
+      </div>
       <div className="table-scroll">
         <table>
           <caption id={`${id}-caption`}>
