@@ -21,6 +21,8 @@ export default function QueryControls({
   available,
   onRangeChange,
   disabled,
+  showVariable = true,
+  note,
 }) {
   const id = useId();
   const offered = variables.filter((v) =>
@@ -29,21 +31,23 @@ export default function QueryControls({
 
   return (
     <div className="query-controls" role="group" aria-label="Chart filters">
-      <div className="control">
-        <label htmlFor={`${id}-variable`}>Variable</label>
-        <select
-          id={`${id}-variable`}
-          value={variable}
-          onChange={(e) => onVariableChange(e.target.value)}
-          disabled={disabled}
-        >
-          {offered.map((v) => (
-            <option key={v.variable_code} value={v.variable_code}>
-              {v.label} ({v.unit})
-            </option>
-          ))}
-        </select>
-      </div>
+      {showVariable && (
+        <div className="control">
+          <label htmlFor={`${id}-variable`}>Variable</label>
+          <select
+            id={`${id}-variable`}
+            value={variable}
+            onChange={(e) => onVariableChange(e.target.value)}
+            disabled={disabled}
+          >
+            {offered.map((v) => (
+              <option key={v.variable_code} value={v.variable_code}>
+                {v.label} ({v.unit})
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <fieldset className="control">
         <legend>Period</legend>
@@ -94,9 +98,10 @@ export default function QueryControls({
       )}
 
       <p className="control-note">
-        {available.first_date
+        {note ??
+          (available.first_date
           ? `Recorded ${formatDate(available.first_date)} – ${formatDate(available.last_date)}`
-          : "Not recorded at this station"}
+          : "Not recorded at this station")}
       </p>
     </div>
   );

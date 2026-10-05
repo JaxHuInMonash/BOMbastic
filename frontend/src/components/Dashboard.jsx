@@ -1,6 +1,9 @@
 /**
  * Dashboard - the explore-one-place journey (report §2.3, journey 1; FR-01, FR-03, FR-07).
  *
+ * Three views of the chosen station (tabs): explore one variable, compare two
+ * stations (FR-04), and fit a regression between two variables (FR-05).
+ *
  * Owns the query state and hands it down: map and station list on the left,
  * filters, chart, quality summary and table on the right. Every view below the
  * filter row reads the same response, so the numbers always agree.
@@ -15,10 +18,18 @@ import { useId, useState } from "react";
 import { useObservations, useStations, useVariables } from "../api/hooks";
 import { resolveRange } from "../utils/ranges";
 import ChartPanel from "./ChartPanel";
+import CompareView from "./CompareView";
 import DataTable from "./DataTable";
 import QualitySummary from "./QualitySummary";
 import QueryControls from "./QueryControls";
+import RegressionView from "./RegressionView";
 import StationMap from "./StationMap";
+
+const VIEWS = [
+  { key: "explore", label: "Explore" },
+  { key: "compare", label: "Compare stations" },
+  { key: "relationship", label: "Relationship" },
+];
 
 function effectiveVariable(station, chosen) {
   const has = (code) => station.variables.some((v) => v.variable_code === code);
@@ -35,6 +46,7 @@ export default function Dashboard() {
   const [stationId, setStationId] = useState(null);
   const [chosenVariable, setChosenVariable] = useState("rainfall");
   const [range, setRange] = useState({ preset: "1y" });
+  const [view, setView] = useState("explore");
 
   const stationList = stations.data?.stations ?? [];
   const station = stationList.find((s) => s.station_id === stationId) ?? null;
@@ -83,19 +95,55 @@ export default function Dashboard() {
 
         {station && variables.data && (
           <>
-            <QueryControls
-              station={station}
-              variables={variables.data}
-              variable={variable}
-              onVariableChange={setChosenVariable}
-              range={range}
-              resolved={resolved}
-              available={available}
-              onRangeChange={setRange}
-            />
-            <ChartPanel result={observations} />
-            <QualitySummary data={observations.data} />
-            <DataTable data={observations.data} />
+            <div className="tabs" role="tablist" aria-label="What to do with this station">
+              {VIEWS.map((v) => (
+                <button
+                  key={v.key}
+                  type="button"
+                  role="tab"
+                  id={`tab-${v.key}`}
+                  aria-selected={view === v.key}
+                  aria-controls="view-panel"
+                  onClick={() => setView(v.key)}
+                >
+                  {v.label}
+                </button>
+              ))}
+            </div>
+
+            <div id="view-panel" role="tabpanel" aria-labelledby={`tab-${view}`} className="view-panel">
+              {view === "explore" && (
+                <>
+                  <QueryControls
+                    station={station}
+                    variables={variables.data}
+                    variable={variable}
+                    onVariableChange={setChosenVariable}
+                    range={range}
+                    resolved={resolved}
+                    available={available}
+                    onRangeChange={setRange}
+                  />
+                  <ChartPanel result={observations} />
+                  <QualitySummary data={observations.data} />
+                  <DataTable data={observations.data} />
+                </>
+              )}
+              {view === "compare" && (
+                <CompareView
+                  station={station}
+                  stations={stationList}
+                  variables={variables.data}
+                  variable={variable}
+                  onVariableChange={setChosenVariable}
+                  range={range}
+                  onRangeChange={setRange}
+                />
+              )}
+              {view === "relationship" && (
+                <RegressionView station={station} variables={variables.data} range={range} onRangeChange={setRange} />
+              )}
+            </div>
           </>
         )}
 
