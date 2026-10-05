@@ -64,7 +64,14 @@ export default function CompareView({ station, stations, variables, variable, on
   const meta = a.data?.query.variable ?? variables.find((v) => v.variable_code === variable);
   const unit = meta?.unit ?? "";
   const kind = meta?.default_chart === "bar" ? "bar" : "line";
-  const ready = Boolean(a.data && b.data && a.data.query.start === b.data.query.start && a.data.query.end === b.data.query.end);
+  // While a request is in flight the hook still returns the previous answer, so
+  // only draw when both answers are for exactly these stations, variable and dates.
+  // Stations often share a last date, so matching dates alone would show the
+  // previous second station's values under the new one's name.
+  const answers = (r, stationId) => Boolean(r.data) && r.data.query.station.station_id === stationId
+    && r.data.query.variable.variable_code === variable
+    && r.data.query.start === resolved.start && r.data.query.end === resolved.end;
+  const ready = Boolean(other) && answers(a, station.station_id) && answers(b, other.station_id);
 
   const stats = ready ? compareStats(a.data.records, b.data.records) : null;
 
