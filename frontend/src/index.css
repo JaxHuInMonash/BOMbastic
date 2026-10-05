@@ -1,111 +1,182 @@
+/*
+ * BOMbastic dashboard styles.
+ *
+ * Colours are tokens: chart chrome and ink from the team's chart palette
+ * (light and dark are each chosen, not inverted). Series colours are added in
+ * step 2, when the first chart uses them.
+ *
+ * Layout: map left (~40%), detail pane right (~60%); stacked on narrow screens.
+ */
+
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+  color-scheme: light;
+  --page: #f9f9f7;
+  --surface: #fcfcfb;
+  --ink: #0b0b0b;
+  --ink-2: #52514e;
+  --muted: #898781;
+  --grid: #e1e0d9;
+  --axis: #c3c2b7;
+  --ring: rgba(11, 11, 11, 0.1);
+  --accent: #2a78d6;
+  --accent-wash: rgba(42, 120, 214, 0.1);
+  --critical: #d03b3b;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font: 15px/1.5 var(--sans);
+  color: var(--ink);
+  background: var(--page);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+    color-scheme: dark;
+    --page: #0d0d0d;
+    --surface: #1a1a19;
+    --ink: #ffffff;
+    --ink-2: #c3c2b7;
+    --muted: #898781;
+    --grid: #2c2c2a;
+    --axis: #383835;
+    --ring: rgba(255, 255, 255, 0.1);
+    --accent: #3987e5;
+    --accent-wash: rgba(57, 135, 229, 0.16);
+    --critical: #d03b3b;
   }
 }
 
-body {
-  margin: 0;
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--page); }
+h1 { font-size: 1.35rem; font-weight: 600; line-height: 1.25; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+
+button,
+select,
+input {
+  font: inherit;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--axis);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+button { cursor: pointer; }
+button:hover:not(:disabled) { background: var(--accent-wash); }
+button:disabled, select:disabled { opacity: 0.5; cursor: default; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* ---------------------------------------------------------------- layout */
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(320px, 2fr) 3fr;
+  height: 100vh;
+}
+.map-pane { min-height: 0; border-right: 1px solid var(--grid); }
+.detail-pane {
+  min-width: 0;
+  overflow-y: auto;
+  padding: 20px 24px 32px;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+@media (max-width: 900px) {
+  .dashboard { grid-template-columns: 1fr; height: auto; }
+  .map-pane { height: 55vh; border-right: 0; border-bottom: 1px solid var(--grid); }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
+.detail-header { display: grid; gap: 10px; }
+.empty-hint { color: var(--ink-2); max-width: 60ch; }
+
+/* The selected station keeps the same pin, recoloured, and sits above the others. */
+.leaflet-marker-icon.station-pin--selected { filter: hue-rotate(160deg) saturate(1.6) brightness(1.05); }
+
+/* ---------------------------------------------------------------- controls */
+.control { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.control > label, .control > legend { font-size: 0.85rem; color: var(--ink-2); }
+fieldset.control { border: 0; padding: 0; margin: 0; }
+fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
+.station-picker select { min-width: 0; max-width: 100%; flex: 1; }
+
+.query-controls {
   display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 20px;
+  padding: 10px 0;
+  border-block: 1px solid var(--grid);
 }
+.segmented { display: inline-flex; }
+.segmented button { border-radius: 0; margin-left: -1px; }
+.segmented button:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+.segmented button:last-child { border-radius: 0 6px 6px 0; }
+.segmented button[aria-pressed="true"] {
+  background: var(--accent-wash);
+  border-color: var(--accent);
+  position: relative;
+  font-weight: 600;
+}
+.control-note { font-size: 0.85rem; color: var(--muted); margin-left: auto; }
 
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
+/* ---------------------------------------------------------------- chart frame */
+.chart-frame {
+  margin: 0;
+  background: var(--surface);
+  border: 1px solid var(--ring);
+  border-radius: 8px;
+  padding: 14px 16px;
+  min-height: 340px;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  transition: opacity 120ms;
 }
+.chart-frame.is-refreshing { opacity: 0.5; }
+.chart-title { font-weight: 600; color: var(--ink); }
+.chart-placeholder {
+  display: grid;
+  place-content: center;
+  gap: 4px;
+  text-align: center;
+  color: var(--muted);
+  border: 1px dashed var(--axis);
+  border-radius: 6px;
+  margin-top: 10px;
+}
+.chart-message { grid-template-rows: none; place-content: center; text-align: center; gap: 8px; padding: 24px; color: var(--ink-2); }
+.chart-message-title { font-weight: 600; color: var(--ink); }
+.chart-message button { justify-self: center; }
+@media (prefers-reduced-motion: reduce) { .chart-frame { transition: none; } }
 
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
-  }
-}
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
-  }
-}
-p {
+/* ---------------------------------------------------------------- quality summary */
+.quality-summary { display: grid; gap: 10px; }
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
   margin: 0;
 }
+.stat { background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; padding: 10px 12px; }
+.stat dt { font-size: 0.8rem; color: var(--ink-2); }
+.stat dd { margin: 2px 0 0; font-size: 1.25rem; font-weight: 600; }
+.stat-note { font-size: 0.8rem; color: var(--muted); margin-top: 2px; }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+.quality-counts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; color: var(--ink-2); }
+.quality-counts strong { color: var(--ink); font-variant-numeric: tabular-nums; }
+/* Neutral shape keys for now; the quality encoding itself is decided in step 4. */
+.quality-key { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; }
+.quality-key--observed { border-radius: 50%; background: var(--ink-2); }
+.quality-key--unverified { border-radius: 50%; border: 2px solid var(--ink-2); }
+.quality-key--missing { height: 2px; vertical-align: 3px; background: var(--muted); }
+.quality-key--no_record { height: 1px; vertical-align: 4px; background: var(--axis); }
+.quality-key--multi { width: 6px; background: var(--ink-2); border-radius: 2px 2px 0 0; }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-}
+/* ---------------------------------------------------------------- table */
+.data-table { display: grid; gap: 8px; }
+.table-scroll { overflow-x: auto; background: var(--surface); border: 1px solid var(--ring); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.9rem; }
+caption { text-align: left; padding: 10px 12px; color: var(--ink-2); font-size: 0.85rem; }
+th, td { padding: 6px 12px; border-top: 1px solid var(--grid); text-align: left; white-space: nowrap; }
+th { font-weight: 600; color: var(--ink-2); font-size: 0.8rem; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pager { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 0.85rem; color: var(--ink-2); }
