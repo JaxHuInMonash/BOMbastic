@@ -3,9 +3,11 @@
  * error states (report §5.2; NFR-02: empty, partial, invalid and failed
  * responses never crash the dashboard, and each says what happened).
  *
- * Step 1 of 4: the frame and every state are real; the plot itself arrives in
- * step 2 (temperature lines) and step 3 (rainfall bars).
+ * The plot is TimeSeriesChart (Plotly): bars for rainfall, lines for temperature,
+ * with data quality drawn as docs/data-contract.md requires.
  */
+
+import TimeSeriesChart from "./TimeSeriesChart";
 
 const ERROR_TITLE = {
   unreachable: "The API isn't responding",
@@ -53,14 +55,7 @@ export default function ChartPanel({ result }) {
       <figcaption className="chart-title">
         {variable.label} ({variable.unit}) · {station.name}
       </figcaption>
-      <div className="chart-placeholder">
-        <p>
-          {variable.default_chart === "bar" ? "Bar chart" : "Line chart"} of{" "}
-          {data.records.length.toLocaleString()} daily values goes here in step{" "}
-          {variable.default_chart === "bar" ? "3" : "2"}.
-        </p>
-        <p>The table below already shows exactly what it will plot.</p>
-      </div>
+      <TimeSeriesChart data={data} />
     </figure>
   );
 }
