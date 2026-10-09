@@ -9,11 +9,16 @@
  * If the new station doesn't record it, the chart falls back to rainfall (every
  * station has it) without forgetting your choice, so the next station that does
  * record it shows it again.
+ *
+ * Companion rule: when the variable is a temperature and the station records
+ * the other one too, that one is fetched for the same dates and drawn lighter
+ * on the same chart. The quality summary and table stay on the chosen variable.
  */
 
 import { useId, useState } from "react";
 import { useObservations, useStations, useVariables } from "../api/hooks";
 import { resolveRange } from "../utils/ranges";
+import { companionOf } from "../utils/series";
 import ChartPanel from "./ChartPanel";
 import DataTable from "./DataTable";
 import QualitySummary from "./QualitySummary";
@@ -43,6 +48,14 @@ export default function Dashboard() {
   const resolved = station && available.last_date ? resolveRange(range, available) : {};
 
   const observations = useObservations({ stationId, variable, start: resolved.start, end: resolved.end });
+  // The other temperature, same station and dates, drawn lighter beside the chosen one.
+  const companionCode = station ? companionOf(variable, station) : null;
+  const companion = useObservations({
+    stationId: companionCode ? stationId : null,
+    variable: companionCode,
+    start: resolved.start,
+    end: resolved.end,
+  });
 
   return (
     <div className="dashboard">
@@ -93,7 +106,7 @@ export default function Dashboard() {
               available={available}
               onRangeChange={setRange}
             />
-            <ChartPanel result={observations} />
+            <ChartPanel result={observations} companion={companionCode ? companion : null} />
             <QualitySummary data={observations.data} />
             <DataTable data={observations.data} />
           </>

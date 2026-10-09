@@ -80,9 +80,16 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
   display: grid;
   gap: 16px;
   align-content: start;
+  /* Rows take their content's height. With plain auto rows, an overflowing
+     pane shrinks each row to its item's min-height, so a chart taller than
+     .chart-frame's min-height spilled over the tiles below it. */
+  grid-auto-rows: max-content;
+  /* minmax(0, …) lets the chart and table shrink to the pane on a phone
+     instead of widening it past the screen. */
+  grid-template-columns: minmax(0, 1fr);
 }
 @media (max-width: 900px) {
-  .dashboard { grid-template-columns: 1fr; height: auto; }
+  .dashboard { grid-template-columns: minmax(0, 1fr); height: auto; }
   .map-pane { height: 55vh; border-right: 0; border-bottom: 1px solid var(--grid); }
 }
 
@@ -147,6 +154,9 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .chart-message-title { font-weight: 600; color: var(--ink); }
 .chart-message button { justify-self: center; }
 @media (prefers-reduced-motion: reduce) { .chart-frame { transition: none; } }
+.chart-frame > * { min-width: 0; }
+.plotly-host { width: 100%; margin-top: 6px; }
+.chart-note { font-size: 0.85rem; color: var(--ink-2); margin-top: 6px; }
 
 /* ---------------------------------------------------------------- quality summary */
 .quality-summary { display: grid; gap: 10px; }
