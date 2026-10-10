@@ -13,6 +13,7 @@
  * and if it fails the main chart still shows.
  */
 
+import { useState } from "react";
 import RainfallChart from "./RainfallChart";
 import TemperatureChart from "./TemperatureChart";
 
@@ -37,6 +38,8 @@ function matchingCompanion(companion, data) {
 
 export default function ChartPanel({ result, companion = null }) {
   const { data, error, loading, retry } = result;
+  // Daily or running total for rainfall; kept here so it survives a change of station or dates.
+  const [rainView, setRainView] = useState("daily");
 
   if (error) {
     return (
@@ -93,7 +96,12 @@ export default function ChartPanel({ result, companion = null }) {
         {variable.label} ({variable.unit}) · {station.name}
       </figcaption>
       {/* Keyed by query so a picked month resets when the station or dates change. */}
-      <RainfallChart key={`${station.station_id}|${data.query.start}|${data.query.end}`} data={data} />
+      <RainfallChart
+        key={`${station.station_id}|${data.query.start}|${data.query.end}`}
+        data={data}
+        view={rainView}
+        onViewChange={setRainView}
+      />
     </figure>
   );
 }

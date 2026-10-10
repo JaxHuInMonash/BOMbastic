@@ -3,8 +3,9 @@
  * LONG_RANGE_DAYS and for the month picked in the calendar.
  *
  *   column            one day's reading; a dry day (0 mm) has no column
- *   wide pale column  a multi-day total, spanning the days it covers, as tall
- *                     as the total (the tooltip says it is a total)
+ *   wide striped      a multi-day total, spanning the days it covers, drawn at
+ *   column            its average per day so its area is the rain measured;
+ *                     the tooltip gives the total and says it is not a daily value
  *   grey ×            no reading (or no record) on that day, on the baseline
  *
  * Every day has a tooltip, dry and missing days included: an invisible
@@ -15,7 +16,7 @@
 import { useMemo } from "react";
 import { CHROME, seriesColor } from "../utils/chartTheme";
 import { addDays } from "../utils/dates";
-import { describeDay } from "../utils/rainfall";
+import { describeDay, multiDayBlocks } from "../utils/rainfall";
 import { useColorScheme } from "../utils/useColorScheme";
 import PlotlyChart from "./PlotlyChart";
 
@@ -31,9 +32,9 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
 
   const traces = useMemo(() => {
     const singles = days.filter((d) => d.kind === "value" && d.value > 0);
-    const totals = [...new Map(days.filter((d) => d.kind === "multi").map((d) => [d.total.end, d.total])).values()];
+    const totals = multiDayBlocks(days);
     const gaps = days.filter((d) => d.kind === "missing" || d.kind === "norecord");
-    const top = Math.max(1, ...singles.map((d) => d.value), ...totals.map((t) => t.value)) * 1.08;
+    const top = Math.max(1, ...singles.map((d) => d.value), ...totals.map((t) => t.perDay)) * 1.08;
     const tips = days.map(describeDay);
 
     const out = [{
@@ -48,10 +49,10 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
     if (totals.length) {
       out.push({
         type: "bar",
-        name: "Multi-day total",
+        name: "Multi-day total, average per day",
         // Centred on the days it covers, one day wide per day covered, minus a small gap.
         x: totals.map((t) => new Date((midnight(t.start) + midnight(t.end)) / 2).toISOString()),
-        y: totals.map((t) => t.value),
+        y: totals.map((t) => t.perDay),
         width: totals.map((t) => t.span * DAY_MS - DAY_MS * 0.2),
         marker: { color: surface, line: { color, width: 1.5 }, pattern: { shape: "/", fgcolor: color, size: 6, solidity: 0.25 } },
         hoverinfo: "skip",
@@ -79,7 +80,13 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
       width: DAY_MS,
       marker: { color: "rgba(0,0,0,0)" },
       hovertemplate: "%{customdata}<extra></extra>",
-      customdata: tips.map((t) => `<b>${t.value}</b><br>${t.date}<br>${t.status}`),
+      customdata: tips.map((t, i) => {
+        const d = days[i];
+        const drawn = d.kind === "multi"
+          ? `<br>Drawn at the average: ${Number((d.total.value / d.total.span).toFixed(1))} mm a day`
+          : "";
+        return `<b>${t.value}</b><br>${t.date}<br>${t.status}${drawn}`;
+      }),
     });
     return { traces: out, top };
   }, [days, color, muted, surface, short]);

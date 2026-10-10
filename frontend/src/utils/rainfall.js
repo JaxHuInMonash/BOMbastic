@@ -19,10 +19,10 @@ import { addDays, daysBetween, toDate } from "./dates.js";
 export const RAIN_BINS = [
   { min: 0, max: 0, label: "0 mm" },
   { min: 0, max: 1, label: "under 1" },
-  { min: 1, max: 5, label: "1–5" },
-  { min: 5, max: 10, label: "5–10" },
-  { min: 10, max: 25, label: "10–25" },
-  { min: 25, max: 50, label: "25–50" },
+  { min: 1, max: 5, label: "1-5" },
+  { min: 5, max: 10, label: "5-10" },
+  { min: 10, max: 25, label: "10-25" },
+  { min: 25, max: 50, label: "25-50" },
   { min: 50, max: Infinity, label: "50+ mm" },
 ];
 
@@ -154,4 +154,71 @@ export function calendarYears(start, end) {
     years.push({ year, weeks, cells, months });
   }
   return years;
+}
+
+/**
+ * Running total for the "Running total" view: one entry per day with the
+ * measured rainfall since the start of the range, at the end of that day.
+ *
+ *   value    total after adding that day's reading
+ *   multi    days inside a multi-day total: `total` is null (the timing inside
+ *            the span is unknown) and `from`/`to` give the totals either side;
+ *            on the last day `total` equals `to`. The chart joins `from` to `to`
+ *            with a dashed straight line, which claims nothing about timing.
+ *   gap      no reading or no record: nothing is added, so the total carries on
+ *            unchanged; the chart draws this stretch differently because the
+ *            real total is probably higher.
+ *
+ * A total whose span began before the range is still added on its last day, as
+ * the API's summary total does, so the line ends on the same number as the tile.
+ */
+export function runningTotal(days) {
+  const out = new Array(days.length);
+  let run = 0;
+  let spanFrom = 0;
+  for (let i = 0; i < days.length; i += 1) {
+    const d = days[i];
+    if (d.kind === "value") {
+      run += d.value;
+      out[i] = { date: d.date, kind: "value", total: run };
+    } else if (d.kind === "multi") {
+      if (i === 0 || days[i - 1].kind !== "multi" || days[i - 1].total !== d.total) spanFrom = run;
+      const to = spanFrom + d.total.value;
+      const last = d.date === d.total.end;
+      if (last) run = to;
+      out[i] = { date: d.date, kind: "multi", total: last ? to : null, from: spanFrom, to };
+    } else {
+      out[i] = { date: d.date, kind: "gap", total: run };
+    }
+  }
+  return out;
+}
+
+const round1 = (v) => Number(v.toFixed(1));
+
+/** Tooltip for one day of the running total: { total, detail, status }. */
+export function describeRunning(entry, day) {
+  const base = describeDay(day);
+  if (entry.kind === "multi") {
+    const total = entry.total === null
+      ? `So far: ${round1(entry.from)} → ${round1(entry.to)} mm`
+      : `So far: ${round1(entry.to)} mm`;
+    return { total, detail: `${base.date}: ${base.value}`, status: "Timing inside a multi-day total is unknown" };
+  }
+  if (entry.kind === "gap") {
+    return { total: `So far: ${round1(entry.total)} mm`, detail: `${base.date}: ${base.value}, nothing added`, status: base.status };
+  }
+  return { total: `So far: ${round1(entry.total)} mm`, detail: `${base.date}: ${base.value}`, status: base.status };
+}
+
+/**
+ * Multi-day totals for the column chart, one per total. Each is drawn across
+ * the days it covers at the average per day, so the block's area equals the
+ * rain measured (the same as if it had been daily columns); the tooltip gives
+ * the total itself.
+ */
+export function multiDayBlocks(days) {
+  const seen = new Map();
+  for (const d of days) if (d.kind === "multi" && !seen.has(d.total.end)) seen.set(d.total.end, d.total);
+  return [...seen.values()].map((t) => ({ ...t, perDay: t.value / t.span }));
 }

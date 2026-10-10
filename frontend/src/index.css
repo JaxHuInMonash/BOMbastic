@@ -205,6 +205,9 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .rain-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.8rem; color: var(--ink-2); }
 .rain-legend li { display: inline-flex; align-items: center; gap: 5px; }
 .rain-legend svg { flex: none; }
+.chart-view-switch { justify-self: end; margin-top: -26px; }
+.chart-view-switch button { padding: 3px 10px; font-size: 0.85rem; }
+@media (max-width: 600px) { .chart-view-switch { justify-self: start; margin-top: 6px; } }
 .rain-month { border-top: 1px solid var(--grid); margin-top: 12px; padding-top: 10px; }
 .rain-month-bar { display: flex; align-items: center; gap: 8px; }
 .rain-month-bar h3 { margin: 0; font-size: 1rem; font-weight: 600; min-width: 9.5em; text-align: center; }

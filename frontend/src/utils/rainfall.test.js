@@ -5,7 +5,8 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
-  binOf, calendarYears, describeDay, monthBounds, RAIN_BINS, rainfallDays, shiftMonth, weekdayOf,
+  binOf, calendarYears, describeDay, describeRunning, monthBounds, multiDayBlocks, RAIN_BINS, rainfallDays, runningTotal,
+  shiftMonth, weekdayOf,
 } from "./rainfall.js";
 
 const rec = (date, value, accumulation_days = 1, quality_state = "observed") => ({
@@ -34,7 +35,7 @@ test("FR-02: tooltip text for a dry day, a missing day and a multi-day total", (
   assert.equal(dry.value, "0 mm · dry day");
   assert.equal(dry.status, "Quality-checked by BOM");
   assert.equal(missing.value, "No reading");
-  assert.equal(part.value, "Part of 21 mm over 2 days (12 Jan – 13 Jan)");
+  assert.equal(part.value, "Part of 21 mm over 2 days (12 Jan - 13 Jan)");
   assert.match(part.status, /^Multi-day total, not a single day's rain · Not yet quality-checked/);
   const absent = describeDay(rainfallDays([], "2025-01-16", "2025-01-16")[0]);
   assert.equal(absent.value, "No record");
@@ -80,4 +81,31 @@ test("FR-02: selecting a month clips it to the chosen range", () => {
   assert.deepEqual(monthBounds("2021-10-20", "2021-10-04", "2026-10-03"), { start: "2021-10-04", end: "2021-10-31" });
   assert.equal(shiftMonth("2025-12", 1), "2026-01");
   assert.equal(shiftMonth("2025-01", -1), "2024-12");
+});
+
+test("NFR-05: a multi-day block's height is the average per day, so its area is the total", () => {
+  // 10 mm reported on 4 Jun, covering 2-4 Jun.
+  const records = [rec("2025-06-01", 2), rec("2025-06-02", null), rec("2025-06-03", null), rec("2025-06-04", 10, 3), rec("2025-06-05", 5)];
+  const [block] = multiDayBlocks(rainfallDays(records, "2025-06-01", "2025-06-05"));
+  assert.equal(block.start, "2025-06-02");
+  assert.equal(block.end, "2025-06-04");
+  assert.equal(block.value, 10);
+  assert.ok(Math.abs(block.perDay * block.span - 10) < 1e-9);
+});
+
+test("FR-02: running total adds readings, joins a multi-day total end to end, and adds nothing for missing days", () => {
+  const records = [rec("2025-06-01", 2), rec("2025-06-02", null), rec("2025-06-03", null), rec("2025-06-04", 10, 3), rec("2025-06-05", 5), rec("2025-06-06", null), rec("2025-06-07", 1)];
+  const run = runningTotal(rainfallDays(records, "2025-06-01", "2025-06-07"));
+  assert.deepEqual(run.map((r) => r.kind), ["value", "multi", "multi", "multi", "value", "gap", "value"]);
+  assert.deepEqual(run.map((r) => r.total), [2, null, null, 12, 17, 17, 18]);
+  assert.equal(run[1].from, 2);
+  assert.equal(run[2].to, 12);
+  assert.equal(describeRunning(run[2], rainfallDays(records, "2025-06-01", "2025-06-07")[2]).total, "So far: 2 → 12 mm");
+});
+
+test("FR-02: running total ends on the same number as the API's summary total", () => {
+  // A total that began before the range is still counted on its last day, like the API does.
+  const records = [rec("2025-06-01", null), rec("2025-06-02", 6, 3), rec("2025-06-03", 0.4)];
+  const run = runningTotal(rainfallDays(records, "2025-06-01", "2025-06-03"));
+  assert.equal(run[run.length - 1].total, 6.4);
 });
