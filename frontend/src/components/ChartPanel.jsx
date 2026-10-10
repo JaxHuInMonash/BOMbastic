@@ -3,8 +3,9 @@
  * error states (report §5.2; NFR-02: empty, partial, invalid and failed
  * responses never crash the dashboard, and each says what happened).
  *
- * Temperature is a line chart (step 2, TemperatureChart). Rainfall bars arrive
- * in step 3; until then rainfall keeps the placeholder.
+ * Temperature is a line chart (TemperatureChart). Rainfall is daily columns,
+ * or a calendar per year for long ranges (RainfallChart). Which one is decided
+ * by the variable's default_chart from /api/v1/variables, not by its name.
  *
  * The companion series (the other temperature) is extra context: it is drawn
  * only when its response is for the same station and the same dates as the
@@ -12,6 +13,7 @@
  * and if it fails the main chart still shows.
  */
 
+import RainfallChart from "./RainfallChart";
 import TemperatureChart from "./TemperatureChart";
 
 const ERROR_TITLE = {
@@ -90,12 +92,8 @@ export default function ChartPanel({ result, companion = null }) {
       <figcaption className="chart-title">
         {variable.label} ({variable.unit}) · {station.name}
       </figcaption>
-      <div className="chart-placeholder">
-        <p>
-          Bar chart of {data.records.length.toLocaleString()} daily values goes here in step 3.
-        </p>
-        <p>The table below already shows exactly what it will plot.</p>
-      </div>
+      {/* Keyed by query so a picked month resets when the station or dates change. */}
+      <RainfallChart key={`${station.station_id}|${data.query.start}|${data.query.end}`} data={data} />
     </figure>
   );
 }

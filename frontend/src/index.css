@@ -140,16 +140,6 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 }
 .chart-frame.is-refreshing { opacity: 0.5; }
 .chart-title { font-weight: 600; color: var(--ink); }
-.chart-placeholder {
-  display: grid;
-  place-content: center;
-  gap: 4px;
-  text-align: center;
-  color: var(--muted);
-  border: 1px dashed var(--axis);
-  border-radius: 6px;
-  margin-top: 10px;
-}
 .chart-message { grid-template-rows: none; place-content: center; text-align: center; gap: 8px; padding: 24px; color: var(--ink-2); }
 .chart-message-title { font-weight: 600; color: var(--ink); }
 .chart-message button { justify-self: center; }
@@ -157,6 +147,69 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .chart-frame > * { min-width: 0; }
 .plotly-host { width: 100%; margin-top: 6px; }
 .chart-note { font-size: 0.85rem; color: var(--ink-2); margin-top: 6px; }
+
+/* One tooltip style for charts drawn outside Plotly; matches Plotly's hover label. */
+.chart-tooltip {
+  position: absolute;
+  z-index: 10;
+  pointer-events: none;
+  display: grid;
+  gap: 1px;
+  width: max-content;
+  max-width: 260px;
+  padding: 6px 9px;
+  font-size: 0.8rem;
+  line-height: 1.35;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1px solid var(--axis);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+.chart-tooltip strong { color: var(--ink); font-size: 0.9rem; font-variant-numeric: tabular-nums; }
+.chart-tooltip-status { color: var(--muted); }
+
+/* ---------------------------------------------------------------- rainfall calendar */
+/* Fixed mm classes (utils/rainfall.js RAIN_BINS): one blue, light to dark; 0 mm is
+   almost the surface. Dark mode is chosen, not inverted: more rain is lighter. */
+:root {
+  --rain-0: #eef1f4; --rain-1: #b7d3f6; --rain-2: #86b6ef; --rain-3: #5598e7;
+  --rain-4: #2a78d6; --rain-5: #1c5cab; --rain-6: #0d366b;
+  --rain-missing: #cfcec7; --rain-hatch: #898781;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rain-0: #26282b; --rain-1: #143a6b; --rain-2: #1c5cab; --rain-3: #2a78d6;
+    --rain-4: #5598e7; --rain-5: #86b6ef; --rain-6: #cde2fb;
+    --rain-missing: #3a3a37; --rain-hatch: #6e6d68;
+  }
+}
+.rain-calendar { position: relative; display: grid; gap: 6px; margin-top: 8px; }
+.rain-year-grid { display: block; width: 100%; max-width: 860px; height: auto; overflow: visible; }
+.rain-year-label { font-size: 11px; font-weight: 600; fill: var(--ink); }
+.rain-axis-label { font-size: 9px; fill: var(--muted); }
+.rain-month-label { font-size: 10px; fill: var(--ink-2); cursor: pointer; }
+.rain-month-label:hover { fill: var(--accent); text-decoration: underline; }
+.rain-month-label.is-selected { fill: var(--accent); font-weight: 700; }
+.rain-cell { cursor: pointer; stroke: transparent; stroke-width: 1; }
+.rain-cell:hover, .rain-cell:focus-visible { stroke: var(--ink); stroke-width: 1.5; outline: none; }
+.rain-cell.is-selected { stroke: var(--accent); stroke-width: 1.5; }
+.rain-b0 { fill: var(--rain-0); } .rain-b1 { fill: var(--rain-1); } .rain-b2 { fill: var(--rain-2); }
+.rain-b3 { fill: var(--rain-3); } .rain-b4 { fill: var(--rain-4); } .rain-b5 { fill: var(--rain-5); }
+.rain-b6 { fill: var(--rain-6); }
+.rain-missing { fill: url(#rain-hatch); }
+.rain-hatch-bg { fill: var(--rain-missing); }
+.rain-hatch-line { stroke: var(--rain-hatch); stroke-width: 1.2; }
+.rain-multi { fill: var(--rain-0); }
+.rain-multi-dot { fill: var(--accent); }
+.rain-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.8rem; color: var(--ink-2); }
+.rain-legend li { display: inline-flex; align-items: center; gap: 5px; }
+.rain-legend svg { flex: none; }
+.rain-month { border-top: 1px solid var(--grid); margin-top: 12px; padding-top: 10px; }
+.rain-month-bar { display: flex; align-items: center; gap: 8px; }
+.rain-month-bar h3 { margin: 0; font-size: 1rem; font-weight: 600; min-width: 9.5em; text-align: center; }
+.rain-month-bar button { padding: 2px 10px; }
+.rain-month-close { margin-left: auto; }
 
 /* ---------------------------------------------------------------- quality summary */
 .quality-summary { display: grid; gap: 10px; }
