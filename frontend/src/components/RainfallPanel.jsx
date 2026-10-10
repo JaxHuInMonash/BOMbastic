@@ -4,6 +4,13 @@
  * Shows a selected station's rainfall history with missing, accumulated
  * and unverified readings clearly marked, instead of quietly presenting
  * them as normal daily values. Backs onto GET /api/rainfall/:station_id.
+ *
+ * Fetching: the request URL is worked out during render, and the effect only
+ * fetches it. Each answer is stored with the URL it answers, so "loading" is
+ * simply "the stored answer is for a different URL" and never has to be set
+ * inside the effect (react-hooks/set-state-in-effect). Switching station
+ * cancels the previous request, so a slow answer for the old station can't
+ * overwrite the new one.
  */
 
 import { useEffect, useState } from "react";
@@ -16,39 +23,43 @@ const FLAG_META = {
   accumulated: {
     label: "Accumulated total",
     color: "#ef6c00",
-    symbol: "\u2211", // Σ
+    symbol: "∑", // Σ
   },
   unverified: { label: "Unverified reading", color: "#c62828", symbol: "!" },
 };
 
+function rainfallUrl(stationId, startYear, endYear) {
+  if (!stationId) return null;
+  const params = new URLSearchParams();
+  if (startYear) params.set("start_year", startYear);
+  if (endYear) params.set("end_year", endYear);
+  return `${API_BASE}/api/rainfall/${stationId}?${params}`;
+}
+
 export default function RainfallPanel({ stationId, startYear, endYear }) {
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const url = rainfallUrl(stationId, startYear, endYear);
+  const [result, setResult] = useState({ url: null, data: null, error: null });
 
   useEffect(() => {
-    if (!stationId) return;
-
-    setLoading(true);
-    setError(null);
-
-    const params = new URLSearchParams();
-    if (startYear) params.set("start_year", startYear);
-    if (endYear) params.set("end_year", endYear);
-
-    fetch(`${API_BASE}/api/rainfall/${stationId}?${params}`)
+    if (!url) return undefined;
+    const controller = new AbortController();
+    fetch(url, { signal: controller.signal })
       .then((res) => {
         if (!res.ok) throw new Error(`No rainfall data for this station (${res.status})`);
         return res.json();
       })
-      .then(setData)
-      .catch((err) => setError(err.message))
-      .finally(() => setLoading(false));
-  }, [stationId, startYear, endYear]);
+      .then((data) => setResult({ url, data, error: null }))
+      .catch((err) => {
+        if (err.name === "AbortError") return;
+        setResult({ url, data: null, error: err.message });
+      });
+    return () => controller.abort();
+  }, [url]);
 
-  if (!stationId) return null;
-  if (loading) return <p>Loading rainfall data...</p>;
-  if (error) return <p role="alert">{error}</p>;
+  if (!url) return null;
+  if (result.url !== url) return <p>Loading rainfall data...</p>;
+  if (result.error) return <p role="alert">{result.error}</p>;
+  const { data } = result;
   if (!data) return null;
 
   const { summary, records } = data;
