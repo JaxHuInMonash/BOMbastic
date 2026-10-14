@@ -16,7 +16,7 @@
 
 import { useMemo, useState } from "react";
 import { formatDate } from "../utils/dates";
-import { monthBounds, rainfallDays, shiftMonth } from "../utils/rainfall";
+import { monthBounds, classifyDays, shiftMonth } from "../utils/rainfall";
 import { isLongRange } from "../utils/series";
 import RainfallBars from "./RainfallBars";
 import RainfallCalendar from "./RainfallCalendar";
@@ -31,7 +31,7 @@ const barsLabel = (name, start, end) =>
 
 export default function RainfallChart({ data, view = "daily", onViewChange }) {
   const { station, start, end } = data.query;
-  const days = useMemo(() => rainfallDays(data.records, start, end), [data.records, start, end]);
+  const days = useMemo(() => classifyDays(data.records, start, end), [data.records, start, end]);
   const key = `${station.station_id}|rainfall|${start}|${end}`;
   // The month picked in the calendar. ChartPanel remounts this per query, so it resets.
   const [month, setMonth] = useState(null);

@@ -90,3 +90,20 @@ test("FR-07: the companion is the other temperature, only if the station records
   assert.equal(companionOf("rainfall", station), null);
   assert.equal(companionOf("tmax", { variables: [{ variable_code: "tmax" }] }), null);
 });
+
+test("FR-06: temperature tooltip line says the value and its check status, or why there is none", async () => {
+  const { classifyDays } = await import("./rainfall.js");
+  const { describeTemperatureDay } = await import("./series.js");
+  const records = [
+    rec("2022-09-15", 12.1), rec("2022-09-16", null), rec("2022-09-17", 11.4, 2),
+    { date: "2022-09-18", value: 11.2, quality_state: "unverified", accumulation_days: 1 },
+  ];
+  const lines = classifyDays(records, "2022-09-15", "2022-09-19").map((d) => describeTemperatureDay(d, "°C"));
+  assert.deepEqual(lines, [
+    "12.1 °C · checked",
+    "inside a 2-day value (to 17 Sept)",
+    "11.4 °C over 2 days to 17 Sept · checked",
+    "11.2 °C · not yet checked",
+    "no record",
+  ]);
+});

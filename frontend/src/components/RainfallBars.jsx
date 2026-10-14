@@ -8,6 +8,8 @@
  *                     the tooltip gives the total and says it is not a daily value
  *   grey ×            no reading (or no record) on that day, on the baseline
  *
+ * Days BOM hasn't quality-checked yet sit on a pale band (utils/quality.js).
+ *
  * Every day has a tooltip, dry and missing days included: an invisible
  * full-height column per day is the hover target, so the reader aims at a
  * date, not at a 2px bar or a 0 mm day with nothing drawn.
@@ -17,6 +19,7 @@ import { useMemo } from "react";
 import { CHROME, seriesColor } from "../utils/chartTheme";
 import { addDays } from "../utils/dates";
 import { describeDay, multiDayBlocks } from "../utils/rainfall";
+import { bandLegend, bandShapes, unverifiedRuns } from "../utils/quality";
 import { useColorScheme } from "../utils/useColorScheme";
 import PlotlyChart from "./PlotlyChart";
 
@@ -28,6 +31,7 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
   const color = seriesColor(scheme, "rainfall");
   const muted = CHROME[scheme].muted;
   const surface = CHROME[scheme].surface;
+  const runs = useMemo(() => unverifiedRuns(days), [days]);
   const short = days.length <= 62;
 
   const traces = useMemo(() => {
@@ -88,8 +92,9 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
         return `<b>${t.value}</b><br>${t.date}<br>${t.status}${drawn}`;
       }),
     });
+    if (runs.length) out.push(bandLegend(CHROME[scheme].band));
     return { traces: out, top };
-  }, [days, color, muted, surface, short]);
+  }, [days, color, muted, surface, short, runs, scheme]);
 
   const layout = useMemo(
     () => ({
@@ -109,8 +114,10 @@ export default function RainfallBars({ days, start, end, revision, ariaLabel, he
       },
       yaxis: { title: { text: "Rainfall (mm)" }, range: [0, traces.top], fixedrange: false },
       legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom" },
+      // Pale band behind days BOM hasn't quality-checked yet (utils/quality.js).
+      shapes: bandShapes(runs, CHROME[scheme].band),
     }),
-    [start, end, short, scheme, traces.top],
+    [start, end, short, scheme, traces.top, runs],
   );
 
   return <PlotlyChart traces={traces.traces} layout={layout} revision={revision} ariaLabel={ariaLabel} height={height} />;

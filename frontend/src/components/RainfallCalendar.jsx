@@ -6,6 +6,7 @@
  *   blue, darker    more rain, on fixed mm classes so every year is comparable
  *   grey, hatched   no reading, or no record at all
  *   pale with dot   part of a multi-day total (the total is in the tooltip)
+ *   corner notch    not yet quality-checked by BOM (the band on the other charts)
  *
  * Every square has a tooltip on hover and on keyboard focus. Clicking a square
  * or a month name, or pressing Enter on a square, selects that month; the
@@ -28,6 +29,9 @@ const TOP = 28; // year label, then month labels
 const WIDTH = LEFT + 54 * PITCH;
 const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 const WEEKDAYS = [["Mon", 0], ["Wed", 2], ["Fri", 4]];
+
+const isUnverified = (day) =>
+  (day.kind === "value" && day.quality === "unverified") || (day.kind === "multi" && day.total.quality === "unverified");
 
 function cellClass(day) {
   if (day.kind === "value") return `rain-cell rain-b${binOf(day.value)}`;
@@ -79,6 +83,9 @@ const YearGrid = memo(function YearGrid({ year, cells, months, days, tips, selec
               />
               {day.kind === "multi" && (
                 <circle className="rain-multi-dot" cx={x + CELL / 2} cy={y + CELL / 2} r="2" pointerEvents="none" />
+              )}
+              {isUnverified(day) && (
+                <path className="rain-unverified" d={`M${x + CELL - 5} ${y}h5v5z`} pointerEvents="none" />
               )}
             </g>
           );
@@ -186,6 +193,13 @@ export default function RainfallCalendar({ days, start, end, selectedMonth, onSe
             <circle className="rain-multi-dot" cx="6" cy="6" r="2" />
           </svg>
           Part of a multi-day total
+        </li>
+        <li>
+          <svg width="12" height="12" aria-hidden="true">
+            <rect className="rain-b0" width="12" height="12" rx="2" />
+            <path className="rain-unverified" d="M7 0h5v5z" />
+          </svg>
+          Not yet quality-checked
         </li>
       </ul>
 

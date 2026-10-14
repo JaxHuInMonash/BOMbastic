@@ -108,3 +108,23 @@ export function movingMean({ dates, values }, windowDays = MEAN_WINDOW_DAYS, min
   }
   return { dates, values: means };
 }
+
+const SHORT_DATE = new Intl.DateTimeFormat("en-AU", { day: "numeric", month: "short", timeZone: "UTC" });
+const STATUS_WORD = { observed: "checked", unverified: "not yet checked", interpolated: "interpolated" };
+
+/**
+ * One line of the temperature tooltip for one classified day (utils/rainfall.js
+ * classifyDays): the value and whether BOM has checked it, or why there is none.
+ */
+export function describeTemperatureDay(day, unit) {
+  const t = (v) => `${Number(v.toFixed(1))} ${unit}`;
+  if (day.kind === "value") return `${t(day.value)} · ${STATUS_WORD[day.quality] ?? day.quality}`;
+  if (day.kind === "multi") {
+    const { total } = day;
+    const to = SHORT_DATE.format(new Date(`${total.end}T00:00:00Z`));
+    return day.date === total.end
+      ? `${t(total.value)} over ${total.span} days to ${to} · ${STATUS_WORD[total.quality] ?? total.quality}`
+      : `inside a ${total.span}-day value (to ${to})`;
+  }
+  return day.kind === "missing" ? "no reading" : "no record";
+}

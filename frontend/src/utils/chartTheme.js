@@ -10,8 +10,9 @@
  */
 
 export const CHROME = {
-  light: { ink: "#0b0b0b", ink2: "#52514e", muted: "#898781", grid: "#e1e0d9", axis: "#c3c2b7", surface: "#fcfcfb" },
-  dark: { ink: "#ffffff", ink2: "#c3c2b7", muted: "#898781", grid: "#2c2c2a", axis: "#383835", surface: "#1a1a19" },
+  // band: the "not yet quality-checked" background (utils/quality.js), a neutral wash, never a status colour.
+  light: { ink: "#0b0b0b", ink2: "#52514e", muted: "#898781", grid: "#e1e0d9", axis: "#c3c2b7", surface: "#fcfcfb", band: "rgba(137, 135, 129, 0.16)" },
+  dark: { ink: "#ffffff", ink2: "#c3c2b7", muted: "#898781", grid: "#2c2c2a", axis: "#383835", surface: "#1a1a19", band: "rgba(195, 194, 183, 0.11)" },
 };
 
 const SERIES = {

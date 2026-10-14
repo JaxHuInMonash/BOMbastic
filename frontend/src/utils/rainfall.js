@@ -1,5 +1,5 @@
 /**
- * Rainfall chart data: one entry per calendar day, classified once, so the
+ * Daily chart data: one entry per calendar day, classified once, so the
  * column chart, the calendar heatmap and their tooltips all agree.
  * Pure functions: no React, no Plotly, covered by `npm test`.
  *
@@ -47,7 +47,7 @@ const STATUS = {
  * A total reported after `end` is not in the records, so the days it covers
  * inside the range stay as the API reports them ("missing").
  */
-export function rainfallDays(records, start, end) {
+export function classifyDays(records, start, end) {
   const byDate = new Map(records.map((r) => [r.date, r]));
   const totals = new Map(); // date -> total, for every day a total covers
   for (const r of records) {
@@ -91,7 +91,7 @@ export function describeDay(day) {
     const to = DAY_SHORT.format(toDate(t.end));
     return {
       date,
-      value: `Part of ${mm(t.value)} over ${t.span} days (${from} – ${to})`,
+      value: `Part of ${mm(t.value)} over ${t.span} days (${from} - ${to})`,
       status: `Multi-day total, not a single day's rain · ${STATUS[t.quality] ?? t.quality}`,
     };
   }
@@ -122,7 +122,7 @@ export const weekdayOf = (date) => (toDate(date).getUTCDay() + 6) % 7;
  * Columns are Monday-to-Sunday weeks, rows are weekdays. Only days inside
  * [start, end] get a cell; the rest of the year is left blank.
  * Returns [{ year, weeks, cells: [{ index, date, col, row }], months: [{ month, label, col }] }]
- * where `index` is the day's position in rainfallDays().
+ * where `index` is the day's position in classifyDays().
  */
 export function calendarYears(start, end) {
   const years = [];

@@ -202,6 +202,8 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .rain-hatch-line { stroke: var(--rain-hatch); stroke-width: 1.2; }
 .rain-multi { fill: var(--rain-0); }
 .rain-multi-dot { fill: var(--accent); }
+.rain-unverified { fill: var(--ink); opacity: 0.5; }
+@media (prefers-color-scheme: dark) { .rain-unverified { opacity: 0.3; } }
 .rain-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.8rem; color: var(--ink-2); }
 .rain-legend li { display: inline-flex; align-items: center; gap: 5px; }
 .rain-legend svg { flex: none; }
@@ -229,13 +231,14 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 
 .quality-counts { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 18px; font-size: 0.9rem; color: var(--ink-2); }
 .quality-counts strong { color: var(--ink); font-variant-numeric: tabular-nums; }
-/* Neutral shape keys for now; the quality encoding itself is decided in step 4. */
-.quality-key { display: inline-block; width: 10px; height: 10px; margin-right: 6px; vertical-align: -1px; }
-.quality-key--observed { border-radius: 50%; background: var(--ink-2); }
-.quality-key--unverified { border-radius: 50%; border: 2px solid var(--ink-2); }
-.quality-key--missing { height: 2px; vertical-align: 3px; background: var(--muted); }
-.quality-key--no_record { height: 1px; vertical-align: 4px; background: var(--axis); }
-.quality-key--multi { width: 6px; background: var(--ink-2); border-radius: 2px 2px 0 0; }
+/* Keys mirror the charts: a solid mark, the pale "not yet checked" band, a grey ×, a striped multi-day block. */
+.quality-key { display: inline-block; width: 12px; height: 12px; margin-right: 6px; vertical-align: -1px; border-radius: 2px; }
+.quality-key--observed { background: var(--accent); }
+.quality-key--unverified { background: rgba(137, 135, 129, 0.16); box-shadow: inset 0 0 0 1px var(--axis); }
+.quality-key--missing, .quality-key--no_record { position: relative; }
+.quality-key--missing::before, .quality-key--no_record::before { content: "×"; position: absolute; inset: -4px 0 0; color: var(--muted); font-size: 15px; line-height: 1; text-align: center; }
+.quality-key--multi { border: 1.5px solid var(--accent); background: repeating-linear-gradient(135deg, var(--accent) 0 1.5px, transparent 1.5px 4px); }
+@media (prefers-color-scheme: dark) { .quality-key--unverified { background: rgba(195, 194, 183, 0.11); } }
 
 /* ---------------------------------------------------------------- table */
 .data-table { display: grid; gap: 8px; }

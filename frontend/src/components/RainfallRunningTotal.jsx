@@ -10,6 +10,8 @@
  *                  level, but the real total is probably higher
  *   grey ×         those same days, on the baseline
  *
+ *   pale band      days BOM hasn't quality-checked yet (utils/quality.js)
+ *
  * One y-axis, one meaning: millimetres since the start of the range. Every
  * day has a tooltip (an invisible point per day is the hover target).
  */
@@ -19,6 +21,7 @@ import { CHROME, seriesColor } from "../utils/chartTheme";
 import { addDays, formatDate } from "../utils/dates";
 import { describeRunning, runningTotal } from "../utils/rainfall";
 import { isLongRange } from "../utils/series";
+import { bandLegend, bandShapes, unverifiedRuns } from "../utils/quality";
 import { useColorScheme } from "../utils/useColorScheme";
 import PlotlyChart from "./PlotlyChart";
 
@@ -48,7 +51,8 @@ const MIN_COVERAGE = 0.9;
 export default function RainfallRunningTotal({ days, start, end, coverage, revision, ariaLabel }) {
   const scheme = useColorScheme();
   const color = seriesColor(scheme, "rainfall");
-  const { muted } = CHROME[scheme];
+  const { muted, band } = CHROME[scheme];
+  const runs = useMemo(() => unverifiedRuns(days), [days]);
 
   const { traces, last, gapDays } = useMemo(() => {
     const run = runningTotal(days);
@@ -102,6 +106,7 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
         marker: { symbol: "x-thin-open", size: 7, color: muted, line: { width: 1.5, color: muted } },
       });
     }
+    if (runs.length) out.push(bandLegend(band));
     out.push({
       type: "scatter", mode: "markers", name: "", showlegend: false,
       x: run.map((r) => r.date), y: hoverY,
@@ -109,7 +114,7 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
       customdata: tips, hovertemplate: "%{customdata}<extra></extra>",
     });
     return { traces: out, last: prev, gapDays: gaps.length };
-  }, [days, start, end, color, muted]);
+  }, [days, start, end, color, muted, runs, band]);
   const stateTotal = coverage >= MIN_COVERAGE;
 
   const layout = useMemo(
@@ -123,13 +128,15 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
       },
       yaxis: { title: { text: `Rainfall since ${formatDate(start)} (mm)` }, rangemode: "tozero" },
       legend: { orientation: "h", x: 0, y: 1.02, yanchor: "bottom" },
+      // Pale band behind days BOM hasn't quality-checked yet (utils/quality.js).
+      shapes: bandShapes(runs, CHROME[scheme].band),
       // Direct label at the end of the line: the number the reader came for.
       annotations: stateTotal ? [{
         x: last.x, y: last.y, xanchor: "right", yanchor: "bottom", showarrow: false,
         text: `<b>${Number(last.y.toFixed(1))} mm</b> measured`, font: { color: CHROME[scheme].ink, size: 12 },
       }] : [],
     }),
-    [start, end, scheme, last, stateTotal],
+    [start, end, scheme, last, stateTotal, runs],
   );
 
   return (

@@ -1,12 +1,13 @@
 /**
  * QualitySummary - coverage and data-quality counts for the active query
- * (report §5.2, NFR-05). Every count is a number with a word, never colour alone.
+ * (report §5.2, NFR-05). Every count is a number with a word, never colour alone,
+ * and each key is drawn the way the chart draws that state.
  */
 
 const STATES = [
   { key: "observed", label: "Quality-checked", hint: "BOM has checked these readings" },
-  { key: "unverified", label: "Not yet checked", hint: "Recorded, but BOM has not finished quality control" },
-  { key: "missing", label: "No reading", hint: "BOM has the day but no measurement for it" },
+  { key: "unverified", label: "Not yet checked", hint: "Recorded, but BOM has not finished quality control; shown on the chart as a pale band" },
+  { key: "missing", label: "No reading", hint: "BOM has the day but no measurement for it; shown on the chart as a grey ×" },
   { key: "no_record", label: "Outside the record", hint: "Days before the station started or after it stopped" },
 ];
 
