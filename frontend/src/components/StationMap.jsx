@@ -2,13 +2,16 @@
  * StationMap - FR-03 (Map selection)
  *
  * Renders BOM weather stations as markers on an interactive map. Clicking a
- * marker selects that station, highlights it, and calls onSelect so the
- * dashboard can refresh its chart and table for the new location.
+ * marker calls onSelect so the dashboard can refresh its chart and table.
  *
- * Originally by Rithik (4a91507). Now controlled by the dashboard: it receives
- * the station list from /api/v1/stations (only stations with data in the
- * database, so every marker opens a chart) and the selected id, so a station
- * picked from the keyboard-accessible list highlights here too.
+ * Originally by Rithik (4a91507). Controlled by the dashboard: it receives the
+ * station list from /api/v1/stations (only stations with data in the database,
+ * so every marker opens a chart) and the selected ids.
+ *
+ * Explore: the selected station's pin is recoloured and drawn on top.
+ * Compare (FR-04): station A's pin keeps the blue pin and B's is orange, the
+ * same colours as their lines on the chart, each labelled with its letter;
+ * other pins fade so the pair stands out, and the map fits both in view.
  *
  * Marker images are imported from the leaflet package so the bundler ships
  * them. Leaflet's own default-icon lookup guesses a path that does not exist in
@@ -17,7 +20,7 @@
  */
 
 import { useEffect } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
@@ -31,28 +34,41 @@ const PIN = {
   iconSize: [25, 41],
   iconAnchor: [12, 41],
   popupAnchor: [1, -34],
+  tooltipAnchor: [0, -38],
   shadowSize: [41, 41],
 };
 const DEFAULT_ICON = new L.Icon(PIN);
 // Same pin, recoloured in CSS (.station-pin--selected) so nothing is fetched at runtime.
 const SELECTED_ICON = new L.Icon({ ...PIN, className: "station-pin--selected" });
 
-// react-leaflet doesn't auto-recentre when the selected marker changes;
-// this small helper does it so the UX feels responsive on selection.
-function RecenterOnSelect({ station }) {
+// react-leaflet doesn't recentre on its own: fly to the selected station, or
+// fit both in view when comparing.
+function FollowSelection({ a, b }) {
   const map = useMap();
   useEffect(() => {
-    if (station) {
-      map.flyTo([station.latitude, station.longitude], Math.max(map.getZoom(), 6), {
-        duration: 0.5,
-      });
+    if (a && b) {
+      map.flyToBounds([[a.latitude, a.longitude], [b.latitude, b.longitude]], { padding: [70, 70], maxZoom: 8, duration: 0.6 });
+    } else if (a) {
+      map.flyTo([a.latitude, a.longitude], Math.max(map.getZoom(), 6), { duration: 0.5 });
     }
-  }, [station, map]);
+  }, [a, b, map]);
   return null;
 }
 
-export default function StationMap({ stations, selectedId, onSelect }) {
-  const selected = stations.find((s) => s.station_id === selectedId) ?? null;
+export default function StationMap({ stations, selectedId, compareId = null, comparing = false, onSelect }) {
+  const a = stations.find((s) => s.station_id === selectedId) ?? null;
+  const b = comparing ? stations.find((s) => s.station_id === compareId) ?? null : null;
+
+  const look = (id) => {
+    if (comparing) {
+      if (id === selectedId) return { icon: DEFAULT_ICON, z: 1000, opacity: 1, label: "A" };
+      if (id === compareId) return { icon: SELECTED_ICON, z: 1000, opacity: 1, label: "B" };
+      return { icon: DEFAULT_ICON, z: 0, opacity: 0.45, label: null };
+    }
+    return id === selectedId
+      ? { icon: SELECTED_ICON, z: 1000, opacity: 1, label: null }
+      : { icon: DEFAULT_ICON, z: 0, opacity: 1, label: null };
+  };
 
   return (
     <MapContainer
@@ -65,24 +81,33 @@ export default function StationMap({ stations, selectedId, onSelect }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
 
-      {stations.map((station) => (
-        <Marker
-          key={station.station_id}
-          position={[station.latitude, station.longitude]}
-          icon={station.station_id === selectedId ? SELECTED_ICON : DEFAULT_ICON}
-          zIndexOffset={station.station_id === selectedId ? 1000 : 0}
-          eventHandlers={{ click: () => onSelect(station.station_id) }}
-          title={station.name}
-        >
-          <Popup>
-            <strong>{station.name}</strong>
-            <br />
-            {station.state} · {station.variables.map((v) => v.variable_code).join(", ")}
-          </Popup>
-        </Marker>
-      ))}
+      {stations.map((station) => {
+        const { icon, z, opacity, label } = look(station.station_id);
+        return (
+          <Marker
+            key={`${station.station_id}|${label ?? ""}`}
+            position={[station.latitude, station.longitude]}
+            icon={icon}
+            opacity={opacity}
+            zIndexOffset={z}
+            eventHandlers={{ click: () => onSelect(station.station_id) }}
+            title={station.name}
+          >
+            {label && (
+              <Tooltip permanent direction="top" className={`station-label station-label--${label.toLowerCase()}`}>
+                {label}
+              </Tooltip>
+            )}
+            <Popup>
+              <strong>{station.name}</strong>
+              <br />
+              {station.state} · {station.variables.map((v) => v.variable_code).join(", ")}
+            </Popup>
+          </Marker>
+        );
+      })}
 
-      <RecenterOnSelect station={selected} />
+      <FollowSelection a={a} b={b} />
     </MapContainer>
   );
 }

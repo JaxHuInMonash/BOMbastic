@@ -19,31 +19,11 @@
 import { useMemo } from "react";
 import { CHROME, seriesColor } from "../utils/chartTheme";
 import { addDays, formatDate } from "../utils/dates";
-import { describeRunning, runningTotal } from "../utils/rainfall";
+import { describeRunning, joinSegments, runningLine } from "../utils/rainfall";
 import { isLongRange } from "../utils/series";
 import { bandLegend, bandShapes, unverifiedRuns } from "../utils/quality";
 import { useColorScheme } from "../utils/useColorScheme";
 import PlotlyChart from "./PlotlyChart";
-
-/**
- * Segments of one kind as a single trace. Touching segments are merged into
- * one polyline (a run of dry days is one flat line, not 100 tiny pieces);
- * separate runs are split with null so Plotly leaves a gap between them.
- */
-function segments(pairs) {
-  const x = [];
-  const y = [];
-  let end = null;
-  for (const [a, b] of pairs) {
-    if (end !== a) {
-      if (x.length) x.push(null), y.push(null);
-      x.push(a.x), y.push(a.y);
-    }
-    x.push(b.x), y.push(b.y);
-    end = b;
-  }
-  return { x, y };
-}
 
 /** Same rule as the summary tiles (report D-A): no total is stated below 90% coverage. */
 const MIN_COVERAGE = 0.9;
@@ -55,35 +35,7 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
   const runs = useMemo(() => unverifiedRuns(days), [days]);
 
   const { traces, last, gapDays } = useMemo(() => {
-    const run = runningTotal(days);
-    // Known points: the start (0 mm, the evening before the first day) and every day whose total is known.
-    let prev = { x: addDays(start, -1), y: 0 };
-    const solid = [];
-    const dashed = [];
-    const dotted = [];
-    const hoverY = new Array(run.length);
-    for (let i = 0; i < run.length; i += 1) {
-      const r = run[i];
-      if (r.total === null) continue;
-      const point = { x: r.date, y: r.total };
-      (r.kind === "multi" ? dashed : r.kind === "gap" ? dotted : solid).push([prev, point]);
-      prev = point;
-    }
-    // Hover anchors sit on the line, inside a dashed span too (position only;
-    // the tooltip says the timing there is unknown).
-    for (let i = 0; i < run.length;) {
-      if (run[i].total !== null) {
-        hoverY[i] = run[i].total;
-        i += 1;
-      } else {
-        let j = i;
-        while (j < run.length - 1 && run[j].total === null) j += 1;
-        const { from, to } = run[i];
-        const n = j - i + 1;
-        for (let k = i; k < j; k += 1) hoverY[k] = from + ((to - from) * (k - i + 1)) / n;
-        i = j;
-      }
-    }
+    const { run, solid, dashed, dotted, last, hoverY } = runningLine(days, start);
     const tips = run.map((r, i) => {
       const t = describeRunning(r, days[i]);
       return `<b>${t.total}</b><br>${t.detail}<br>${t.status}`;
@@ -91,15 +43,15 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
     const gaps = run.filter((r) => r.kind === "gap");
 
     const out = [];
-    const s = segments(solid);
+    const s = joinSegments(solid);
     out.push({ type: "scatter", mode: "lines", name: "Measured total", ...s, line: { color, width: 2 }, hoverinfo: "skip", connectgaps: false });
     if (dashed.length) {
-      out.push({ type: "scatter", mode: "lines", name: "Multi-day total (timing unknown)", ...segments(dashed), line: { color, width: 2, dash: "dash" }, hoverinfo: "skip", connectgaps: false });
+      out.push({ type: "scatter", mode: "lines", name: "Multi-day total (timing unknown)", ...joinSegments(dashed), line: { color, width: 2, dash: "dash" }, hoverinfo: "skip", connectgaps: false });
     }
     if (dotted.length) {
       // Crosses on the baseline only on short ranges; over years they merge into a grey bar.
       const crosses = !isLongRange(start, end);
-      out.push({ type: "scatter", mode: "lines", name: "No reading (nothing added)", ...segments(dotted), line: { color: muted, width: 1.5, dash: "dot" }, hoverinfo: "skip", connectgaps: false });
+      out.push({ type: "scatter", mode: "lines", name: "No reading (nothing added)", ...joinSegments(dotted), line: { color: muted, width: 1.5, dash: "dot" }, hoverinfo: "skip", connectgaps: false });
       if (crosses) out.push({
         type: "scatter", mode: "markers", name: "No reading", showlegend: false,
         x: gaps.map((g) => g.date), y: gaps.map(() => 0), cliponaxis: false, hoverinfo: "skip",
@@ -113,7 +65,7 @@ export default function RainfallRunningTotal({ days, start, end, coverage, revis
       marker: { size: 8, color: "rgba(0,0,0,0)" },
       customdata: tips, hovertemplate: "%{customdata}<extra></extra>",
     });
-    return { traces: out, last: prev, gapDays: gaps.length };
+    return { traces: out, last, gapDays: gaps.length };
   }, [days, start, end, color, muted, runs, band]);
   const stateTotal = coverage >= MIN_COVERAGE;
 

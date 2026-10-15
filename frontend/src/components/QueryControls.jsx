@@ -21,6 +21,7 @@ export default function QueryControls({
   available,
   onRangeChange,
   disabled,
+  note,
 }) {
   const id = useId();
   const offered = variables.filter((v) =>
@@ -94,9 +95,9 @@ export default function QueryControls({
       )}
 
       <p className="control-note">
-        {available.first_date
+        {note ?? (available.first_date
           ? `Recorded ${formatDate(available.first_date)} – ${formatDate(available.last_date)}`
-          : "Not recorded at this station"}
+          : "Not recorded at this station")}
       </p>
     </div>
   );

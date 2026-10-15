@@ -222,3 +222,60 @@ export function multiDayBlocks(days) {
   for (const d of days) if (d.kind === "multi" && !seen.has(d.total.end)) seen.set(d.total.end, d.total);
   return [...seen.values()].map((t) => ({ ...t, perDay: t.value / t.span }));
 }
+
+/**
+ * Merge touching segments of one kind into polylines for a single Plotly
+ * trace: [a, b, c, null, d, e, ...]. A run of dry days becomes one flat line,
+ * not hundreds of tiny pieces; separate runs are split with null.
+ */
+export function joinSegments(pairs) {
+  const x = [];
+  const y = [];
+  let end = null;
+  for (const [a, b] of pairs) {
+    if (end !== a) {
+      if (x.length) x.push(null), y.push(null);
+      x.push(a.x), y.push(a.y);
+    }
+    x.push(b.x), y.push(b.y);
+    end = b;
+  }
+  return { x, y };
+}
+
+/**
+ * The running-total line for a range: segments by kind (solid readings,
+ * dashed multi-day totals, dotted no-reading stretches), the last point, and
+ * one hover anchor per day on the line. Starts at 0 mm on the evening before
+ * the first day.
+ */
+export function runningLine(days, start) {
+  const run = runningTotal(days);
+  let prev = { x: addDays(start, -1), y: 0 };
+  const solid = [];
+  const dashed = [];
+  const dotted = [];
+  for (const r of run) {
+    if (r.total === null) continue;
+    const point = { x: r.date, y: r.total };
+    (r.kind === "multi" ? dashed : r.kind === "gap" ? dotted : solid).push([prev, point]);
+    prev = point;
+  }
+  // Inside a dashed span the anchor sits on the straight line (position only;
+  // the tooltip says the timing there is unknown).
+  const hoverY = new Array(run.length);
+  for (let i = 0; i < run.length;) {
+    if (run[i].total !== null) {
+      hoverY[i] = run[i].total;
+      i += 1;
+    } else {
+      let j = i;
+      while (j < run.length - 1 && run[j].total === null) j += 1;
+      const { from, to } = run[i];
+      const n = j - i + 1;
+      for (let k = i; k < j; k += 1) hoverY[k] = from + ((to - from) * (k - i + 1)) / n;
+      i = j;
+    }
+  }
+  return { run, solid, dashed, dotted, last: prev, hoverY };
+}

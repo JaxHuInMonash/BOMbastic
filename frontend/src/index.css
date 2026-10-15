@@ -94,6 +94,25 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 }
 
 .detail-header { display: grid; gap: 10px; }
+.station-pickers { display: grid; gap: 8px; }
+.station-picker button { padding: 4px 10px; }
+.tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--grid); }
+.tabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0; background: transparent; padding: 7px 14px; color: var(--ink-2); }
+.tabs button[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--accent); }
+/* Compare: A and B wear their chart colours (chartTheme.js stationColor). */
+:root { --station-a: #2a78d6; --station-b: #eb6834; }
+@media (prefers-color-scheme: dark) { :root { --station-a: #3987e5; --station-b: #d95926; } }
+.key-a, .key-b { display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; border-radius: 4px; color: #fff; font-size: 0.8em; font-weight: 700; vertical-align: 0.1em; }
+.key-a { background: var(--station-a); }
+.key-b { background: var(--station-b); }
+.vs { color: var(--muted); font-weight: 400; font-size: 0.85em; }
+.stat--a { border-top: 3px solid var(--station-a); }
+.stat--b { border-top: 3px solid var(--station-b); }
+.leaflet-tooltip.station-label { font-weight: 700; color: #fff; border: 0; padding: 1px 6px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+.leaflet-tooltip.station-label--a { background: var(--station-a); }
+.leaflet-tooltip.station-label--b { background: var(--station-b); }
+.leaflet-tooltip.station-label--a::before { border-top-color: var(--station-a); }
+.leaflet-tooltip.station-label--b::before { border-top-color: var(--station-b); }
 .empty-hint { color: var(--ink-2); max-width: 60ch; }
 
 /* The selected station keeps the same pin, recoloured, and sits above the others. */

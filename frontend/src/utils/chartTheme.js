@@ -24,3 +24,15 @@ const SERIES = {
 export function seriesColor(scheme, variableCode) {
   return SERIES[scheme]?.[variableCode] ?? SERIES[scheme]?.rainfall ?? SERIES.light.rainfall;
 }
+
+/**
+ * Compare view: colour follows the station, not the variable. A is slot 1
+ * (blue), B is slot 2 (orange), the pair already validated above; the map
+ * pins use the same two colours.
+ */
+const STATIONS = {
+  light: { A: "#2a78d6", B: "#eb6834" },
+  dark: { A: "#3987e5", B: "#d95926" },
+};
+
+export const stationColor = (scheme, which) => STATIONS[scheme][which];
