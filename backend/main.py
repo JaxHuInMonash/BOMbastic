@@ -8,7 +8,8 @@ a static JSON file rather than Postgres, since NFR-05/FR-01 already own
 the real database ingestion path. Swapping the JSON read for a DB query
 later doesn't change the endpoint's contract.
 
-The versioned endpoints (/api/v1/variables, /api/v1/observations, /health)
+The versioned endpoints (/api/v1/variables, /api/v1/stations, /api/v1/observations,
+/api/v1/regressions, /health)
 live in api_v1.py and read PostgreSQL. The endpoints below still read the
 static JSON and the rainfall CSVs, so the existing map keeps working while the
 frontend moves over.
@@ -44,7 +45,7 @@ app = FastAPI(title="BOMbastic Map API")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # tighten to the deployed frontend origin before submission
-    allow_methods=["GET"],
+    allow_methods=["GET", "POST"],  # POST: /api/v1/regressions
     allow_headers=["*"],
 )
 

@@ -14,6 +14,10 @@
  * from the next map click or the B list. Variable and period are shared with
  * Explore, so switching tabs keeps the same question.
  *
+ * Relationship (FR-05): a third tab fits a line between two variables at the
+ * current station. It is one-station only, as the report's journey requires;
+ * on the map, stations with a single variable fade while it is open.
+ *
  * Companion rule: when the variable is a temperature and the station records
  * the other one too, that one is fetched for the same dates and drawn lighter
  * on the same chart. The quality summary and table stay on the chosen variable.
@@ -28,6 +32,7 @@ import CompareView from "./CompareView";
 import DataTable from "./DataTable";
 import QualitySummary from "./QualitySummary";
 import QueryControls from "./QueryControls";
+import RegressionView from "./RegressionView";
 import StationMap from "./StationMap";
 
 function effectiveVariable(station, chosen) {
@@ -92,6 +97,7 @@ export default function Dashboard() {
             selectedId={stationId}
             compareId={stationB?.station_id ?? null}
             comparing={comparing}
+            dimmed={mode === "relationship" ? (s) => s.variables.length < 2 : null}
             onSelect={onMapSelect}
           />
         )}
@@ -140,7 +146,7 @@ export default function Dashboard() {
           </div>
           {station && (
             <div className="tabs" role="tablist" aria-label="View">
-              {[["explore", "Explore"], ["compare", "Compare"]].map(([key, label]) => (
+              {[["explore", "Explore"], ["compare", "Compare"], ["relationship", "Relationship"]].map(([key, label]) => (
                 <button key={key} type="button" role="tab" aria-selected={mode === key} onClick={() => setMode(key)}>
                   {label}
                 </button>
@@ -161,7 +167,18 @@ export default function Dashboard() {
           />
         )}
 
-        {station && !comparing && variables.data && (
+        {station && mode === "relationship" && variables.data && (
+          <RegressionView
+            station={station}
+            stations={stationList}
+            variables={variables.data}
+            onSelectStation={setStationId}
+            range={range}
+            onRangeChange={setRange}
+          />
+        )}
+
+        {station && mode === "explore" && variables.data && (
           <>
             <QueryControls
               station={station}

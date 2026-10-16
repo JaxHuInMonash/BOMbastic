@@ -12,6 +12,8 @@
  * Compare (FR-04): station A's pin keeps the blue pin and B's is orange, the
  * same colours as their lines on the chart, each labelled with its letter;
  * other pins fade so the pair stands out, and the map fits both in view.
+ * Relationship (FR-05): `dimmed` fades stations a relationship can't be
+ * fitted at (only one variable), so the usable ones stand out.
  *
  * Marker images are imported from the leaflet package so the bundler ships
  * them. Leaflet's own default-icon lookup guesses a path that does not exist in
@@ -55,11 +57,11 @@ function FollowSelection({ a, b }) {
   return null;
 }
 
-export default function StationMap({ stations, selectedId, compareId = null, comparing = false, onSelect }) {
+export default function StationMap({ stations, selectedId, compareId = null, comparing = false, dimmed = null, onSelect }) {
   const a = stations.find((s) => s.station_id === selectedId) ?? null;
   const b = comparing ? stations.find((s) => s.station_id === compareId) ?? null : null;
 
-  const look = (id) => {
+  const look = (id, station) => {
     if (comparing) {
       if (id === selectedId) return { icon: DEFAULT_ICON, z: 1000, opacity: 1, label: "A" };
       if (id === compareId) return { icon: SELECTED_ICON, z: 1000, opacity: 1, label: "B" };
@@ -67,7 +69,7 @@ export default function StationMap({ stations, selectedId, compareId = null, com
     }
     return id === selectedId
       ? { icon: SELECTED_ICON, z: 1000, opacity: 1, label: null }
-      : { icon: DEFAULT_ICON, z: 0, opacity: 1, label: null };
+      : { icon: DEFAULT_ICON, z: 0, opacity: dimmed?.(station) ? 0.35 : 1, label: null };
   };
 
   return (
@@ -82,7 +84,7 @@ export default function StationMap({ stations, selectedId, compareId = null, com
       />
 
       {stations.map((station) => {
-        const { icon, z, opacity, label } = look(station.station_id);
+        const { icon, z, opacity, label } = look(station.station_id, station);
         return (
           <Marker
             key={`${station.station_id}|${label ?? ""}`}

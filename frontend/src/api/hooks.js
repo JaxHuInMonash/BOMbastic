@@ -40,6 +40,7 @@ function useRequest(fetcher, params) {
 const fetchStations = (_params, signal) => api.stations(signal);
 const fetchVariables = (_params, signal) => api.variables(signal);
 const fetchObservations = (params, signal) => api.observations(params, signal);
+const fetchRegression = (params, signal) => api.regression(params, signal);
 
 export function useStations() {
   return useRequest(fetchStations, {});
@@ -53,4 +54,10 @@ export function useVariables() {
 export function useObservations(query) {
   const ready = Boolean(query.stationId && query.variable);
   return useRequest(fetchObservations, ready ? query : null);
+}
+
+/** query: { stationId, x, y, start, end, qualityPolicy }. Nothing is fetched until station, x and y are set. */
+export function useRegression(query) {
+  const ready = Boolean(query.stationId && query.x && query.y && query.x !== query.y);
+  return useRequest(fetchRegression, ready ? query : null);
 }

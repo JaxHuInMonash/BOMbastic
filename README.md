@@ -56,6 +56,9 @@ cd frontend; npm install; npm run dev
 The API reads the password from `PGPASSWORD` for that terminal only; don't
 save it to a file or commit it. To use a database other than
 `postgresql://postgres@localhost:5432/bombastic`, set `BOMBASTIC_DATABASE_URL`.
+The Relationship tab (FR-05) fits a line only with at least 20 paired days;
+set `BOMBASTIC_REGRESSION_MIN_PAIRS` before starting the API to change that
+threshold (report section 6.3).
 
 ### Check it works
 

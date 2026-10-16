@@ -8,6 +8,7 @@ plus the health check:
     GET /api/v1/stations       stations with data, and which variables each has
     GET /api/v1/stations/{id}  one station and its variables
     GET /api/v1/observations   one station, one variable, one date range
+    POST /api/v1/regressions   one station, two variables: OLS fit (FR-05, regression.py)
     GET /health                is the service up and can it reach the database
 
 Status codes follow the report's error contract:
@@ -33,9 +34,10 @@ from typing import Iterator, Literal
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Path, Query, Request
 from fastapi.responses import JSONResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 import db
+import regression
 
 DEFAULT_DAYS = 365          # NFR-01 is measured on one station and up to a year of daily data
 MAX_DAYS = 3660             # DR-04: about ten years of daily rows per request
@@ -135,6 +137,65 @@ class ObservationsResponse(BaseModel):
     quality_counts: QualityCounts
     summary: Summary | None
     records: list[Record]
+
+
+class RegressionRequest(BaseModel):
+    station_id: str = Field(..., pattern=r"^\d{1,6}$", description="BOM station number")
+    x: str = Field(..., description="Predictor: a variable_code from /api/v1/variables")
+    y: str = Field(..., description="Response: a different variable_code")
+    start: date | None = Field(None, description="First day. Default: a year before end")
+    end: date | None = Field(None, description="Last day. Default: the last day both variables were recorded")
+    quality_policy: Literal["all", "checked"] = Field(
+        "all", description="'all' pairs every reading; 'checked' only readings BOM has quality-checked")
+
+
+class RegressionQuery(BaseModel):
+    station: StationRef
+    x: Variable
+    y: Variable
+    start: date
+    end: date
+    quality_policy: Literal["all", "checked"]
+    min_pairs: int
+    defaulted: list[str] = []
+
+
+class RegressionModel(BaseModel):
+    n: int
+    slope: float
+    intercept: float
+    r_squared: float | None
+    x_min: float
+    x_max: float
+
+
+class RegressionPoint(BaseModel):
+    date: date
+    x: float
+    y: float
+    fitted: float | None
+    residual: float | None
+    x_quality: Literal["observed", "unverified", "interpolated"]
+    y_quality: Literal["observed", "unverified", "interpolated"]
+
+
+class Excluded(BaseModel):
+    no_reading: int
+    multi_day: int
+    not_checked: int
+
+
+class RegressionResponse(BaseModel):
+    status: Literal["ok", "insufficient", "no_data"]
+    message: str | None = None
+    query: RegressionQuery
+    available: Availability           # the dates both variables were recorded
+    days_in_range: int
+    excluded: Excluded
+    interpolated_included: bool
+    warnings: list[str]
+    model: RegressionModel | None
+    points: list[RegressionPoint]
 
 
 # --------------------------------------------------------------------- dependencies
@@ -364,3 +425,81 @@ def get_observations(
                         value=None if r["value"] is None else float(r["value"]),
                         quality_state=r["quality_state"],
                         accumulation_days=r["accumulation_days"]) for r in rows])
+
+
+@router.post("/regressions", response_model=RegressionResponse)
+def post_regression(body: RegressionRequest, store: db.Store = Depends(get_store)):
+    """Fit y = intercept + slope * x for two variables at one station (FR-05).
+
+    Pairs only days where both have a single-day reading under the chosen
+    quality policy, needs at least regression.MIN_PAIRS of them and some spread
+    in x, and otherwise answers status "insufficient" with the reason instead of
+    a model (report 6.3). Describes past data: not a forecast, not a cause."""
+    station_id = body.station_id.zfill(6)
+    if body.x == body.y:
+        raise HTTPException(422, "x and y must be two different variables.")
+    variables = {}
+    for code in (body.x, body.y):
+        var = store.variable(code)
+        if var is None:
+            known = ", ".join(v["variable_code"] for v in store.variables())
+            raise HTTPException(404, f"Unknown variable '{code}'. Known variables: {known}.")
+        variables[code] = var
+    station = store.station(station_id)
+    if station is None:
+        raise HTTPException(404, f"Unknown station '{station_id}'.")
+    var_x, var_y = variables[body.x], variables[body.y]
+
+    # The dates both variables were recorded; the default range counts back from their shared end.
+    ax = store.availability(station_id, body.x)
+    ay = store.availability(station_id, body.y)
+    firsts = [a["first_date"] for a in (ax, ay)]
+    lasts = [a["last_date"] for a in (ax, ay)]
+    shared = Availability(first_date=None, last_date=None)
+    if all(firsts) and all(lasts) and max(firsts) <= min(lasts):
+        shared = Availability(first_date=max(firsts), last_date=min(lasts))
+    start, end, defaulted = resolve_range(body.start, body.end, shared)
+    query = RegressionQuery(station=station, x=var_x, y=var_y, start=start, end=end,
+                            quality_policy=body.quality_policy, min_pairs=regression.MIN_PAIRS,
+                            defaulted=defaulted)
+    days = (end - start).days + 1
+
+    def empty(status: str, message: str, pairing: regression.Pairing | None = None):
+        p = pairing or regression.Pairing(no_reading=days)
+        return RegressionResponse(
+            status=status, message=message, query=query, available=shared, days_in_range=days,
+            excluded=Excluded(**p.excluded), interpolated_included=p.interpolated > 0, warnings=[],
+            model=None,
+            points=[RegressionPoint(**pt, fitted=None, residual=None) for pt in p.pairs])
+
+    if shared.first_date is None:
+        missing = [v["label"].lower() for v, a in ((var_x, ax), (var_y, ay)) if not a["first_date"]]
+        reason = (f"{station['name']} has no {' or '.join(missing)} records." if missing else
+                  f"{station['name']} never recorded {var_x['label'].lower()} and "
+                  f"{var_y['label'].lower()} over the same dates.")
+        return empty("no_data", reason)
+
+    pairing = regression.pair(store.observations(station_id, body.x, start, end),
+                              store.observations(station_id, body.y, start, end),
+                              start, end, body.quality_policy)
+    result = regression.fit([p["x"] for p in pairing.pairs], [p["y"] for p in pairing.pairs])
+    if isinstance(result, str):
+        return empty("insufficient", result, pairing)
+
+    warnings = []
+    unverified = sum(1 for p in pairing.pairs if "unverified" in (p["x_quality"], p["y_quality"]))
+    if unverified:
+        warnings.append(f"{unverified} of the {result.n} paired days include readings BOM hasn't "
+                        f"quality-checked yet.")
+    warnings.append(f"{pairing.interpolated} paired days include interpolated values." if pairing.interpolated
+                    else "No interpolated values were included.")
+    if result.r_squared is None:
+        warnings.append("The y variable has the same value on every paired day, so R² is undefined.")
+    return RegressionResponse(
+        status="ok", query=query, available=shared, days_in_range=days,
+        excluded=Excluded(**pairing.excluded), interpolated_included=pairing.interpolated > 0,
+        warnings=warnings,
+        model=RegressionModel(n=result.n, slope=result.slope, intercept=result.intercept,
+                              r_squared=result.r_squared, x_min=result.x_min, x_max=result.x_max),
+        points=[RegressionPoint(**p, fitted=f, residual=r)
+                for p, f, r in zip(pairing.pairs, result.fitted, result.residuals)])

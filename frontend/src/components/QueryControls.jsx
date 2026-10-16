@@ -22,6 +22,7 @@ export default function QueryControls({
   onRangeChange,
   disabled,
   note,
+  children,
 }) {
   const id = useId();
   const offered = variables.filter((v) =>
@@ -30,21 +31,24 @@ export default function QueryControls({
 
   return (
     <div className="query-controls" role="group" aria-label="Chart filters">
-      <div className="control">
-        <label htmlFor={`${id}-variable`}>Variable</label>
-        <select
-          id={`${id}-variable`}
-          value={variable}
-          onChange={(e) => onVariableChange(e.target.value)}
-          disabled={disabled}
-        >
-          {offered.map((v) => (
-            <option key={v.variable_code} value={v.variable_code}>
-              {v.label} ({v.unit})
-            </option>
-          ))}
-        </select>
-      </div>
+      {/* Another view can bring its own pickers (e.g. X and Y for a relationship). */}
+      {children ?? (
+        <div className="control">
+          <label htmlFor={`${id}-variable`}>Variable</label>
+          <select
+            id={`${id}-variable`}
+            value={variable}
+            onChange={(e) => onVariableChange(e.target.value)}
+            disabled={disabled}
+          >
+            {offered.map((v) => (
+              <option key={v.variable_code} value={v.variable_code}>
+                {v.label} ({v.unit})
+              </option>
+            ))}
+          </select>
+        </div>
+      )}
 
       <fieldset className="control">
         <legend>Period</legend>
