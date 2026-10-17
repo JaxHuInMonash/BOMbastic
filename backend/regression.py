@@ -23,37 +23,75 @@ from __future__ import annotations
 
 import math
 import os
+from collections.abc import Sequence
 from dataclasses import dataclass, field
 from datetime import date, timedelta
+from decimal import Decimal
+from typing import Literal, TypedDict
 
 # Report 6.3: "Require at least 20 paired points by default ... expose the
 # threshold in configuration". Set BOMBASTIC_REGRESSION_MIN_PAIRS to change it.
 MIN_PAIRS = int(os.environ.get("BOMBASTIC_REGRESSION_MIN_PAIRS", "20"))
 
-POLICIES = ("all", "checked")
+Policy = Literal["all", "checked"]
+POLICIES: tuple[Policy, ...] = ("all", "checked")
+
+QualityState = Literal["observed", "unverified", "interpolated", "missing"]
+ReadingQuality = Literal["observed", "unverified", "interpolated"]   # a state that has a value
+
+
+class DailyRow(TypedDict):
+    """The columns this module reads from a stored daily row (db.ObservationRow has these and more)."""
+    observed_date: date
+    value: Decimal | None
+    quality_state: QualityState
+    accumulation_days: int | None
+
+
+class PairedDay(TypedDict):
+    date: date
+    x: float
+    y: float
+    x_quality: ReadingQuality
+    y_quality: ReadingQuality
+
+
+class Excluded(TypedDict):
+    no_reading: int
+    multi_day: int
+    not_checked: int
 
 
 @dataclass
 class Pairing:
-    pairs: list[dict] = field(default_factory=list)   # {date, x, y, x_quality, y_quality}
+    pairs: list[PairedDay] = field(default_factory=lambda: list[PairedDay]())
     no_reading: int = 0      # either variable has no reading, or no row, that day
     multi_day: int = 0       # either variable's value covers several days
     not_checked: int = 0     # left out by the "checked" policy
     interpolated: int = 0    # pairs that include an interpolated value
 
     @property
-    def excluded(self) -> dict:
+    def excluded(self) -> Excluded:
         return {"no_reading": self.no_reading, "multi_day": self.multi_day, "not_checked": self.not_checked}
 
 
-def _single(row: dict | None) -> float | None:
+def _reading_quality(state: QualityState) -> ReadingQuality:
+    """The quality of a row that has a value. A 'missing' row never has one
+    (the schema enforces it), so meeting one here is a bug, not data."""
+    if state == "missing":
+        raise ValueError("a row with a value cannot have quality_state 'missing'")
+    return state
+
+
+def _single(row: DailyRow | None) -> float | None:
     """The row's value if it is one day's reading, else None."""
     if row is None or row["value"] is None or (row["accumulation_days"] or 1) > 1:
         return None
     return float(row["value"])
 
 
-def pair(rows_x: list[dict], rows_y: list[dict], start: date, end: date, policy: str = "all") -> Pairing:
+def pair(rows_x: Sequence[DailyRow], rows_y: Sequence[DailyRow], start: date, end: date,
+         policy: Policy = "all") -> Pairing:
     """Line up two variables' rows by date over [start, end]. Every day in the
     range is either paired or counted under exactly one reason, checked in
     this order: no reading, multi-day value, quality policy."""
@@ -76,7 +114,8 @@ def pair(rows_x: list[dict], rows_y: list[dict], start: date, end: date, policy:
             if "interpolated" in (rx["quality_state"], ry["quality_state"]):
                 out.interpolated += 1
             out.pairs.append({"date": day, "x": x, "y": y,
-                              "x_quality": rx["quality_state"], "y_quality": ry["quality_state"]})
+                              "x_quality": _reading_quality(rx["quality_state"]),
+                              "y_quality": _reading_quality(ry["quality_state"])})
         day += timedelta(days=1)
     return out
 

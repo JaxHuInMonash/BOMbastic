@@ -16,11 +16,15 @@ export class ApiError extends Error {
   }
 }
 
-export async function getJSON(path, params = {}, signal) {
+function urlFor(path, params = {}) {
   const query = new URLSearchParams(
     Object.entries(params).filter(([, v]) => v !== undefined && v !== null && v !== ""),
   );
-  return request(`${API_BASE}${path}${query.size ? `?${query}` : ""}`, { signal });
+  return `${API_BASE}${path}${query.size ? `?${query}` : ""}`;
+}
+
+export async function getJSON(path, params = {}, signal) {
+  return request(urlFor(path, params), { signal });
 }
 
 /** POST a JSON body; used for computations such as /api/v1/regressions (report §5.3). */
@@ -68,6 +72,9 @@ export const api = {
   variables: (signal) => getJSON("/api/v1/variables", {}, signal),
   observations: ({ stationId, variable, start, end }, signal) =>
     getJSON("/api/v1/observations", { station_id: stationId, variable, start, end }, signal),
+  /** A link, not a fetch: the browser downloads the file the API names (FR-08). */
+  exportUrl: ({ stationId, variable, start, end, compareStationId }) =>
+    urlFor("/api/v1/export.csv", { station_id: stationId, variable, start, end, compare_station_id: compareStationId }),
   regression: ({ stationId, x, y, start, end, qualityPolicy }, signal) =>
     postJSON("/api/v1/regressions", { station_id: stationId, x, y, start, end, quality_policy: qualityPolicy }, signal),
 };

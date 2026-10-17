@@ -6,6 +6,7 @@
 import { useId, useState } from "react";
 import { differences } from "../utils/compare";
 import { formatDate } from "../utils/dates";
+import ExportLink from "./ExportLink";
 
 const PAGE_SIZE = 50;
 
@@ -36,6 +37,10 @@ export default function CompareTable({ pair, daysA, daysB }) {
 
   return (
     <section className="data-table" aria-labelledby={`${id}-caption`}>
+      <ExportLink
+        query={{ stationId: a.query.station.station_id, compareStationId: b.query.station.station_id, variable: a.query.variable.variable_code, start: a.query.start, end: a.query.end }}
+        note={`${(a.records.length + b.records.length).toLocaleString()} rows: A's records, then B's, one row per station and day, with unit, quality flag and source`}
+      />
       <div className="table-scroll">
         <table>
           <caption id={`${id}-caption`}>

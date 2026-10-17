@@ -277,3 +277,12 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .station-suggestions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .station-suggestions button { font-size: 0.85rem; padding: 4px 10px; }
 .caveat { font-size: 0.85rem; color: var(--ink-2); border-left: 3px solid var(--axis); padding: 2px 0 2px 10px; }
+
+/* ---------------------------------------------------------------- export (FR-08) */
+.table-toolbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.table-toolbar .control-note { margin-left: 0; }
+a.button {
+  display: inline-block; padding: 6px 12px; border: 1px solid var(--axis); border-radius: 6px;
+  background: var(--surface); color: var(--ink); text-decoration: none; font-size: 0.9rem;
+}
+a.button:hover { background: var(--accent-wash); }
