@@ -9,6 +9,7 @@ plus the health check:
     GET /api/v1/stations/{id}  one station and its variables
     GET /api/v1/observations   one station, one variable, one date range
     POST /api/v1/regressions   one station, two variables: OLS fit (FR-05, regression.py)
+    GET /api/v1/export.csv     the observations query (or a two-station comparison) as CSV (FR-08)
     GET /health                is the service up and can it reach the database
 
 Status codes follow the report's error contract:
@@ -29,11 +30,15 @@ Rules taken from docs/data-contract.md:
 
 from __future__ import annotations
 
+import csv
+import io
 from datetime import date, timedelta
-from typing import Iterator, Literal
+from decimal import Decimal
+from collections.abc import Generator
+from typing import Literal
 
 from fastapi import APIRouter, Depends, FastAPI, HTTPException, Path, Query, Request
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, Response
 from pydantic import BaseModel, Field
 
 import db
@@ -199,7 +204,7 @@ class RegressionResponse(BaseModel):
 
 
 # --------------------------------------------------------------------- dependencies
-def get_store() -> Iterator[db.Store]:
+def get_store() -> Generator[db.Store, None, None]:
     with db.connect() as conn:
         yield db.Store(conn)
 
@@ -220,7 +225,7 @@ def install(app: FastAPI) -> None:
         return JSONResponse(status_code=503, content={"detail": f"Database schema out of date: {error}"})
 
 
-def group_stations(rows: list[dict]) -> list[Station]:
+def group_stations(rows: list[db.CoverageRow]) -> list[Station]:
     """Fold one-row-per-variable into one Station with a list of variables."""
     stations: dict[str, Station] = {}
     for r in rows:
@@ -244,7 +249,7 @@ def resolve_range(start: date | None, end: date | None,
     With neither given, the last DEFAULT_DAYS of the station's own record are
     used, so a station that stopped recording years ago still opens on data.
     """
-    defaulted = []
+    defaulted: list[str] = []
     if end is None:
         if start is not None:
             end = start + timedelta(days=DEFAULT_DAYS - 1)
@@ -265,7 +270,7 @@ def resolve_range(start: date | None, end: date | None,
     return start, end, defaulted
 
 
-def summarise(rows: list[dict], start: date, end: date,
+def summarise(rows: list[db.ObservationRow], start: date, end: date,
               semantic_type: str) -> tuple[QualityCounts, Summary]:
     counts = QualityCounts()
     days_covered = 0
@@ -318,9 +323,57 @@ def summarise(rows: list[dict], start: date, end: date,
     )
 
 
+def lookup(store: db.Store, station_id: str, variable: str, start: date | None,
+           end: date | None) -> tuple[db.StationRow, db.VariableRow, Availability, date, date, list[str]]:
+    """Validate a station/variable/range query the way every endpoint does:
+    404 for an unknown station or variable, 422 for a bad range."""
+    station_id = station_id.zfill(6)
+    var = store.variable(variable)
+    if var is None:
+        known = ", ".join(v["variable_code"] for v in store.variables())
+        raise HTTPException(404, f"Unknown variable '{variable}'. Known variables: {known}.")
+    station = store.station(station_id)
+    if station is None:
+        raise HTTPException(404, f"Unknown station '{station_id}'.")
+    available = Availability(**store.availability(station_id, variable))
+    start, end, defaulted = resolve_range(start, end, available)
+    return station, var, available, start, end, defaulted
+
+
+# Column names are part of the contract (report FR-08): don't rename them.
+EXPORT_COLUMNS = ["station_id", "station_name", "date", "variable", "value", "unit",
+                  "quality_flag", "days_covered", "source_product", "ingestion_run_id"]
+
+
+def plain_number(value: Decimal | float | None) -> str:
+    """12.40 -> '12.4', 0.00 -> '0', 120.00 -> '120': the stored value, no float noise."""
+    if value is None:
+        return ""
+    text = format(Decimal(str(value)), "f")
+    return text.rstrip("0").rstrip(".") if "." in text else text
+
+
+def export_rows(station: db.StationRow, var: db.VariableRow,
+                rows: list[db.ObservationRow]) -> list[list[str]]:
+    """One CSV row per stored record, exactly the records /observations returns.
+    A missing day keeps its row with an empty value and quality_flag 'missing'
+    (never 0); days_covered is how many days the value accounts for."""
+    out: list[list[str]] = []
+    for r in rows:
+        has_value = r["value"] is not None
+        out.append([
+            station["station_id"], station["name"], r["observed_date"].isoformat(), var["variable_code"],
+            plain_number(r["value"]), var["unit"], r["quality_state"],
+            str(r["accumulation_days"] or 1) if has_value else "",
+            # .get: rows built outside the database (tests) may not carry provenance.
+            r.get("source_product") or "", str(r.get("ingestion_run_id") or ""),
+        ])
+    return out
+
+
 # --------------------------------------------------------------------- endpoints
 @health_router.get("/health")
-def health(store: db.Store = Depends(get_store)) -> dict:
+def health(store: db.Store = Depends(get_store)) -> dict[str, str]:
     """Liveness and readiness: answers 503 if the database is unreachable."""
     store.ping()
     return {"status": "ok", "database": "ok"}
@@ -349,12 +402,13 @@ def list_stations(
         known = ", ".join(v["variable_code"] for v in store.variables())
         raise HTTPException(404, f"Unknown variable '{variable}'. Known variables: {known}.")
 
-    corners = (min_lat, max_lat, min_lon, max_lon)
-    if any(c is not None for c in corners) and not all(c is not None for c in corners):
+    bbox: tuple[float, float, float, float] | None = None
+    if min_lat is not None and max_lat is not None and min_lon is not None and max_lon is not None:
+        if min_lat > max_lat or min_lon > max_lon:
+            raise HTTPException(422, "min_lat must not exceed max_lat, nor min_lon max_lon.")
+        bbox = (min_lat, max_lat, min_lon, max_lon)
+    elif any(c is not None for c in (min_lat, max_lat, min_lon, max_lon)):
         raise HTTPException(422, "Give all four of min_lat, max_lat, min_lon, max_lon, or none.")
-    bbox = corners if all(c is not None for c in corners) else None
-    if bbox and (min_lat > max_lat or min_lon > max_lon):
-        raise HTTPException(422, "min_lat must not exceed max_lat, nor min_lon max_lon.")
 
     stations = group_stations(store.station_coverage(variable_code=variable, bbox=bbox))
     return StationList(count=len(stations), stations=stations)
@@ -386,19 +440,10 @@ def get_observations(
     store: db.Store = Depends(get_store),
 ):
     """One station, one variable, one date range of daily values (FR-01)."""
-    station_id = station_id.zfill(6)
-
-    var = store.variable(variable)
-    if var is None:
-        known = ", ".join(v["variable_code"] for v in store.variables())
-        raise HTTPException(404, f"Unknown variable '{variable}'. Known variables: {known}.")
-    station = store.station(station_id)
-    if station is None:
-        raise HTTPException(404, f"Unknown station '{station_id}'.")
-
-    available = Availability(**store.availability(station_id, variable))
-    start, end, defaulted = resolve_range(start, end, available)
-    query = QueryInfo(station=station, variable=var, start=start, end=end, defaulted=defaulted)
+    station, var, available, start, end, defaulted = lookup(store, station_id, variable, start, end)
+    query = QueryInfo(station=StationRef(**station), variable=Variable(**var), start=start, end=end,
+                      defaulted=defaulted)
+    station_id = station["station_id"]
 
     if available.first_date is None:
         return ObservationsResponse(
@@ -438,7 +483,7 @@ def post_regression(body: RegressionRequest, store: db.Store = Depends(get_store
     station_id = body.station_id.zfill(6)
     if body.x == body.y:
         raise HTTPException(422, "x and y must be two different variables.")
-    variables = {}
+    variables: dict[str, db.VariableRow] = {}
     for code in (body.x, body.y):
         var = store.variable(code)
         if var is None:
@@ -453,18 +498,19 @@ def post_regression(body: RegressionRequest, store: db.Store = Depends(get_store
     # The dates both variables were recorded; the default range counts back from their shared end.
     ax = store.availability(station_id, body.x)
     ay = store.availability(station_id, body.y)
-    firsts = [a["first_date"] for a in (ax, ay)]
-    lasts = [a["last_date"] for a in (ax, ay)]
     shared = Availability(first_date=None, last_date=None)
-    if all(firsts) and all(lasts) and max(firsts) <= min(lasts):
-        shared = Availability(first_date=max(firsts), last_date=min(lasts))
+    fx, fy, lx, ly = ax["first_date"], ay["first_date"], ax["last_date"], ay["last_date"]
+    if fx and fy and lx and ly and max(fx, fy) <= min(lx, ly):
+        shared = Availability(first_date=max(fx, fy), last_date=min(lx, ly))
     start, end, defaulted = resolve_range(body.start, body.end, shared)
-    query = RegressionQuery(station=station, x=var_x, y=var_y, start=start, end=end,
+    query = RegressionQuery(station=StationRef(**station), x=Variable(**var_x), y=Variable(**var_y),
+                            start=start, end=end,
                             quality_policy=body.quality_policy, min_pairs=regression.MIN_PAIRS,
                             defaulted=defaulted)
     days = (end - start).days + 1
 
-    def empty(status: str, message: str, pairing: regression.Pairing | None = None):
+    def empty(status: Literal["insufficient", "no_data"], message: str,
+              pairing: regression.Pairing | None = None) -> RegressionResponse:
         p = pairing or regression.Pairing(no_reading=days)
         return RegressionResponse(
             status=status, message=message, query=query, available=shared, days_in_range=days,
@@ -486,7 +532,7 @@ def post_regression(body: RegressionRequest, store: db.Store = Depends(get_store
     if isinstance(result, str):
         return empty("insufficient", result, pairing)
 
-    warnings = []
+    warnings: list[str] = []
     unverified = sum(1 for p in pairing.pairs if "unverified" in (p["x_quality"], p["y_quality"]))
     if unverified:
         warnings.append(f"{unverified} of the {result.n} paired days include readings BOM hasn't "
@@ -503,3 +549,46 @@ def post_regression(body: RegressionRequest, store: db.Store = Depends(get_store
                               r_squared=result.r_squared, x_min=result.x_min, x_max=result.x_max),
         points=[RegressionPoint(**p, fitted=f, residual=r)
                 for p, f, r in zip(pairing.pairs, result.fitted, result.residuals)])
+
+
+@router.get("/export.csv", response_class=Response,
+            responses={200: {"content": {"text/csv": {}}, "description": "The query's records as CSV"}})
+def export_csv(
+    station_id: str = Query(..., pattern=r"^\d{1,6}$", description="BOM station number"),
+    variable: str = Query(..., description="A variable_code from /api/v1/variables"),
+    start: date | None = Query(None, description="First day, YYYY-MM-DD"),
+    end: date | None = Query(None, description="Last day, YYYY-MM-DD"),
+    compare_station_id: str | None = Query(None, pattern=r"^\d{1,6}$",
+                                           description="A second station: export a comparison"),
+    store: db.Store = Depends(get_store),
+):
+    """The records of an observations query as CSV (FR-08, DR-01): the same rows
+    as /api/v1/observations and the dashboard table, with stable column names,
+    the unit on every row, the quality flag, the days each value covers, and the
+    source product and ingestion run each value came from.
+
+    With compare_station_id, both stations' records over the same dates, the
+    first station's rows first. The file starts with a UTF-8 byte order mark so
+    Excel shows units like °C correctly."""
+    station, var, _available, start, end, _ = lookup(store, station_id, variable, start, end)
+    stations = [station]
+    if compare_station_id is not None:
+        other = compare_station_id.zfill(6)
+        if other == station["station_id"]:
+            raise HTTPException(422, "compare_station_id must be a different station.")
+        second = store.station(other)
+        if second is None:
+            raise HTTPException(404, f"Unknown station '{other}'.")
+        stations.append(second)
+
+    buffer = io.StringIO()
+    buffer.write("\ufeff")
+    writer = csv.writer(buffer, lineterminator="\r\n")
+    writer.writerow(EXPORT_COLUMNS)
+    for st in stations:
+        writer.writerows(export_rows(st, var, store.observations(st["station_id"], variable, start, end)))
+
+    names = "_vs_".join(st["station_id"] for st in stations)
+    filename = f"bombastic_{names}_{var['variable_code']}_{start}_{end}.csv"
+    return Response(content=buffer.getvalue(), media_type="text/csv; charset=utf-8",
+                    headers={"Content-Disposition": f'attachment; filename="{filename}"'})

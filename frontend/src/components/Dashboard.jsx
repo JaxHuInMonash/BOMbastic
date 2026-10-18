@@ -92,18 +92,35 @@ export default function Dashboard() {
             <button type="button" onClick={stations.retry}>Try again</button>
           </div>
         ) : (
-          <StationMap
-            stations={stationList}
-            selectedId={stationId}
-            compareId={stationB?.station_id ?? null}
-            comparing={comparing}
-            dimmed={mode === "relationship" ? (s) => s.variables.length < 2 : null}
-            onSelect={onMapSelect}
-          />
+          <>
+            <StationMap
+              stations={stationList}
+              selectedId={stationId}
+              compareId={stationB?.station_id ?? null}
+              comparing={comparing}
+              dimmed={mode === "relationship" ? (s) => s.variables.length < 2 : null}
+              onSelect={onMapSelect}
+            />
+            <aside className="map-guide" aria-live="polite">
+              <strong>{station ? "Selected station" : "Explore the map"}</strong>
+              <span>
+                {station
+                  ? `${station.name} · ${station.state}${comparing && stationB ? `  |  B: ${stationB.name} · ${stationB.state}` : ""}`
+                  : "Select a marker, or choose a station from the list."}
+              </span>
+            </aside>
+          </>
         )}
       </section>
 
       <section className="detail-pane" aria-label="Selected station">
+        <div className="brand-lockup">
+          <span className="brand-mark" aria-hidden="true">B</span>
+          <div>
+            <p className="brand-name">BOMbastic</p>
+            <p className="brand-tagline">Explore Australian weather data</p>
+          </div>
+        </div>
         <header className="detail-header">
           <h1>
             {!station ? "Choose a station" : comparing && stationB ? (

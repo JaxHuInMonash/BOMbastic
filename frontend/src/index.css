@@ -72,11 +72,11 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
   grid-template-columns: minmax(320px, 2fr) 3fr;
   height: 100vh;
 }
-.map-pane { min-height: 0; border-right: 1px solid var(--grid); }
+.map-pane { min-height: 0; position: relative; border-right: 1px solid var(--grid); }
 .detail-pane {
   min-width: 0;
   overflow-y: auto;
-  padding: 20px 24px 32px;
+  padding: 18px clamp(18px, 2.4vw, 32px) 32px;
   display: grid;
   gap: 16px;
   align-content: start;
@@ -90,10 +90,19 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 }
 @media (max-width: 900px) {
   .dashboard { grid-template-columns: minmax(0, 1fr); height: auto; }
-  .map-pane { height: 55vh; border-right: 0; border-bottom: 1px solid var(--grid); }
+  .map-pane { height: clamp(320px, 42vh, 460px); border-right: 0; border-bottom: 1px solid var(--grid); }
 }
 
-.detail-header { display: grid; gap: 10px; }
+.brand-lockup { display: flex; align-items: center; gap: 10px; padding-bottom: 2px; }
+.brand-mark {
+  display: grid; place-items: center; flex: none; width: 38px; height: 38px;
+  border-radius: 11px; background: var(--accent); color: #fff; font-size: 1.25rem; font-weight: 750;
+  box-shadow: 0 3px 10px rgba(42, 120, 214, 0.2);
+}
+.brand-name { font-size: 1rem; line-height: 1.2; font-weight: 750; letter-spacing: 0.01em; }
+.brand-tagline { margin-top: 2px; color: var(--ink-2); font-size: 0.78rem; }
+.detail-header { display: grid; gap: 12px; padding: 14px; background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; }
+.detail-header h1 { font-size: clamp(1.25rem, 1.8vw, 1.55rem); }
 .station-pickers { display: grid; gap: 8px; }
 .station-picker button { padding: 4px 10px; }
 .tabs { display: flex; gap: 4px; border-bottom: 1px solid var(--grid); }
@@ -114,6 +123,16 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 .leaflet-tooltip.station-label--a::before { border-top-color: var(--station-a); }
 .leaflet-tooltip.station-label--b::before { border-top-color: var(--station-b); }
 .empty-hint { color: var(--ink-2); max-width: 60ch; }
+
+.map-guide {
+  position: absolute; z-index: 1000; top: 14px; right: 14px;
+  display: grid; gap: 2px; max-width: min(300px, calc(100% - 72px));
+  padding: 10px 12px; border: 1px solid rgba(255, 255, 255, 0.75); border-radius: 9px;
+  color: #17212d; background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 3px 14px rgba(20, 36, 52, 0.16); pointer-events: none;
+}
+.map-guide strong { font-size: 0.82rem; }
+.map-guide span { color: #485563; font-size: 0.76rem; line-height: 1.35; }
 
 /* The selected station keeps the same pin, recoloured, and sits above the others. */
 .leaflet-marker-icon.station-pin--selected { filter: hue-rotate(160deg) saturate(1.6) brightness(1.05); }
@@ -277,3 +296,20 @@ td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
 .station-suggestions { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; }
 .station-suggestions button { font-size: 0.85rem; padding: 4px 10px; }
 .caveat { font-size: 0.85rem; color: var(--ink-2); border-left: 3px solid var(--axis); padding: 2px 0 2px 10px; }
+
+/* ---------------------------------------------------------------- export (FR-08) */
+.table-toolbar { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.table-toolbar .control-note { margin-left: 0; }
+a.button {
+  display: inline-block; padding: 6px 12px; border: 1px solid var(--axis); border-radius: 6px;
+  background: var(--surface); color: var(--ink); text-decoration: none; font-size: 0.9rem;
+}
+a.button:hover { background: var(--accent-wash); }
+
+@media (max-width: 600px) {
+  .detail-pane { padding: 16px 14px 28px; gap: 14px; }
+  .detail-header { padding: 12px; }
+  .map-guide { top: 12px; right: 12px; max-width: min(270px, calc(100% - 64px)); }
+  .tabs { overflow-x: auto; }
+  .tabs button { flex: none; padding-inline: 11px; }
+}

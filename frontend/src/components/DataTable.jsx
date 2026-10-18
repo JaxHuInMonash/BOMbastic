@@ -5,6 +5,7 @@
 
 import { useId, useState } from "react";
 import { formatDate } from "../utils/dates";
+import ExportLink from "./ExportLink";
 
 const PAGE_SIZE = 50;
 
@@ -31,6 +32,10 @@ export default function DataTable({ data }) {
 
   return (
     <section className="data-table" aria-labelledby={`${id}-caption`}>
+      <ExportLink
+        query={{ stationId: data.query.station.station_id, variable: data.query.variable.variable_code, start: data.query.start, end: data.query.end }}
+        note={`${records.length.toLocaleString()} rows, the records in this table, with unit, quality flag and source`}
+      />
       <div className="table-scroll">
         <table>
           <caption id={`${id}-caption`}>
