@@ -76,7 +76,7 @@ export default function StationMap({ stations, selectedId, compareId = null, com
     <MapContainer
       center={[-25.27, 133.78]} // roughly the centre of Australia
       zoom={4}
-      style={{ height: "100%", width: "100%", minHeight: 480 }}
+      style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
