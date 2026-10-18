@@ -15,8 +15,10 @@
  * Explore, so switching tabs keeps the same question.
  *
  * Relationship (FR-05): a third tab fits a line between two variables at the
- * current station. It is one-station only, as the report's journey requires;
- * on the map, stations with a single variable fade while it is open.
+ * current station. It is one-station only, as the report's journey requires.
+ * While it is open the station list holds only stations where two variables
+ * could give 20 paired days, the other pins fade, and clicking a faded pin
+ * only opens its popup.
  *
  * Companion rule: when the variable is a temperature and the station records
  * the other one too, that one is fetched for the same dates and drawn lighter
@@ -26,6 +28,7 @@
 import { useId, useState } from "react";
 import { useObservations, useStations, useVariables } from "../api/hooks";
 import { resolveRange } from "../utils/ranges";
+import { canRelate } from "../utils/regression";
 import { companionOf } from "../utils/series";
 import ChartPanel from "./ChartPanel";
 import CompareView from "./CompareView";
@@ -57,12 +60,18 @@ export default function Dashboard() {
   const stationList = stations.data?.stations ?? [];
   const station = stationList.find((s) => s.station_id === stationId) ?? null;
   const comparing = mode === "compare" && Boolean(station);
+  const relating = mode === "relationship" && Boolean(station);
+  const pickable = relating ? stationList.filter(canRelate) : stationList;
   const stationB = comparing ? stationList.find((s) => s.station_id === compareId && s.station_id !== stationId) ?? null : null;
 
-  // In Compare the map picks B; clicking A's own pin does nothing.
+  // In Compare the map picks B; clicking A's own pin does nothing. In
+  // Relationship a faded pin (no usable pair) only shows its popup.
   const onMapSelect = (id) => {
-    if (!comparing) setStationId(id);
-    else if (id !== stationId) setCompareId(id);
+    if (comparing) {
+      if (id !== stationId) setCompareId(id);
+    } else if (!relating || pickable.some((s) => s.station_id === id)) {
+      setStationId(id);
+    }
   };
   const swap = () => {
     setCompareId(stationId);
@@ -98,7 +107,7 @@ export default function Dashboard() {
               selectedId={stationId}
               compareId={stationB?.station_id ?? null}
               comparing={comparing}
-              dimmed={mode === "relationship" ? (s) => s.variables.length < 2 : null}
+              dimmed={relating ? (s) => !canRelate(s) : null}
               onSelect={onMapSelect}
             />
             <aside className="map-guide" aria-live="polite">
@@ -132,14 +141,21 @@ export default function Dashboard() {
               <label htmlFor={listId}>{!station ? "Pick on the map, or from the list" : comparing ? "A" : "Station"}</label>
               <select
                 id={listId}
-                value={stationId ?? ""}
-                onChange={(e) => setStationId(e.target.value || null)}
+                value={relating && !canRelate(station) ? "" : stationId ?? ""}
+                onChange={(e) => {
+                  // In Relationship the placeholder isn't a way out of the tab.
+                  if (e.target.value || !relating) setStationId(e.target.value || null);
+                }}
                 disabled={!stationList.length}
               >
                 <option value="">
-                  {stations.loading ? "Loading stations…" : `${stationList.length} stations with data`}
+                  {stations.loading
+                    ? "Loading stations…"
+                    : relating
+                      ? `${pickable.length} stations with two variables`
+                      : `${stationList.length} stations with data`}
                 </option>
-                {stationList.map((s) => (
+                {pickable.map((s) => (
                   <option key={s.station_id} value={s.station_id}>
                     {s.name} ({s.state}) · {s.station_id}
                   </option>

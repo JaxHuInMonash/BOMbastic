@@ -5,12 +5,64 @@
  * `npm test`.
  */
 
-/** Variables this station records, in the API's order. */
-export const stationVariables = (variables, station) =>
-  variables.filter((v) => station.variables.some((sv) => sv.variable_code === v.variable_code));
+import { overlapOf } from "./compare.js";
+import { daysBetween } from "./dates.js";
 
-/** Stations recording at least two variables: the ones a relationship can be fitted at. */
-export const regressionStations = (stations) => stations.filter((s) => s.variables.length >= 2);
+/**
+ * Fewest paired days a line is fitted with. Matches the API's default
+ * (backend/regression.py MIN_PAIRS); the API still decides, so if
+ * BOMBASTIC_REGRESSION_MIN_PAIRS is raised it explains instead of fitting.
+ */
+export const MIN_PAIRS = 20;
+
+/**
+ * Could these two variables give at least MIN_PAIRS paired days? Each needs
+ * that many days with a value, and their records must overlap by that many
+ * days. It is an upper bound: the API pairs the actual days and may still find
+ * too few in the chosen period.
+ */
+function canPair(a, b) {
+  if (a.days_with_value < MIN_PAIRS || b.days_with_value < MIN_PAIRS) return false;
+  const overlap = overlapOf(a, b);
+  return Boolean(overlap) && daysBetween(overlap.first_date, overlap.last_date) >= MIN_PAIRS;
+}
+
+/** Variable codes at this station that can pair with at least one other there. */
+export function pairableCodes(station) {
+  const vs = station.variables;
+  return vs.filter((a) => vs.some((b) => b !== a && canPair(a, b))).map((v) => v.variable_code);
+}
+
+/** Can a relationship be fitted at this station at all? */
+export const canRelate = (station) => pairableCodes(station).length >= 2;
+
+/** Stations a relationship can be fitted at: the Relationship tab's station list. */
+export const regressionStations = (stations) => stations.filter(canRelate);
+
+/** Variables, in the API's order, that can take part in a relationship at this station. */
+export function stationVariables(variables, station) {
+  const codes = pairableCodes(station);
+  return variables.filter((v) => codes.includes(v.variable_code));
+}
+
+/** The closest of `candidates` to `station` (great-circle), with its distance in km, or null. */
+export function nearestStation(station, candidates) {
+  const rad = Math.PI / 180;
+  const km = (s) => {
+    const dLat = (s.latitude - station.latitude) * rad;
+    const dLon = (s.longitude - station.longitude) * rad;
+    const h = Math.sin(dLat / 2) ** 2
+      + Math.cos(station.latitude * rad) * Math.cos(s.latitude * rad) * Math.sin(dLon / 2) ** 2;
+    return 2 * 6371 * Math.asin(Math.sqrt(h));
+  };
+  let best = null;
+  for (const s of candidates) {
+    if (s.station_id === station.station_id) continue;
+    const d = km(s);
+    if (!best || d < best.km) best = { station: s, km: d };
+  }
+  return best;
+}
 
 /**
  * Which pair to start with: minimum → maximum temperature when both exist

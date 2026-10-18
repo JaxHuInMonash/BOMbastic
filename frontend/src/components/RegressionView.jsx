@@ -9,6 +9,11 @@
  * days left out with the reason. With too few paired days (under 20) or no
  * spread in X, it explains instead of drawing a misleading line.
  *
+ * Which stations: the station list and the map offer only stations where two
+ * variables could give at least 20 paired days (utils/regression.js
+ * canRelate). If the station chosen in another tab can't, this says why in
+ * one line and offers the nearest one that can.
+ *
  * A response is shown only when it answers exactly this station, pair, period
  * and policy, so switching station never shows the previous station's figures
  * under the new name.
@@ -19,7 +24,7 @@ import { useRegression } from "../api/hooks";
 import { overlapOf } from "../utils/compare";
 import { formatDate } from "../utils/dates";
 import { resolveRange } from "../utils/ranges";
-import { equationText, regressionStations, resolvePair, sig, stationVariables } from "../utils/regression";
+import { MIN_PAIRS, equationText, nearestStation, regressionStations, resolvePair, sig, stationVariables } from "../utils/regression";
 import QueryControls from "./QueryControls";
 import RegressionChart from "./RegressionChart";
 import RegressionTable from "./RegressionTable";
@@ -67,19 +72,20 @@ export default function RegressionView({ station, stations, variables, onSelectS
   const data = answers(result.data, query) ? result.data : null;
 
   if (codes.length < 2) {
-    const candidates = regressionStations(stations);
+    const near = nearestStation(station, regressionStations(stations));
+    const only = station.variables.length === 1
+      ? `It records only ${variables.find((v) => v.variable_code === station.variables[0].variable_code)?.label.toLowerCase() ?? "one variable"}.`
+      : `No two of its variables overlap for at least ${MIN_PAIRS} days.`;
     return (
-      <div className="chart-frame chart-message regression-empty" role="status">
-        <p className="chart-message-title">{station.name} records only {offered[0]?.label.toLowerCase() ?? "one variable"} here</p>
-        <p>A relationship needs two variables measured at the same station. {candidates.length ? "These stations have more than one:" : "No station in the database has more than one yet."}</p>
-        {candidates.length > 0 && (
-          <ul className="station-suggestions">
-            {candidates.map((s) => (
-              <li key={s.station_id}>
-                <button type="button" onClick={() => onSelectStation(s.station_id)}>{s.name} ({s.state})</button>
-              </li>
-            ))}
-          </ul>
+      <div className="chart-frame chart-message" role="status">
+        <p className="chart-message-title">No relationship can be fitted at {station.name}</p>
+        <p>
+          {only} {near ? "Choose a station from the list above, or a solid pin on the map." : "No station in the database has two variables yet."}
+        </p>
+        {near && (
+          <button type="button" onClick={() => onSelectStation(near.station.station_id)}>
+            Use the nearest: {near.station.name} ({near.station.state}), {Math.round(near.km).toLocaleString()} km away
+          </button>
         )}
       </div>
     );
