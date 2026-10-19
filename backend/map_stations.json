@@ -1,0 +1,7490 @@
+[
+  {
+    "station_id": "001006",
+    "name": "WYNDHAM AERO",
+    "lat": -15.51,
+    "lon": 128.1503,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001007",
+    "name": "TROUGHTON ISLAND",
+    "lat": -13.7542,
+    "lon": 126.1485,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "001010",
+    "name": "THEDA",
+    "lat": -14.7885,
+    "lon": 126.4963,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "001020",
+    "name": "TRUSCOTT",
+    "lat": -14.09,
+    "lon": 126.3867,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001023",
+    "name": "EL QUESTRO",
+    "lat": -16.0086,
+    "lon": 127.9806,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001024",
+    "name": "ELLENBRAE",
+    "lat": -15.9572,
+    "lon": 127.0628,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001025",
+    "name": "DOONGAN",
+    "lat": -15.3797,
+    "lon": 126.3114,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001026",
+    "name": "DRYSDALE RIVER STATION",
+    "lat": -15.7031,
+    "lon": 126.3781,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "001030",
+    "name": "KIMBERLEY COASTAL CAMP",
+    "lat": -14.5786,
+    "lon": 125.9133,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "001031",
+    "name": "FARAWAY BAY",
+    "lat": -13.96,
+    "lon": 127.1964,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002001",
+    "name": "ARGYLE DOWNS",
+    "lat": -16.5039,
+    "lon": 128.9173,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002005",
+    "name": "CARLTON HILL",
+    "lat": -15.4864,
+    "lon": 128.5344,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "002009",
+    "name": "GIBB RIVER",
+    "lat": -16.4202,
+    "lon": 126.4412,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "002012",
+    "name": "HALLS CREEK METEOROLOGICAL OFFICE",
+    "lat": -18.2291,
+    "lon": 127.6636,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002013",
+    "name": "IVANHOE STATION",
+    "lat": -15.69,
+    "lon": 128.6833,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002014",
+    "name": "KIMBERLEY RES.STATION",
+    "lat": -15.6545,
+    "lon": 128.7091,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002016",
+    "name": "LISSADELL",
+    "lat": -16.6742,
+    "lon": 128.5533,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002019",
+    "name": "MARGARET RIVER STATION",
+    "lat": -18.6253,
+    "lon": 126.8617,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002020",
+    "name": "MOOLA BULLA",
+    "lat": -18.1894,
+    "lon": 127.5011,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "002021",
+    "name": "MOUNT AMHURST",
+    "lat": -18.3869,
+    "lon": 126.9892,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002023",
+    "name": "NICHOLSON",
+    "lat": -18.031,
+    "lon": 128.8941,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002026",
+    "name": "RUBY PLAINS",
+    "lat": -18.5959,
+    "lon": 127.642,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002029",
+    "name": "STURT CREEK",
+    "lat": -19.1625,
+    "lon": 128.1633,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "002030",
+    "name": "YULMBU",
+    "lat": -17.2986,
+    "lon": 126.9158,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002032",
+    "name": "WARMUN",
+    "lat": -17.0154,
+    "lon": 128.2174,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002047",
+    "name": "BEDFORD DOWNS",
+    "lat": -17.2631,
+    "lon": 127.4617,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002048",
+    "name": "FLORA VALLEY",
+    "lat": -18.2972,
+    "lon": 128.4419,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "002053",
+    "name": "LANSDOWNE",
+    "lat": -17.6133,
+    "lon": 126.7442,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003000",
+    "name": "BEAGLE BAY",
+    "lat": -16.9807,
+    "lon": 122.6662,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003004",
+    "name": "CAPE LEVEQUE",
+    "lat": -16.3961,
+    "lon": 122.9278,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003008",
+    "name": "ELLENDALE",
+    "lat": -17.9281,
+    "lon": 124.8108,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003010",
+    "name": "KIMBERLEY DOWNS",
+    "lat": -17.3927,
+    "lon": 124.3574,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "003014",
+    "name": "GOGO STATION",
+    "lat": -18.2914,
+    "lon": 125.5869,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003015",
+    "name": "MEDA",
+    "lat": -17.368,
+    "lon": 123.9956,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003017",
+    "name": "MOUNT HOUSE STATION",
+    "lat": -17.0516,
+    "lon": 125.7051,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003018",
+    "name": "MYROODAH",
+    "lat": -18.1225,
+    "lon": 124.2692,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003019",
+    "name": "NAPIER DOWNS",
+    "lat": -17.3305,
+    "lon": 124.8166,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003022",
+    "name": "QUANBUN DOWNS",
+    "lat": -18.3817,
+    "lon": 125.2267,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003023",
+    "name": "ROEBUCK PLAINS",
+    "lat": -17.9315,
+    "lon": 122.4722,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003026",
+    "name": "YEEDA",
+    "lat": -17.6153,
+    "lon": 123.6483,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "003027",
+    "name": "FOSSIL DOWNS",
+    "lat": -18.1386,
+    "lon": 125.7764,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "003028",
+    "name": "ANNA PLAINS",
+    "lat": -19.2536,
+    "lon": 121.4861,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003030",
+    "name": "BIDYADANGA",
+    "lat": -18.6844,
+    "lon": 121.7803,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "003044",
+    "name": "BROOKING SPRINGS",
+    "lat": -18.1103,
+    "lon": 125.6431,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003052",
+    "name": "MOUNT HART STATION",
+    "lat": -16.8214,
+    "lon": 124.9151,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003056",
+    "name": "THANGOO",
+    "lat": -18.1792,
+    "lon": 122.3583,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "003068",
+    "name": "DAMPIER DOWNS",
+    "lat": -18.5077,
+    "lon": 123.4561,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "003101",
+    "name": "DAMPIER DOWNS AIRSTRIP",
+    "lat": -18.5096,
+    "lon": 123.4676,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004004",
+    "name": "BAMBOO CREEK",
+    "lat": -20.9264,
+    "lon": 120.2075,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004006",
+    "name": "BONNEY DOWNS",
+    "lat": -22.1828,
+    "lon": 119.935,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "004012",
+    "name": "DE GREY",
+    "lat": -20.1756,
+    "lon": 119.1908,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004019",
+    "name": "MANDORA",
+    "lat": -19.7419,
+    "lon": 120.8433,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004022",
+    "name": "MUCCAN",
+    "lat": -20.6334,
+    "lon": 120.0863,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004023",
+    "name": "MULYIE",
+    "lat": -20.4619,
+    "lon": 119.5189,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004024",
+    "name": "MUNDABULLANGANA",
+    "lat": -20.5192,
+    "lon": 118.0603,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004026",
+    "name": "NOREENA DOWNS",
+    "lat": -22.2914,
+    "lon": 120.1761,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "004028",
+    "name": "PARDOO STATION",
+    "lat": -20.1078,
+    "lon": 119.5811,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "004029",
+    "name": "COORAGOORA",
+    "lat": -19.9604,
+    "lon": 120.2744,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004041",
+    "name": "WARRAWAGINE",
+    "lat": -20.8508,
+    "lon": 120.6961,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004046",
+    "name": "YARRIE",
+    "lat": -20.6739,
+    "lon": 120.2044,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "004059",
+    "name": "MALLINA",
+    "lat": -20.8822,
+    "lon": 118.0308,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004068",
+    "name": "WALLAL DOWNS",
+    "lat": -19.7789,
+    "lon": 120.6417,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "004100",
+    "name": "BEDOUT ISLAND",
+    "lat": -19.5894,
+    "lon": 119.1,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "005003",
+    "name": "ETHEL CREEK",
+    "lat": -22.8972,
+    "lon": 120.1733,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005005",
+    "name": "HAMERSLEY",
+    "lat": -22.2794,
+    "lon": 117.6775,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005006",
+    "name": "KOOLINE",
+    "lat": -22.9119,
+    "lon": 116.2903,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005008",
+    "name": "MARDIE",
+    "lat": -21.1906,
+    "lon": 115.9797,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "005009",
+    "name": "MARILLANA",
+    "lat": -22.6331,
+    "lon": 119.4081,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005012",
+    "name": "MILLSTREAM",
+    "lat": -21.5906,
+    "lon": 117.0656,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005013",
+    "name": "MINDEROO",
+    "lat": -21.9969,
+    "lon": 115.0463,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005014",
+    "name": "MOUNT FLORANCE",
+    "lat": -21.7869,
+    "lon": 117.8647,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "005017",
+    "name": "ONSLOW AIRPORT",
+    "lat": -21.6688,
+    "lon": 115.1093,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005022",
+    "name": "RED HILL",
+    "lat": -21.975,
+    "lon": 116.0653,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005023",
+    "name": "ROY HILL",
+    "lat": -22.6217,
+    "lon": 119.9564,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005028",
+    "name": "WYLOO",
+    "lat": -22.6906,
+    "lon": 116.2328,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "005030",
+    "name": "YANREY",
+    "lat": -22.5064,
+    "lon": 114.7944,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005032",
+    "name": "YARRALOOLA HOMESTEAD",
+    "lat": -21.5703,
+    "lon": 115.8786,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005034",
+    "name": "MOUNT STUART",
+    "lat": -22.4558,
+    "lon": 116.0508,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005040",
+    "name": "BALMORAL",
+    "lat": -21.1594,
+    "lon": 116.1197,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005051",
+    "name": "EXMOUTH TOWN",
+    "lat": -21.9303,
+    "lon": 114.126,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "005052",
+    "name": "KARRATHA STATION",
+    "lat": -20.8831,
+    "lon": 116.6725,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006000",
+    "name": "BIDGEMIA",
+    "lat": -25.0417,
+    "lon": 115.3092,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006001",
+    "name": "BILLABALONG",
+    "lat": -27.4231,
+    "lon": 115.8347,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006003",
+    "name": "BOOLATHANA",
+    "lat": -24.6525,
+    "lon": 113.6936,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006005",
+    "name": "BRICKHOUSE",
+    "lat": -24.8208,
+    "lon": 113.7853,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006011",
+    "name": "CARNARVON AIRPORT",
+    "lat": -24.8878,
+    "lon": 113.67,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006015",
+    "name": "COORALYA",
+    "lat": -24.4453,
+    "lon": 114.0779,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006019",
+    "name": "DOORAWARRAH",
+    "lat": -24.806,
+    "lon": 114.431,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006023",
+    "name": "GNARALOO",
+    "lat": -23.8222,
+    "lon": 113.5256,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006025",
+    "name": "HAMELIN POOL",
+    "lat": -26.3994,
+    "lon": 114.1658,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006027",
+    "name": "JIMBA JIMBA",
+    "lat": -25.0442,
+    "lon": 115.1331,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006033",
+    "name": "MAROONAH",
+    "lat": -23.4796,
+    "lon": 115.5478,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006039",
+    "name": "MINILYA",
+    "lat": -23.8497,
+    "lon": 113.9714,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006044",
+    "name": "DENHAM",
+    "lat": -25.9265,
+    "lon": 113.5325,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006045",
+    "name": "TAMALA",
+    "lat": -26.6969,
+    "lon": 113.7158,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006050",
+    "name": "WANDAGEE",
+    "lat": -23.7647,
+    "lon": 114.5539,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006052",
+    "name": "WILLIAMBURY",
+    "lat": -23.8608,
+    "lon": 115.1475,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006055",
+    "name": "WOOLGORONG",
+    "lat": -27.7456,
+    "lon": 115.8286,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "006056",
+    "name": "WOORAMEL",
+    "lat": -25.74,
+    "lon": 114.2847,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006058",
+    "name": "YALLALONG",
+    "lat": -27.4278,
+    "lon": 115.5147,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006062",
+    "name": "CARNARVON POST OFFICE",
+    "lat": -24.8858,
+    "lon": 113.6565,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006066",
+    "name": "WINNING",
+    "lat": -23.1567,
+    "lon": 114.5403,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006069",
+    "name": "MOUNT NARRYER",
+    "lat": -26.5903,
+    "lon": 115.9267,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006072",
+    "name": "EMU CREEK STATION",
+    "lat": -23.0314,
+    "lon": 115.0414,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006084",
+    "name": "WARROORA",
+    "lat": -23.4836,
+    "lon": 113.7926,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006097",
+    "name": "USELESS LOOP",
+    "lat": -26.1203,
+    "lon": 113.3975,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006102",
+    "name": "STEEP POINT",
+    "lat": -26.1764,
+    "lon": 113.2149,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "006109",
+    "name": "GNARALOO - 3 MILE CAMP",
+    "lat": -23.8761,
+    "lon": 113.4972,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007003",
+    "name": "BERINGARRA",
+    "lat": -26.0417,
+    "lon": 116.9528,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007007",
+    "name": "BOOLARDY",
+    "lat": -26.9839,
+    "lon": 116.5353,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "007008",
+    "name": "BRYAH",
+    "lat": -25.5059,
+    "lon": 118.7983,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007017",
+    "name": "CUE",
+    "lat": -27.425,
+    "lon": 117.8936,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007019",
+    "name": "BULLOO DOWNS",
+    "lat": -24.0019,
+    "lon": 119.5725,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "007027",
+    "name": "GABYON",
+    "lat": -28.2494,
+    "lon": 116.34,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "007041",
+    "name": "LANDOR",
+    "lat": -25.1303,
+    "lon": 116.9047,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007047",
+    "name": "MEELINE STATION",
+    "lat": -28.4467,
+    "lon": 118.2678,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007050",
+    "name": "MILGUN",
+    "lat": -25.0942,
+    "lon": 118.2983,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007052",
+    "name": "MOORARIE",
+    "lat": -25.9214,
+    "lon": 117.6,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007053",
+    "name": "MOUNT AUGUSTUS",
+    "lat": -24.3086,
+    "lon": 116.9111,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "007055",
+    "name": "MOUNT GOULD",
+    "lat": -25.8058,
+    "lon": 117.3905,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007058",
+    "name": "MOUNT PHILLIP",
+    "lat": -24.4,
+    "lon": 116.3078,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007064",
+    "name": "MURGOO",
+    "lat": -27.3636,
+    "lon": 116.4261,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007067",
+    "name": "NARNDEE",
+    "lat": -28.9467,
+    "lon": 118.1857,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007080",
+    "name": "THREE RIVERS",
+    "lat": -25.1256,
+    "lon": 119.1514,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007082",
+    "name": "TUCKANARRA",
+    "lat": -27.1192,
+    "lon": 118.0842,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007083",
+    "name": "TUREE CREEK",
+    "lat": -23.6239,
+    "lon": 118.6561,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007089",
+    "name": "WOOLEEN",
+    "lat": -27.0878,
+    "lon": 116.1606,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007090",
+    "name": "WYDGEE",
+    "lat": -28.8439,
+    "lon": 117.8311,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007095",
+    "name": "YOWERAGABBIE",
+    "lat": -28.2322,
+    "lon": 117.6556,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007097",
+    "name": "WONDINONG",
+    "lat": -27.8608,
+    "lon": 118.4183,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007099",
+    "name": "YARRABUBBA",
+    "lat": -27.1308,
+    "lon": 118.7803,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007100",
+    "name": "MOUNT PADBURY",
+    "lat": -25.6933,
+    "lon": 118.0803,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007134",
+    "name": "MURCHISON DOWNS",
+    "lat": -26.795,
+    "lon": 118.9842,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007135",
+    "name": "MURRUM STATION",
+    "lat": -28.2747,
+    "lon": 117.3919,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007153",
+    "name": "PRAIRIE DOWNS",
+    "lat": -23.5531,
+    "lon": 119.1478,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007154",
+    "name": "WYNYANGOO",
+    "lat": -27.9369,
+    "lon": 118.1889,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007164",
+    "name": "EDMUND",
+    "lat": -23.7633,
+    "lon": 116.1206,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007180",
+    "name": "MARYMIA",
+    "lat": -25.0386,
+    "lon": 120.0064,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007181",
+    "name": "WEELARRANA",
+    "lat": -22.9789,
+    "lon": 120.01,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "007197",
+    "name": "CHALLA",
+    "lat": -28.2813,
+    "lon": 118.3106,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "008013",
+    "name": "BOWGADA",
+    "lat": -29.3303,
+    "lon": 116.1433,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008025",
+    "name": "CARNAMAH",
+    "lat": -29.6883,
+    "lon": 115.8857,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008044",
+    "name": "DONGARA",
+    "lat": -29.2528,
+    "lon": 114.9306,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008050",
+    "name": "GERALDTON TOWN",
+    "lat": -28.7769,
+    "lon": 114.605,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008088",
+    "name": "MINGENEW",
+    "lat": -29.1906,
+    "lon": 115.4414,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008095",
+    "name": "MULLEWA",
+    "lat": -28.5367,
+    "lon": 115.5142,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008100",
+    "name": "NORTHAMPTON",
+    "lat": -28.3618,
+    "lon": 114.6328,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "008151",
+    "name": "WALEBING",
+    "lat": -30.6646,
+    "lon": 116.1383,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "008290",
+    "name": "NORTH ISLAND",
+    "lat": -28.3009,
+    "lon": 113.5937,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009006",
+    "name": "CHELSEA",
+    "lat": -30.6256,
+    "lon": 115.7803,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009018",
+    "name": "GINGIN",
+    "lat": -31.3461,
+    "lon": 115.9031,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009023",
+    "name": "JARRAHDALE",
+    "lat": -32.3342,
+    "lon": 116.0755,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009029",
+    "name": "MUCHEA TREE FARM",
+    "lat": -31.5825,
+    "lon": 115.9658,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009033",
+    "name": "NEW NORCIA",
+    "lat": -30.9711,
+    "lon": 116.2178,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009046",
+    "name": "YATHROO",
+    "lat": -30.7742,
+    "lon": 115.6975,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009105",
+    "name": "WANNEROO",
+    "lat": -31.7317,
+    "lon": 115.7931,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009225",
+    "name": "PERTH METRO",
+    "lat": -31.9192,
+    "lon": 115.8728,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009500",
+    "name": "ALBANY",
+    "lat": -35.0289,
+    "lon": 117.8808,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009507",
+    "name": "BANNISTER",
+    "lat": -32.6836,
+    "lon": 116.5194,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009515",
+    "name": "BUSSELTON SHIRE",
+    "lat": -33.6611,
+    "lon": 115.3456,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009518",
+    "name": "CAPE LEEUWIN",
+    "lat": -34.3728,
+    "lon": 115.1358,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009519",
+    "name": "CAPE NATURALISTE",
+    "lat": -33.5372,
+    "lon": 115.0189,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009520",
+    "name": "CAPE RICHE",
+    "lat": -34.6086,
+    "lon": 118.7511,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009531",
+    "name": "DENMARK",
+    "lat": -34.9617,
+    "lon": 117.3567,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009534",
+    "name": "DONNYBROOK",
+    "lat": -33.5719,
+    "lon": 115.8247,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "009547",
+    "name": "FOREST GROVE",
+    "lat": -34.0744,
+    "lon": 115.0808,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009557",
+    "name": "HOPETOUN",
+    "lat": -33.9327,
+    "lon": 120.0944,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009572",
+    "name": "HALLS HEAD",
+    "lat": -32.5385,
+    "lon": 115.7002,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009579",
+    "name": "OAKE MARSH FARM",
+    "lat": -33.7633,
+    "lon": 122.0675,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009581",
+    "name": "MOUNT BARKER",
+    "lat": -34.625,
+    "lon": 117.6361,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009584",
+    "name": "MYRUP",
+    "lat": -33.7422,
+    "lon": 121.995,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009585",
+    "name": "NANNUP",
+    "lat": -33.9797,
+    "lon": 115.7656,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009594",
+    "name": "PEPPERMINT GROVE",
+    "lat": -34.435,
+    "lon": 119.3628,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009613",
+    "name": "WARNER GLEN",
+    "lat": -34.1436,
+    "lon": 115.2261,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009621",
+    "name": "WOODBURN",
+    "lat": -34.6997,
+    "lon": 117.9556,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009654",
+    "name": "BREMER BAY",
+    "lat": -34.3989,
+    "lon": 119.378,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009692",
+    "name": "BIDELLIA",
+    "lat": -34.2267,
+    "lon": 115.7597,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009715",
+    "name": "THOMAS RIVER",
+    "lat": -33.8025,
+    "lon": 123.0331,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009739",
+    "name": "TELINA DOWNS",
+    "lat": -33.6789,
+    "lon": 122.3311,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009813",
+    "name": "MOUNT HOWICK",
+    "lat": -33.7294,
+    "lon": 122.7552,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009822",
+    "name": "DALYUP PARK",
+    "lat": -33.7753,
+    "lon": 121.555,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "009908",
+    "name": "ONE TREE BRIDGE (HAZELMERE)",
+    "lat": -34.2289,
+    "lon": 115.9294,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010019",
+    "name": "BURRACOPPIN",
+    "lat": -31.3958,
+    "lon": 118.4808,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010030",
+    "name": "WATTONING",
+    "lat": -30.7767,
+    "lon": 118.1992,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010037",
+    "name": "CUTTENING",
+    "lat": -31.7264,
+    "lon": 117.7644,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010092",
+    "name": "MERREDIN",
+    "lat": -31.4756,
+    "lon": 118.2789,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "010111",
+    "name": "NORTHAM",
+    "lat": -31.6508,
+    "lon": 116.6586,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "010112",
+    "name": "NUNGARIN",
+    "lat": -31.1842,
+    "lon": 118.1006,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010125",
+    "name": "TOODYAY",
+    "lat": -31.5517,
+    "lon": 116.4703,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010260",
+    "name": "BIMBIJY",
+    "lat": -29.6981,
+    "lon": 118.0397,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010502",
+    "name": "AMELUP",
+    "lat": -34.2553,
+    "lon": 118.2214,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010515",
+    "name": "BEVERLEY",
+    "lat": -32.1083,
+    "lon": 116.9247,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "010537",
+    "name": "CRANBROOK",
+    "lat": -34.2958,
+    "lon": 117.5533,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010541",
+    "name": "NYERILUP",
+    "lat": -33.8594,
+    "lon": 118.8158,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "010582",
+    "name": "KOJONUP",
+    "lat": -33.83,
+    "lon": 117.159,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010586",
+    "name": "KUMMININ",
+    "lat": -32.0081,
+    "lon": 118.2319,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010633",
+    "name": "RAVENSTHORPE",
+    "lat": -33.5803,
+    "lon": 120.0458,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "010638",
+    "name": "ST ALBANS",
+    "lat": -32.5228,
+    "lon": 118.3047,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010655",
+    "name": "WILLIAMS",
+    "lat": -33.0269,
+    "lon": 116.8792,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010668",
+    "name": "KOORIKIN",
+    "lat": -32.4692,
+    "lon": 118.1458,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010670",
+    "name": "LAKE CARMODY",
+    "lat": -32.4831,
+    "lon": 119.3625,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010729",
+    "name": "CHILLINUP",
+    "lat": -34.3439,
+    "lon": 118.6306,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "010779",
+    "name": "MIANELUP",
+    "lat": -34.0042,
+    "lon": 118.0536,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011003",
+    "name": "EUCLA",
+    "lat": -31.6797,
+    "lon": 128.8958,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "011008",
+    "name": "MUNDRABILLA STATION",
+    "lat": -31.8433,
+    "lon": 127.8572,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "011016",
+    "name": "MADURA STATION",
+    "lat": -31.9269,
+    "lon": 126.9733,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011019",
+    "name": "EYRE",
+    "lat": -32.2464,
+    "lon": 126.3008,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "011022",
+    "name": "OLD EUCLA",
+    "lat": -31.7117,
+    "lon": 128.8867,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011023",
+    "name": "CAIGUNA ASA",
+    "lat": -32.2653,
+    "lon": 125.4894,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "011025",
+    "name": "MOONERA",
+    "lat": -31.7219,
+    "lon": 126.5889,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011029",
+    "name": "ARUBIDDY",
+    "lat": -31.8097,
+    "lon": 125.9267,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011030",
+    "name": "RAWLINNA HOMESTEAD",
+    "lat": -31.0417,
+    "lon": 125.2164,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "011033",
+    "name": "MCTAGGARTS",
+    "lat": -31.9178,
+    "lon": 125.3008,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011035",
+    "name": "BULL CAMEL",
+    "lat": -31.1956,
+    "lon": 124.8481,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011041",
+    "name": "SEEMORE DOWNS",
+    "lat": -30.7428,
+    "lon": 125.2936,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011048",
+    "name": "NIGHTSHADE",
+    "lat": -32.1761,
+    "lon": 125.3953,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011050",
+    "name": "KYBO",
+    "lat": -31.0239,
+    "lon": 126.5842,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011052",
+    "name": "FORREST",
+    "lat": -30.8453,
+    "lon": 128.1092,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "011053",
+    "name": "RED ROCKS POINT",
+    "lat": -32.2028,
+    "lon": 127.5297,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012013",
+    "name": "BULONG",
+    "lat": -30.7503,
+    "lon": 121.7519,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012018",
+    "name": "COOLGARDIE",
+    "lat": -30.9586,
+    "lon": 121.1739,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012025",
+    "name": "DEPOT SPRINGS",
+    "lat": -27.9332,
+    "lon": 120.0577,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012027",
+    "name": "EDJUDINA",
+    "lat": -29.8119,
+    "lon": 122.3547,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012029",
+    "name": "FRASER RANGE",
+    "lat": -32.0339,
+    "lon": 122.8017,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012043",
+    "name": "KOOKYNIE",
+    "lat": -29.3361,
+    "lon": 121.4944,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012045",
+    "name": "LAVERTON",
+    "lat": -28.6303,
+    "lon": 122.4072,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012046",
+    "name": "LEONORA",
+    "lat": -28.8879,
+    "lon": 121.3302,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012052",
+    "name": "MENZIES",
+    "lat": -29.6939,
+    "lon": 121.0297,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012054",
+    "name": "DOBRA SCRITIA",
+    "lat": -31.4161,
+    "lon": 119.0467,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012062",
+    "name": "NAMBI",
+    "lat": -28.3897,
+    "lon": 121.6775,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012066",
+    "name": "ORA BANDA",
+    "lat": -30.3764,
+    "lon": 121.0633,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012072",
+    "name": "SANDSTONE",
+    "lat": -27.9872,
+    "lon": 119.2973,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012077",
+    "name": "I DUNNO",
+    "lat": -32.8606,
+    "lon": 121.7081,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012090",
+    "name": "YEELIRRIE",
+    "lat": -27.2842,
+    "lon": 120.0931,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012092",
+    "name": "YUINMERY",
+    "lat": -28.5606,
+    "lon": 119.0161,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012106",
+    "name": "WOOLIBAR",
+    "lat": -31.0731,
+    "lon": 121.665,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012108",
+    "name": "WONGANOO",
+    "lat": -27.1397,
+    "lon": 121.3397,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012152",
+    "name": "KOORARAWALYEE",
+    "lat": -31.2608,
+    "lon": 120.0217,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012176",
+    "name": "STURT MEADOWS",
+    "lat": -28.6781,
+    "lon": 120.9706,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012191",
+    "name": "KANANDAH",
+    "lat": -30.8958,
+    "lon": 124.8658,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012220",
+    "name": "COWARNA DOWNS",
+    "lat": -31.0089,
+    "lon": 122.3567,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012240",
+    "name": "ILKURLKA",
+    "lat": -28.3514,
+    "lon": 127.5169,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "012304",
+    "name": "MELROSE",
+    "lat": -27.9283,
+    "lon": 121.3047,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "012305",
+    "name": "LAVERTON AERO",
+    "lat": -28.6133,
+    "lon": 122.4236,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013002",
+    "name": "GLEN-AYLE",
+    "lat": -25.2661,
+    "lon": 122.0433,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013006",
+    "name": "MILLROSE",
+    "lat": -26.4006,
+    "lon": 120.9539,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013011",
+    "name": "WARBURTON AIRFIELD",
+    "lat": -26.1317,
+    "lon": 126.5839,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013014",
+    "name": "CUNYU SHEARING SHED",
+    "lat": -25.8181,
+    "lon": 120.1706,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013015",
+    "name": "CARNEGIE",
+    "lat": -25.7964,
+    "lon": 122.9753,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013017",
+    "name": "GILES METEOROLOGICAL OFFICE",
+    "lat": -25.0341,
+    "lon": 128.301,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013024",
+    "name": "PRENTI DOWNS",
+    "lat": -26.5172,
+    "lon": 122.8075,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013030",
+    "name": "TELFER AERO",
+    "lat": -21.7125,
+    "lon": 122.2281,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013032",
+    "name": "GRANITE PEAK",
+    "lat": -25.6361,
+    "lon": 121.3533,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013035",
+    "name": "DELITA STATION",
+    "lat": -27.0336,
+    "lon": 122.4439,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013038",
+    "name": "CUNYU",
+    "lat": -25.7069,
+    "lon": 120.3478,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "013040",
+    "name": "TJUKAYIRLA",
+    "lat": -27.1542,
+    "lon": 124.5747,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "013043",
+    "name": "PARNNGURR",
+    "lat": -22.8181,
+    "lon": 122.5956,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014009",
+    "name": "CHANNEL ISLAND",
+    "lat": -12.5547,
+    "lon": 130.8677,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014015",
+    "name": "DARWIN AIRPORT",
+    "lat": -12.4239,
+    "lon": 130.8925,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014032",
+    "name": "KOOLPINYAH",
+    "lat": -12.389,
+    "lon": 131.1767,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014042",
+    "name": "OENPELLI",
+    "lat": -12.3236,
+    "lon": 133.0579,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014142",
+    "name": "PIRLANGIMPI AIRPORT",
+    "lat": -11.4021,
+    "lon": 130.4217,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014153",
+    "name": "BLACK POINT",
+    "lat": -11.1538,
+    "lon": 132.143,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014198",
+    "name": "JABIRU AIRPORT",
+    "lat": -12.6592,
+    "lon": 132.894,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014208",
+    "name": "JABIRU COUNCIL",
+    "lat": -12.6686,
+    "lon": 132.8358,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014224",
+    "name": "WANDIE CREEK",
+    "lat": -13.8062,
+    "lon": 132.197,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014274",
+    "name": "MCCLUER ISLAND",
+    "lat": -11.0468,
+    "lon": 132.9791,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014284",
+    "name": "SOUTH ALLIGATOR RANGERS",
+    "lat": -12.6817,
+    "lon": 132.4736,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014308",
+    "name": "CROKER ISLAND AIRPORT",
+    "lat": -11.1629,
+    "lon": 132.4813,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014401",
+    "name": "WARRUWI AIRPORT",
+    "lat": -11.65,
+    "lon": 133.3797,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014404",
+    "name": "MILINGIMBI AIRPORT",
+    "lat": -12.0932,
+    "lon": 134.8919,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014405",
+    "name": "MANINGRIDA AIRPORT",
+    "lat": -12.0569,
+    "lon": 134.2339,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014408",
+    "name": "ALCAN REFINERY",
+    "lat": -12.1924,
+    "lon": 136.6844,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014410",
+    "name": "CAPE WILBERFORCE",
+    "lat": -11.9172,
+    "lon": 136.5316,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014501",
+    "name": "YIRRKALA TROPICAL GARDENS",
+    "lat": -12.2561,
+    "lon": 136.8979,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014505",
+    "name": "NUMBULWAR",
+    "lat": -14.2786,
+    "lon": 135.739,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014509",
+    "name": "ALCAN MINESITE",
+    "lat": -12.2606,
+    "lon": 136.8389,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014512",
+    "name": "NHULUNBUY",
+    "lat": -12.1939,
+    "lon": 136.7637,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014515",
+    "name": "LAKE EVELLA",
+    "lat": -12.5007,
+    "lon": 135.8005,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014517",
+    "name": "NGAYAWILI",
+    "lat": -11.9971,
+    "lon": 135.5726,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014518",
+    "name": "GROOTE EYLANDT AIRPORT",
+    "lat": -13.9746,
+    "lon": 136.463,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014610",
+    "name": "MATARANKA HOMESTEAD RESORT",
+    "lat": -14.923,
+    "lon": 133.132,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014611",
+    "name": "DUNMARRA ROADHOUSE",
+    "lat": -16.6795,
+    "lon": 133.4132,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014612",
+    "name": "LARRIMAH",
+    "lat": -15.5748,
+    "lon": 133.2137,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014618",
+    "name": "DALY WATERS",
+    "lat": -16.2529,
+    "lon": 133.37,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014621",
+    "name": "NUTWOOD DOWNS",
+    "lat": -15.8087,
+    "lon": 134.1477,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014626",
+    "name": "DALY WATERS AIRSTRIP",
+    "lat": -16.2637,
+    "lon": 133.3782,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014627",
+    "name": "BULMAN",
+    "lat": -13.6715,
+    "lon": 134.3415,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014628",
+    "name": "TANUMBIRINI",
+    "lat": -16.455,
+    "lon": 134.6504,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014637",
+    "name": "MAINORU",
+    "lat": -14.0412,
+    "lon": 134.0951,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014702",
+    "name": "MALLAPUNYAH",
+    "lat": -16.9764,
+    "lon": 135.8129,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014703",
+    "name": "CENTRE ISLAND",
+    "lat": -15.7426,
+    "lon": 136.8192,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014704",
+    "name": "MCARTHUR RIVER MINE AIRPORT",
+    "lat": -16.4423,
+    "lon": 136.076,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014705",
+    "name": "CALVERT HILLS",
+    "lat": -17.2314,
+    "lon": 137.3309,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014707",
+    "name": "WOLLOGORANG",
+    "lat": -17.2122,
+    "lon": 137.9462,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014708",
+    "name": "BING BONG",
+    "lat": -15.6227,
+    "lon": 136.3533,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014712",
+    "name": "HODGSON RIVER",
+    "lat": -15.5756,
+    "lon": 134.0952,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014713",
+    "name": "GALLIPOLI",
+    "lat": -19.1385,
+    "lon": 137.8734,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014715",
+    "name": "MCARTHUR RIVER STATION",
+    "lat": -16.6597,
+    "lon": 135.852,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014718",
+    "name": "REDBANK MINE",
+    "lat": -17.1916,
+    "lon": 137.7429,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014719",
+    "name": "NATHAN RIVER",
+    "lat": -15.5759,
+    "lon": 135.4271,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014720",
+    "name": "BENMARA",
+    "lat": -17.918,
+    "lon": 136.9056,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014729",
+    "name": "BING BONG PORT",
+    "lat": -15.6291,
+    "lon": 136.3881,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014732",
+    "name": "KING ASH BAY",
+    "lat": -15.9332,
+    "lon": 136.4778,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014800",
+    "name": "KILLARNEY",
+    "lat": -16.2565,
+    "lon": 131.753,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014801",
+    "name": "HUMBERT RIVER",
+    "lat": -16.4835,
+    "lon": 130.6235,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014802",
+    "name": "CAMFIELD",
+    "lat": -17.0366,
+    "lon": 131.294,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014803",
+    "name": "LEGUNE",
+    "lat": -15.2083,
+    "lon": 129.4503,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014814",
+    "name": "AUVERGNE",
+    "lat": -15.6844,
+    "lon": 130.0098,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014816",
+    "name": "OLD DELAMERE",
+    "lat": -15.7372,
+    "lon": 131.5345,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014817",
+    "name": "BRADSHAW HOMESTEAD",
+    "lat": -15.3482,
+    "lon": 130.2763,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014820",
+    "name": "NEWRY",
+    "lat": -16.0498,
+    "lon": 129.2649,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014821",
+    "name": "ROSEWOOD",
+    "lat": -16.4583,
+    "lon": 129.0059,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014824",
+    "name": "BULLITA",
+    "lat": -16.1196,
+    "lon": 130.4282,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014825",
+    "name": "VICTORIA RIVER DOWNS",
+    "lat": -16.403,
+    "lon": 131.0145,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014829",
+    "name": "LAJAMANU AIRPORT",
+    "lat": -18.3324,
+    "lon": 130.6361,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014830",
+    "name": "CATTLE CREEK",
+    "lat": -17.5967,
+    "lon": 131.5445,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014856",
+    "name": "BIRRINDUDU",
+    "lat": -18.3903,
+    "lon": 129.43,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014857",
+    "name": "SUPLEJACK",
+    "lat": -19.28,
+    "lon": 129.9424,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014902",
+    "name": "KATHERINE COUNCIL",
+    "lat": -14.4589,
+    "lon": 132.2572,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014903",
+    "name": "KATHERINE AVIATION MUSEUM",
+    "lat": -14.4437,
+    "lon": 132.2737,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014917",
+    "name": "JINDARE",
+    "lat": -14.0155,
+    "lon": 131.6105,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014921",
+    "name": "WILLEROO",
+    "lat": -15.287,
+    "lon": 131.5817,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "014925",
+    "name": "TIPPERARY",
+    "lat": -13.7352,
+    "lon": 131.0437,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014927",
+    "name": "CDU KATHERINE RURAL CAMPUS",
+    "lat": -14.3727,
+    "lon": 132.1559,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "014933",
+    "name": "PINE CREEK",
+    "lat": -13.8238,
+    "lon": 131.8373,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015004",
+    "name": "AUSTRAL DOWNS",
+    "lat": -20.502,
+    "lon": 137.7745,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015005",
+    "name": "AVON DOWNS",
+    "lat": -20.0297,
+    "lon": 137.4907,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015015",
+    "name": "HELEN SPRINGS",
+    "lat": -18.4337,
+    "lon": 133.8775,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015019",
+    "name": "LAKE NASH",
+    "lat": -20.9645,
+    "lon": 137.9214,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015027",
+    "name": "ROCKHAMPTON DOWNS",
+    "lat": -18.9488,
+    "lon": 135.1935,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015040",
+    "name": "SOUDAN",
+    "lat": -20.0519,
+    "lon": 137.0188,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015041",
+    "name": "EVA DOWNS",
+    "lat": -18.0018,
+    "lon": 134.8618,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015067",
+    "name": "BANKA BANKA",
+    "lat": -18.792,
+    "lon": 134.0297,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015081",
+    "name": "ANTHONY LAGOON",
+    "lat": -17.9777,
+    "lon": 135.5322,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015082",
+    "name": "RENNER SPRINGS",
+    "lat": -18.3177,
+    "lon": 133.7947,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015085",
+    "name": "BRUNETTE DOWNS",
+    "lat": -18.637,
+    "lon": 135.945,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015086",
+    "name": "NEWCASTLE WATERS",
+    "lat": -17.3785,
+    "lon": 133.4103,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015088",
+    "name": "ALEXANDRIA",
+    "lat": -19.0577,
+    "lon": 136.7065,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015103",
+    "name": "UCHARONIDGE",
+    "lat": -17.6744,
+    "lon": 134.251,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015114",
+    "name": "PHILLIP CREEK",
+    "lat": -19.2738,
+    "lon": 134.1235,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015125",
+    "name": "MITTIEBAH",
+    "lat": -18.8052,
+    "lon": 137.0879,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015131",
+    "name": "ELLIOTT",
+    "lat": -17.5552,
+    "lon": 133.5439,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015502",
+    "name": "ALI CURUNG",
+    "lat": -21.0025,
+    "lon": 134.4029,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015510",
+    "name": "MOUNT CAVENAGH",
+    "lat": -25.9551,
+    "lon": 133.211,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015511",
+    "name": "CURTIN SPRINGS",
+    "lat": -25.3139,
+    "lon": 131.7571,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015519",
+    "name": "PALMER VALLEY",
+    "lat": -24.7495,
+    "lon": 133.2317,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015523",
+    "name": "GLEN HELEN",
+    "lat": -23.4062,
+    "lon": 132.2437,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015524",
+    "name": "IDRACOWRA",
+    "lat": -24.9949,
+    "lon": 133.7876,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015525",
+    "name": "BARROW CREEK",
+    "lat": -21.5317,
+    "lon": 133.8901,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015528",
+    "name": "YUENDUMU",
+    "lat": -22.2565,
+    "lon": 131.8011,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015530",
+    "name": "ELKEDRA",
+    "lat": -21.1661,
+    "lon": 135.446,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015531",
+    "name": "HERMANNSBURG",
+    "lat": -23.945,
+    "lon": 132.7749,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015534",
+    "name": "OORATIPPRA",
+    "lat": -21.9041,
+    "lon": 136.0741,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015535",
+    "name": "CONISTON",
+    "lat": -22.0498,
+    "lon": 132.495,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015536",
+    "name": "MARYVALE",
+    "lat": -24.6685,
+    "lon": 134.0721,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015537",
+    "name": "KURUNDI",
+    "lat": -20.5003,
+    "lon": 134.662,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015542",
+    "name": "ANNINGIE",
+    "lat": -21.8481,
+    "lon": 133.1228,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015545",
+    "name": "HARTS RANGE POLICE",
+    "lat": -22.9783,
+    "lon": 134.9173,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015547",
+    "name": "NEW MACDONALD DOWNS",
+    "lat": -22.6134,
+    "lon": 135.0359,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015554",
+    "name": "VAUGHAN SPRINGS",
+    "lat": -22.2984,
+    "lon": 130.85,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015559",
+    "name": "MARQUA",
+    "lat": -22.8024,
+    "lon": 137.2954,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015561",
+    "name": "MOUNT LIEBIG",
+    "lat": -23.2674,
+    "lon": 131.2733,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015569",
+    "name": "WILLOWRA",
+    "lat": -21.2759,
+    "lon": 132.623,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015572",
+    "name": "STIRLING",
+    "lat": -21.7325,
+    "lon": 133.7633,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015574",
+    "name": "ERLDUNDA",
+    "lat": -25.2219,
+    "lon": 133.1955,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015577",
+    "name": "DELMORE DOWNS",
+    "lat": -22.4515,
+    "lon": 134.8189,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015585",
+    "name": "AMMAROO",
+    "lat": -21.7507,
+    "lon": 135.2382,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015590",
+    "name": "ALICE SPRINGS AIRPORT",
+    "lat": -23.7951,
+    "lon": 133.889,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015595",
+    "name": "ANDADO",
+    "lat": -25.4108,
+    "lon": 135.2906,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015600",
+    "name": "NEW CROWN",
+    "lat": -25.6771,
+    "lon": 134.833,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015602",
+    "name": "JERVOIS",
+    "lat": -22.9494,
+    "lon": 136.1442,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015604",
+    "name": "LUCY CREEK",
+    "lat": -22.4415,
+    "lon": 136.2922,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015605",
+    "name": "LILLA CREEK",
+    "lat": -25.5607,
+    "lon": 134.0713,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015608",
+    "name": "MURRAY DOWNS",
+    "lat": -21.0435,
+    "lon": 134.6753,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015611",
+    "name": "NEWHAVEN",
+    "lat": -22.7231,
+    "lon": 131.169,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015612",
+    "name": "PAPUNYA",
+    "lat": -23.2044,
+    "lon": 131.9156,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015617",
+    "name": "SANTA TERESA",
+    "lat": -24.1308,
+    "lon": 134.3736,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015618",
+    "name": "TOBERMOREY",
+    "lat": -22.2741,
+    "lon": 137.973,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015620",
+    "name": "TARLTON DOWNS",
+    "lat": -22.6577,
+    "lon": 136.7998,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015623",
+    "name": "UNDOOLYA",
+    "lat": -23.6939,
+    "lon": 134.0352,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015624",
+    "name": "VICTORY DOWNS",
+    "lat": -25.9891,
+    "lon": 132.9748,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015626",
+    "name": "WOODGREEN",
+    "lat": -22.3959,
+    "lon": 134.2333,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015631",
+    "name": "BOND SPRINGS HOMESTEAD",
+    "lat": -23.5406,
+    "lon": 133.9211,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015635",
+    "name": "YULARA AIRPORT",
+    "lat": -25.1896,
+    "lon": 130.9737,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015640",
+    "name": "MULGA PARK",
+    "lat": -25.9053,
+    "lon": 131.6712,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015641",
+    "name": "THE GRANITES",
+    "lat": -20.5433,
+    "lon": 130.3173,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015645",
+    "name": "DEEP WELL",
+    "lat": -24.2992,
+    "lon": 134.1439,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015652",
+    "name": "WATARRKA",
+    "lat": -24.2918,
+    "lon": 131.549,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015660",
+    "name": "ULURU RANGERS",
+    "lat": -25.3602,
+    "lon": 131.0196,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015664",
+    "name": "WALUNGURRU AIRPORT",
+    "lat": -23.2656,
+    "lon": 129.3844,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "015666",
+    "name": "RABBIT FLAT",
+    "lat": -20.1823,
+    "lon": 130.0148,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015669",
+    "name": "NEUTRAL JUNCTION",
+    "lat": -21.5142,
+    "lon": 133.9933,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "015672",
+    "name": "DEAD BULLOCK SOAK",
+    "lat": -20.5337,
+    "lon": 129.9363,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016001",
+    "name": "WOOMERA AERODROME",
+    "lat": -31.1558,
+    "lon": 136.8054,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016003",
+    "name": "BULGUNNIA",
+    "lat": -30.1658,
+    "lon": 134.8928,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016005",
+    "name": "PORT AUGUSTA (CARRIEWERLOO STN)",
+    "lat": -32.3983,
+    "lon": 137.2269,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016006",
+    "name": "TARCOOLA (COMMONWEALTH HILL)",
+    "lat": -29.9434,
+    "lon": 134.1506,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016008",
+    "name": "AMATA AIRSTRIP",
+    "lat": -26.1035,
+    "lon": 131.2064,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016021",
+    "name": "KOKATHA",
+    "lat": -31.2609,
+    "lon": 135.2374,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016022",
+    "name": "KONDOOLKA",
+    "lat": -31.9955,
+    "lon": 134.8827,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016025",
+    "name": "WOOMERA (MAHANEWO)",
+    "lat": -31.7293,
+    "lon": 136.4448,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016027",
+    "name": "COOBER PEDY (MCDOUALL PEAK)",
+    "lat": -29.8409,
+    "lon": 134.9035,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016030",
+    "name": "MOUNT EBA",
+    "lat": -30.1809,
+    "lon": 135.6629,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016031",
+    "name": "TARCOOLA (MULGATHING)",
+    "lat": -30.2406,
+    "lon": 133.9885,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016033",
+    "name": "WOOMERA (OAKDEN HILLS)",
+    "lat": -31.6611,
+    "lon": 137.0382,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016043",
+    "name": "WOOMERA (SOUTH GAP STATION)",
+    "lat": -31.6338,
+    "lon": 137.6218,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016046",
+    "name": "THURLGA",
+    "lat": -32.4395,
+    "lon": 135.773,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016047",
+    "name": "TODMORDEN",
+    "lat": -27.1391,
+    "lon": 134.7575,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016048",
+    "name": "THE TWINS STATION",
+    "lat": -29.9964,
+    "lon": 135.3911,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016055",
+    "name": "YARDEA",
+    "lat": -32.3792,
+    "lon": 135.5247,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016056",
+    "name": "YUDNAPINNA",
+    "lat": -32.1232,
+    "lon": 137.1505,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016059",
+    "name": "TARCOOLA (MOBELLA)",
+    "lat": -29.8113,
+    "lon": 133.3603,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016062",
+    "name": "WIRRAMINNA HOMESTEAD",
+    "lat": -31.1994,
+    "lon": 135.2293,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016065",
+    "name": "ANDAMOOKA",
+    "lat": -30.449,
+    "lon": 137.1692,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016067",
+    "name": "MOUNT IVE",
+    "lat": -32.4398,
+    "lon": 136.0671,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016082",
+    "name": "MOUNT BARRY STATION",
+    "lat": -28.2415,
+    "lon": 134.9899,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016083",
+    "name": "HAMILTON STATION",
+    "lat": -26.7134,
+    "lon": 135.0782,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016090",
+    "name": "COOBER PEDY AIRPORT",
+    "lat": -29.0347,
+    "lon": 134.7222,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016095",
+    "name": "TIEYON",
+    "lat": -26.2085,
+    "lon": 133.8545,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "016097",
+    "name": "ERNABELLA (PUKATJA)",
+    "lat": -26.2635,
+    "lon": 132.1771,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "016099",
+    "name": "PIPALYATJARA",
+    "lat": -26.1618,
+    "lon": 129.1656,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "017004",
+    "name": "ANNA CREEK",
+    "lat": -28.8921,
+    "lon": 136.1688,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "017007",
+    "name": "OODNADATTA (ALLANDALE)",
+    "lat": -27.6286,
+    "lon": 135.5879,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017014",
+    "name": "BLINMAN",
+    "lat": -31.0939,
+    "lon": 138.6786,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017016",
+    "name": "CLIFTON HILLS",
+    "lat": -27.0181,
+    "lon": 138.8949,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017019",
+    "name": "CORDILLO DOWNS",
+    "lat": -26.7061,
+    "lon": 140.6261,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017020",
+    "name": "MUNGERANIE (COWARIE)",
+    "lat": -27.7025,
+    "lon": 138.3358,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "017028",
+    "name": "INNAMINCKA STATION",
+    "lat": -27.724,
+    "lon": 140.7633,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "017030",
+    "name": "MACUMBA",
+    "lat": -27.2533,
+    "lon": 135.6492,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017031",
+    "name": "MARREE",
+    "lat": -29.6451,
+    "lon": 138.0639,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "017036",
+    "name": "MUNGERANIE (MULKA)",
+    "lat": -28.3525,
+    "lon": 138.6534,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017037",
+    "name": "MULOORINA STATION (MULOORINA HOMESTEAD)",
+    "lat": -29.239,
+    "lon": 137.9058,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017038",
+    "name": "MARREE (MUNDOWDNA STATION)",
+    "lat": -29.7331,
+    "lon": 138.2329,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017039",
+    "name": "MARREE (MURNPEOWIE)",
+    "lat": -29.5897,
+    "lon": 139.0508,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017043",
+    "name": "OODNADATTA AIRPORT",
+    "lat": -27.5553,
+    "lon": 135.4456,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017045",
+    "name": "PANDIE PANDIE",
+    "lat": -26.1282,
+    "lon": 139.3894,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017054",
+    "name": "BLINMAN (WIRREALPA)",
+    "lat": -31.1278,
+    "lon": 138.9618,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017056",
+    "name": "GAMMON RANGES (WOOLTANA)",
+    "lat": -30.4132,
+    "lon": 139.4198,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017076",
+    "name": "MARREE (CLAYTON)",
+    "lat": -29.2781,
+    "lon": 138.3823,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017089",
+    "name": "KALAMURINA",
+    "lat": -27.7205,
+    "lon": 138.2548,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017111",
+    "name": "INNAMINCKA (DULLINGARI)",
+    "lat": -28.1484,
+    "lon": 140.8672,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017112",
+    "name": "MOOMBA (TIRRAWARRA)",
+    "lat": -27.6908,
+    "lon": 140.1066,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017115",
+    "name": "CAMERON CORNER (LINDON)",
+    "lat": -29.1266,
+    "lon": 140.9018,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "017130",
+    "name": "MARREE (CALLANNA)",
+    "lat": -29.7138,
+    "lon": 137.9017,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018012",
+    "name": "CEDUNA AMO",
+    "lat": -32.1297,
+    "lon": 133.6976,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018017",
+    "name": "PORT LINCOLN (BIG SWAMP)",
+    "lat": -34.6266,
+    "lon": 135.6992,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018019",
+    "name": "COULTA",
+    "lat": -34.3856,
+    "lon": 135.4698,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018030",
+    "name": "FOWLERS BAY",
+    "lat": -31.99,
+    "lon": 132.4372,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018033",
+    "name": "CEDUNA (GOODE)",
+    "lat": -31.9674,
+    "lon": 133.7658,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018043",
+    "name": "KOPPIO",
+    "lat": -34.4139,
+    "lon": 135.8224,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018045",
+    "name": "SHERINGA (LAKE HAMILTON)",
+    "lat": -33.9534,
+    "lon": 135.2682,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018047",
+    "name": "CEDUNA (MALTEE)",
+    "lat": -32.0723,
+    "lon": 133.9401,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018063",
+    "name": "PENONG",
+    "lat": -31.932,
+    "lon": 133.0056,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "018069",
+    "name": "ELLISTON",
+    "lat": -33.6501,
+    "lon": 134.888,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018077",
+    "name": "SMOKY BAY",
+    "lat": -32.3761,
+    "lon": 133.9369,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "018079",
+    "name": "STREAKY BAY",
+    "lat": -32.8092,
+    "lon": 134.2233,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "018091",
+    "name": "TUMBY BAY (WARRATTA VALE)",
+    "lat": -34.2603,
+    "lon": 136.2106,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018106",
+    "name": "NULLARBOR",
+    "lat": -31.4492,
+    "lon": 130.8976,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018107",
+    "name": "PORT LINCOLN (WOOLGA)",
+    "lat": -34.5911,
+    "lon": 135.7572,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "018110",
+    "name": "COOK",
+    "lat": -30.6143,
+    "lon": 130.4136,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "018114",
+    "name": "MARALINGA",
+    "lat": -30.1591,
+    "lon": 131.579,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018137",
+    "name": "PORT LINCOLN (WESTMERE)",
+    "lat": -34.8328,
+    "lon": 135.6985,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018182",
+    "name": "CEDUNA (UWORRA)",
+    "lat": -31.9661,
+    "lon": 133.3316,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "018218",
+    "name": "CEDUNA (NUNONG)",
+    "lat": -32.1133,
+    "lon": 133.2045,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "019001",
+    "name": "APPILA",
+    "lat": -33.0524,
+    "lon": 138.4277,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "019018",
+    "name": "HAWKER (HOLOWILIENA)",
+    "lat": -31.8777,
+    "lon": 138.8372,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "019024",
+    "name": "MELROSE",
+    "lat": -32.8274,
+    "lon": 138.1892,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "019032",
+    "name": "ORROROO",
+    "lat": -32.7335,
+    "lon": 138.6135,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "019046",
+    "name": "HAWKER (WARCOWIE)",
+    "lat": -31.775,
+    "lon": 138.6529,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "020000",
+    "name": "BIMBOWRIE",
+    "lat": -32.0498,
+    "lon": 140.162,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "020001",
+    "name": "BOOLCOOMATTA",
+    "lat": -31.9695,
+    "lon": 140.5436,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "020002",
+    "name": "COCKBURN",
+    "lat": -32.076,
+    "lon": 140.9969,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "020016",
+    "name": "MULYUNGARIE",
+    "lat": -31.5542,
+    "lon": 140.792,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "020017",
+    "name": "MUTOOROO",
+    "lat": -32.4467,
+    "lon": 140.9233,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "020048",
+    "name": "MANNA HILL (WADNAMINGA)",
+    "lat": -32.4932,
+    "lon": 140.2299,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "021010",
+    "name": "BRINKWORTH (BUNGAREE)",
+    "lat": -33.746,
+    "lon": 138.5625,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "021020",
+    "name": "GEORGETOWN",
+    "lat": -33.359,
+    "lon": 138.393,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "021042",
+    "name": "PORT BROUGHTON",
+    "lat": -33.6029,
+    "lon": 137.9348,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "022008",
+    "name": "MAITLAND",
+    "lat": -34.3745,
+    "lon": 137.6733,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "022011",
+    "name": "MOONTA",
+    "lat": -34.0672,
+    "lon": 137.5925,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "022013",
+    "name": "PORT VICTORIA",
+    "lat": -34.4941,
+    "lon": 137.4845,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "022018",
+    "name": "WAROOKA",
+    "lat": -34.9906,
+    "lon": 137.3995,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "022020",
+    "name": "WALLAROO",
+    "lat": -33.9282,
+    "lon": 137.6399,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "022807",
+    "name": "KINGSCOTE",
+    "lat": -35.656,
+    "lon": 137.6377,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "023000",
+    "name": "ADELAIDE (WEST TERRACE / NGAYIRDAPIRA)",
+    "lat": -34.9257,
+    "lon": 138.5832,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "023307",
+    "name": "KAPUNDA",
+    "lat": -34.3412,
+    "lon": 138.9155,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "023707",
+    "name": "BRIDGEWATER",
+    "lat": -35.0096,
+    "lon": 138.7568,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "023718",
+    "name": "GOOLWA COUNCIL DEPOT",
+    "lat": -35.4984,
+    "lon": 138.7657,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "023721",
+    "name": "HAPPY VALLEY RESERVOIR",
+    "lat": -35.0591,
+    "lon": 138.5662,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "023747",
+    "name": "STRATHALBYN",
+    "lat": -35.256,
+    "lon": 138.8901,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "024003",
+    "name": "RENMARK IRRIGATION",
+    "lat": -34.1656,
+    "lon": 140.7536,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "024013",
+    "name": "LOXTON (PYAP)",
+    "lat": -34.4442,
+    "lon": 140.4958,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "025015",
+    "name": "PINNAROO",
+    "lat": -35.268,
+    "lon": 140.9075,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026000",
+    "name": "BEACHPORT",
+    "lat": -37.4861,
+    "lon": 140.0115,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026012",
+    "name": "KINGSTON SE",
+    "lat": -36.8309,
+    "lon": 139.8526,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026016",
+    "name": "LUCINDALE POST OFFICE",
+    "lat": -36.9731,
+    "lon": 140.3664,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026018",
+    "name": "MILLICENT",
+    "lat": -37.5872,
+    "lon": 140.3426,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026026",
+    "name": "ROBE",
+    "lat": -37.1628,
+    "lon": 139.756,
+    "state": "SA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "026030",
+    "name": "BISCUIT FLAT (WOOLMIT)",
+    "lat": -37.0153,
+    "lon": 139.9612,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026095",
+    "name": "CAPE JAFFA (THE LIMESTONE)",
+    "lat": -36.9655,
+    "lon": 139.7164,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "026105",
+    "name": "ROBE AIRFIELD",
+    "lat": -37.1776,
+    "lon": 139.8054,
+    "state": "SA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027000",
+    "name": "AURUKUN SHIRE COUNCIL",
+    "lat": -13.3539,
+    "lon": 141.7208,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027015",
+    "name": "MORETON TELEGRAPH STATION",
+    "lat": -12.4536,
+    "lon": 142.6389,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "027031",
+    "name": "BAMAGA",
+    "lat": -10.8969,
+    "lon": 142.3844,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "027034",
+    "name": "BATAVIA DOWNS STATION",
+    "lat": -12.6616,
+    "lon": 142.6708,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027038",
+    "name": "HIGHBURY STATION",
+    "lat": -16.4231,
+    "lon": 143.1456,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027042",
+    "name": "WEIPA EASTERN AVE",
+    "lat": -12.6267,
+    "lon": 141.8836,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "027044",
+    "name": "MERLUNA",
+    "lat": -13.0633,
+    "lon": 142.4481,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027045",
+    "name": "WEIPA AERO",
+    "lat": -12.6778,
+    "lon": 141.9208,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027050",
+    "name": "HEATHLANDS NATIONAL PARK",
+    "lat": -11.7508,
+    "lon": 142.5822,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027054",
+    "name": "COCONUT ISLAND",
+    "lat": -10.0511,
+    "lon": 143.0686,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027058",
+    "name": "HORN ISLAND",
+    "lat": -10.5844,
+    "lon": 142.29,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027062",
+    "name": "PUNSAND BAY",
+    "lat": -10.7196,
+    "lon": 142.4585,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "027064",
+    "name": "PICCANINNY PLAINS STATION",
+    "lat": -13.1325,
+    "lon": 142.7872,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028000",
+    "name": "LAURA POST OFFICE",
+    "lat": -15.5581,
+    "lon": 144.4453,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028004",
+    "name": "PALMERVILLE",
+    "lat": -15.9999,
+    "lon": 144.0754,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "028008",
+    "name": "LOCKHART RIVER AIRPORT",
+    "lat": -12.785,
+    "lon": 143.3047,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028010",
+    "name": "FAIRVIEW OUTSTATION",
+    "lat": -15.4992,
+    "lon": 144.2816,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028012",
+    "name": "KOOLBURRA",
+    "lat": -15.3167,
+    "lon": 143.9558,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028014",
+    "name": "LILYVALE STATION",
+    "lat": -14.4894,
+    "lon": 143.6775,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028015",
+    "name": "WROTHAM PARK",
+    "lat": -16.6622,
+    "lon": 143.9969,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028025",
+    "name": "PINNACLE",
+    "lat": -15.6867,
+    "lon": 143.5633,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "028027",
+    "name": "KIMBA",
+    "lat": -15.6119,
+    "lon": 143.4786,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029001",
+    "name": "AUGUSTUS DOWNS STATION",
+    "lat": -18.5447,
+    "lon": 139.8706,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029004",
+    "name": "BURKETOWN POST OFFICE",
+    "lat": -17.7425,
+    "lon": 139.5475,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029005",
+    "name": "BUNDA BUNDA",
+    "lat": -20.0744,
+    "lon": 142.2089,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029007",
+    "name": "CANOBIE",
+    "lat": -19.4764,
+    "lon": 140.9317,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029008",
+    "name": "CLONCURRY MCILLWRAITH ST",
+    "lat": -20.7087,
+    "lon": 140.5182,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029012",
+    "name": "CROYDON TOWNSHIP",
+    "lat": -18.2044,
+    "lon": 142.2447,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029013",
+    "name": "DONORS HILL STATION",
+    "lat": -18.7139,
+    "lon": 140.5472,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029014",
+    "name": "DUNBAR STATION",
+    "lat": -16.0414,
+    "lon": 142.3786,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029016",
+    "name": "ESMERALDA STATION",
+    "lat": -18.8525,
+    "lon": 142.5742,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029022",
+    "name": "GRANADA STATION",
+    "lat": -20.0919,
+    "lon": 140.3675,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029023",
+    "name": "IFFLEY STATION",
+    "lat": -18.8702,
+    "lon": 141.2075,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029027",
+    "name": "KAMILAROI STATION",
+    "lat": -19.36,
+    "lon": 140.0414,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029028",
+    "name": "KARUMBA AIRPORT",
+    "lat": -17.4553,
+    "lon": 140.8314,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029029",
+    "name": "KOOLATAH STATION",
+    "lat": -15.8931,
+    "lon": 142.4439,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029031",
+    "name": "LAWN HILL",
+    "lat": -18.5806,
+    "lon": 138.5811,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029036",
+    "name": "MILLUNGERA STATION",
+    "lat": -19.8581,
+    "lon": 141.5567,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029037",
+    "name": "MIRANDA DOWNS STATION",
+    "lat": -17.3297,
+    "lon": 141.8797,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029038",
+    "name": "KOWANYAMA AIRPORT",
+    "lat": -15.4818,
+    "lon": 141.7483,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "029039",
+    "name": "MORNINGTON ISLAND",
+    "lat": -16.664,
+    "lon": 139.1837,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029040",
+    "name": "MORSTONE STATION",
+    "lat": -19.5261,
+    "lon": 138.3664,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029045",
+    "name": "STRATHMORE",
+    "lat": -17.8619,
+    "lon": 142.5603,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029048",
+    "name": "VANROOK STATION",
+    "lat": -16.9683,
+    "lon": 141.9547,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029054",
+    "name": "INORUNIE STATION",
+    "lat": -18.2092,
+    "lon": 142.6575,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029057",
+    "name": "STIRLING STATION",
+    "lat": -17.1833,
+    "lon": 141.7108,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029061",
+    "name": "HERBERT VALE",
+    "lat": -18.9519,
+    "lon": 138.053,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029069",
+    "name": "WESTMORELAND STATION",
+    "lat": -17.3383,
+    "lon": 138.2508,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029075",
+    "name": "FORT CONSTANTINE STATION",
+    "lat": -20.4744,
+    "lon": 140.5825,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029083",
+    "name": "ARMRAYNALD STATION",
+    "lat": -17.6595,
+    "lon": 139.7565,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029085",
+    "name": "INKERMAN STATION",
+    "lat": -16.2333,
+    "lon": 141.4167,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029110",
+    "name": "RUTLAND PLAINS STATION",
+    "lat": -15.6386,
+    "lon": 141.8228,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029121",
+    "name": "WEST LEICHHARDT STATION",
+    "lat": -20.5958,
+    "lon": 139.6939,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029129",
+    "name": "DEVONCOURT STATION",
+    "lat": -21.215,
+    "lon": 140.2333,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029132",
+    "name": "MANFRED DOWNS STATION",
+    "lat": -20.14,
+    "lon": 141.43,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "029139",
+    "name": "SWEERS ISLAND",
+    "lat": -17.1142,
+    "lon": 139.5981,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030000",
+    "name": "ABINGDON DOWNS STATION",
+    "lat": -17.6083,
+    "lon": 143.1792,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030018",
+    "name": "GEORGETOWN POST OFFICE",
+    "lat": -18.2922,
+    "lon": 143.5483,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030019",
+    "name": "GILBERTON",
+    "lat": -19.2611,
+    "lon": 143.6861,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030024",
+    "name": "HUGHENDEN POST OFFICE",
+    "lat": -20.8447,
+    "lon": 144.1986,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030025",
+    "name": "HUGHENDEN STATION",
+    "lat": -20.8527,
+    "lon": 144.2261,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030030",
+    "name": "LYNDHURST STATION",
+    "lat": -19.2039,
+    "lon": 144.37,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030036",
+    "name": "MOUNT SURPRISE TOWNSHIP",
+    "lat": -18.1472,
+    "lon": 144.3183,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "030039",
+    "name": "OAK PARK STATION",
+    "lat": -19.2544,
+    "lon": 144.1536,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030041",
+    "name": "THE RANCH PRAIRIE",
+    "lat": -20.8708,
+    "lon": 144.6,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "030045",
+    "name": "RICHMOND POST OFFICE",
+    "lat": -20.7289,
+    "lon": 143.1425,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031009",
+    "name": "BUTCHER HILL STATION",
+    "lat": -15.8472,
+    "lon": 144.8753,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031032",
+    "name": "IRVINEBANK",
+    "lat": -17.4311,
+    "lon": 145.2028,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031036",
+    "name": "KURANDA RAILWAY STATION",
+    "lat": -16.8178,
+    "lon": 145.6383,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031037",
+    "name": "LOW ISLES LIGHTHOUSE",
+    "lat": -16.3842,
+    "lon": 145.5592,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "031049",
+    "name": "MULGRAVE MILL",
+    "lat": -17.0928,
+    "lon": 145.7906,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031052",
+    "name": "PORT DOUGLAS - WARNER ST",
+    "lat": -16.4833,
+    "lon": 145.4639,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "031107",
+    "name": "MOUNT OLIVE",
+    "lat": -15.4211,
+    "lon": 145.0622,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "032004",
+    "name": "CARDWELL MARINE PDE",
+    "lat": -18.2544,
+    "lon": 146.0192,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "032009",
+    "name": "BINGIL BAY",
+    "lat": -17.835,
+    "lon": 146.0986,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "032025",
+    "name": "INNISFAIL",
+    "lat": -17.5249,
+    "lon": 146.0345,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "032032",
+    "name": "MACKNADE SUGAR MILL",
+    "lat": -18.5867,
+    "lon": 146.2547,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "032104",
+    "name": "CHRISTMAS CREEK STATION",
+    "lat": -19.0947,
+    "lon": 145.3539,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "032118",
+    "name": "DUNK ISLAND RESORT",
+    "lat": -17.9367,
+    "lon": 146.1417,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "032122",
+    "name": "GREENVALE",
+    "lat": -18.9764,
+    "lon": 145.1125,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033001",
+    "name": "BURDEKIN SHIRE COUNCIL",
+    "lat": -19.5778,
+    "lon": 147.4063,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033012",
+    "name": "COLLAROY STATION",
+    "lat": -22.0328,
+    "lon": 149.185,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033023",
+    "name": "FARLEIGH CO-OP SUGAR MILL",
+    "lat": -21.1011,
+    "lon": 149.1022,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033035",
+    "name": "KALAMIA ESTATE",
+    "lat": -19.5244,
+    "lon": 147.4161,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033054",
+    "name": "NEBO",
+    "lat": -21.6889,
+    "lon": 148.6881,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "033059",
+    "name": "PLANE CREEK SUGAR MILL",
+    "lat": -21.427,
+    "lon": 149.216,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033060",
+    "name": "PLEYSTOWE SUGAR MILL",
+    "lat": -21.1417,
+    "lon": 149.0378,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033062",
+    "name": "RAVENSWOOD POST OFFICE",
+    "lat": -20.0997,
+    "lon": 146.8892,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "033065",
+    "name": "ST LAWRENCE POST OFFICE",
+    "lat": -22.3458,
+    "lon": 149.5356,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "033073",
+    "name": "WOODHOUSE",
+    "lat": -19.8314,
+    "lon": 147.1311,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033076",
+    "name": "YAAMBA",
+    "lat": -23.1333,
+    "lon": 150.3669,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033077",
+    "name": "PACIFIC HEIGHTS",
+    "lat": -23.0965,
+    "lon": 150.7343,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "033082",
+    "name": "STRATHMORE",
+    "lat": -20.4992,
+    "lon": 147.6278,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "033134",
+    "name": "ETON SUNWATER",
+    "lat": -21.2681,
+    "lon": 148.97,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "034007",
+    "name": "MOUNT MCCONNELL",
+    "lat": -20.7019,
+    "lon": 147.0175,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "034010",
+    "name": "TRAFALGAR STATION",
+    "lat": -20.4328,
+    "lon": 146.0131,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "034073",
+    "name": "SALTBUSH PARK",
+    "lat": -22.1367,
+    "lon": 148.9136,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "034085",
+    "name": "SELLHEIM",
+    "lat": -20.0083,
+    "lon": 146.435,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035000",
+    "name": "ALPHA POST OFFICE",
+    "lat": -23.65,
+    "lon": 146.6406,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "035001",
+    "name": "ANAKIE RICHARDSON ST",
+    "lat": -23.5522,
+    "lon": 147.7461,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035007",
+    "name": "BAUHINIA DOWNS STORE",
+    "lat": -24.5708,
+    "lon": 149.2919,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035021",
+    "name": "COMET POST OFFICE",
+    "lat": -23.6046,
+    "lon": 148.5447,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035026",
+    "name": "DUARINGA POST OFFICE",
+    "lat": -23.7139,
+    "lon": 149.6725,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035049",
+    "name": "GILLESPIE",
+    "lat": -24.5608,
+    "lon": 145.7869,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035065",
+    "name": "SPRINGSURE COMET ST",
+    "lat": -24.123,
+    "lon": 148.0856,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "035069",
+    "name": "TAMBO POST OFFICE",
+    "lat": -24.8819,
+    "lon": 146.2564,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "035070",
+    "name": "TAROOM POST OFFICE",
+    "lat": -25.6408,
+    "lon": 149.7958,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035077",
+    "name": "WARRINILLA",
+    "lat": -24.9214,
+    "lon": 148.6006,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035087",
+    "name": "BETANGA",
+    "lat": -23.6317,
+    "lon": 146.3439,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035103",
+    "name": "LANSDOWNE STATION",
+    "lat": -25.0636,
+    "lon": 146.2653,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035189",
+    "name": "CONSUELO",
+    "lat": -24.6553,
+    "lon": 148.4594,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "035289",
+    "name": "MT PLAYFAIR",
+    "lat": -24.8639,
+    "lon": 146.9478,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036004",
+    "name": "ARAMAC POST OFFICE",
+    "lat": -22.9717,
+    "lon": 145.245,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036007",
+    "name": "BARCALDINE POST OFFICE",
+    "lat": -23.5544,
+    "lon": 145.2883,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036008",
+    "name": "BOWEN DOWNS",
+    "lat": -22.4672,
+    "lon": 145.005,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036012",
+    "name": "CAMERON DOWNS",
+    "lat": -21.3747,
+    "lon": 144.2794,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "036018",
+    "name": "ELGIN DOWNS",
+    "lat": -22.0033,
+    "lon": 146.9219,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036022",
+    "name": "EVESHAM STATION",
+    "lat": -23.0311,
+    "lon": 143.7117,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036026",
+    "name": "ISISFORD POST OFFICE",
+    "lat": -24.2591,
+    "lon": 144.4406,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036037",
+    "name": "MUTTABURRA",
+    "lat": -22.595,
+    "lon": 144.5469,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "036050",
+    "name": "ULCANBAH",
+    "lat": -22.0231,
+    "lon": 145.9831,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036056",
+    "name": "LANDSBOROUGH DOWNS",
+    "lat": -21.5114,
+    "lon": 144.3989,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036137",
+    "name": "LISTOWEL DOWNS",
+    "lat": -25.2011,
+    "lon": 145.2269,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036139",
+    "name": "SURBITON STATION",
+    "lat": -22.9856,
+    "lon": 146.6189,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "036143",
+    "name": "BLACKALL TOWNSHIP",
+    "lat": -24.4214,
+    "lon": 145.4672,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037001",
+    "name": "AYRSHIRE DOWNS",
+    "lat": -21.9678,
+    "lon": 142.7214,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037007",
+    "name": "BRIGHTON DOWNS",
+    "lat": -23.3594,
+    "lon": 141.5628,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037010",
+    "name": "CAMOOWEAL TOWNSHIP",
+    "lat": -19.9225,
+    "lon": 138.1214,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037011",
+    "name": "CARANDOTTA STATION",
+    "lat": -21.9714,
+    "lon": 138.6117,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037015",
+    "name": "CORONA DOWNS",
+    "lat": -23.1258,
+    "lon": 143.4619,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037024",
+    "name": "HEADINGLY STATION",
+    "lat": -21.3225,
+    "lon": 138.2906,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037025",
+    "name": "KATANDRA",
+    "lat": -21.55,
+    "lon": 143.8031,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037028",
+    "name": "LUCKNOW STATION",
+    "lat": -22.7172,
+    "lon": 140.9172,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037030",
+    "name": "MALBOONA",
+    "lat": -21.8886,
+    "lon": 143.6019,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037033",
+    "name": "MELROSE",
+    "lat": -22.7414,
+    "lon": 143.3342,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037043",
+    "name": "URANDANGI",
+    "lat": -21.6119,
+    "lon": 138.3136,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037046",
+    "name": "ELDERSLIE",
+    "lat": -22.2903,
+    "lon": 142.4731,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "037049",
+    "name": "WARNAMBOOL DOWNS",
+    "lat": -22.8131,
+    "lon": 142.8325,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037052",
+    "name": "MUNDURIN STATION",
+    "lat": -22.8792,
+    "lon": 141.8364,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037055",
+    "name": "FLORA DOWNS",
+    "lat": -20.1153,
+    "lon": 138.8036,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037103",
+    "name": "ELROSE STATION",
+    "lat": -22.8156,
+    "lon": 140.11,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "037109",
+    "name": "ALDERLEY STATION",
+    "lat": -22.4936,
+    "lon": 139.6615,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038000",
+    "name": "BEDOURIE",
+    "lat": -24.3597,
+    "lon": 139.4714,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038002",
+    "name": "BIRDSVILLE POLICE STATION",
+    "lat": -25.9003,
+    "lon": 139.3492,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "038003",
+    "name": "BOULIA AIRPORT",
+    "lat": -22.9117,
+    "lon": 139.9039,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "038005",
+    "name": "CLUNY",
+    "lat": -24.5081,
+    "lon": 139.5881,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038006",
+    "name": "COORABULKA",
+    "lat": -23.7308,
+    "lon": 140.3075,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038007",
+    "name": "CURRAWILLA STATION",
+    "lat": -25.1425,
+    "lon": 141.3456,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038009",
+    "name": "GLENGYLE",
+    "lat": -24.7856,
+    "lon": 139.5919,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038010",
+    "name": "GLENORMISTON",
+    "lat": -22.9161,
+    "lon": 138.8042,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038012",
+    "name": "JUNDAH POST OFFICE",
+    "lat": -24.8303,
+    "lon": 143.0586,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038013",
+    "name": "KEEROONGOOLOO",
+    "lat": -25.9086,
+    "lon": 142.7878,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038014",
+    "name": "MARION DOWNS",
+    "lat": -23.365,
+    "lon": 139.6556,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038015",
+    "name": "MONKIRA",
+    "lat": -24.8217,
+    "lon": 140.5558,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "038017",
+    "name": "MOUNT LEONARD STATION",
+    "lat": -25.6883,
+    "lon": 140.7536,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038018",
+    "name": "RETREAT (BARCOO RIVER)",
+    "lat": -25.1961,
+    "lon": 143.2756,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038020",
+    "name": "ROSEBERTH STATION",
+    "lat": -25.79,
+    "lon": 139.5856,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038023",
+    "name": "TANBAR STATION",
+    "lat": -25.8417,
+    "lon": 141.9189,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038024",
+    "name": "WINDORAH EVAP",
+    "lat": -25.4197,
+    "lon": 142.6594,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "038031",
+    "name": "DURRIE STATION",
+    "lat": -25.6881,
+    "lon": 140.2283,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038032",
+    "name": "ROXBOROUGH DOWNS",
+    "lat": -22.5197,
+    "lon": 138.8347,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038052",
+    "name": "MUDGEACCA",
+    "lat": -23.0581,
+    "lon": 139.9583,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "038066",
+    "name": "MOUNT MARLOW",
+    "lat": -24.9453,
+    "lon": 143.7556,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039018",
+    "name": "BUSTARD HEAD LIGHTHOUSE",
+    "lat": -24.0222,
+    "lon": 151.7642,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039022",
+    "name": "CAMBOON STATION",
+    "lat": -25.0303,
+    "lon": 150.4342,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "039037",
+    "name": "FAIRYMEAD SUGAR MILL",
+    "lat": -24.791,
+    "lon": 152.3587,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039040",
+    "name": "GIN GIN POST OFFICE",
+    "lat": -24.9933,
+    "lon": 151.9606,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039049",
+    "name": "GRACEMERE - LUCAS ST",
+    "lat": -23.459,
+    "lon": 150.4557,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039067",
+    "name": "MOONMERA",
+    "lat": -23.5798,
+    "lon": 150.4044,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039070",
+    "name": "MT PERRY THE PINES",
+    "lat": -25.1694,
+    "lon": 151.6375,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039078",
+    "name": "PACIFIC SALT",
+    "lat": -23.5782,
+    "lon": 150.8222,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "039085",
+    "name": "SANDY CAPE LIGHTHOUSE",
+    "lat": -24.7297,
+    "lon": 153.2083,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "040043",
+    "name": "CAPE MORETON LIGHTHOUSE",
+    "lat": -27.0314,
+    "lon": 153.4661,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "040093",
+    "name": "GYMPIE",
+    "lat": -26.1831,
+    "lon": 152.6414,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "040096",
+    "name": "HELIDON POST OFFICE",
+    "lat": -27.5504,
+    "lon": 152.1246,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "040101",
+    "name": "IPSWICH",
+    "lat": -27.6117,
+    "lon": 152.7608,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "040126",
+    "name": "MARYBOROUGH",
+    "lat": -25.5132,
+    "lon": 152.7152,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "040913",
+    "name": "BRISBANE",
+    "lat": -27.4808,
+    "lon": 153.0389,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041011",
+    "name": "CAMBOOYA POST OFFICE",
+    "lat": -27.7072,
+    "lon": 151.865,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041013",
+    "name": "CANNING DOWNS",
+    "lat": -28.2263,
+    "lon": 152.065,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041019",
+    "name": "CONDAMINE PLAINS",
+    "lat": -27.7233,
+    "lon": 151.2869,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041053",
+    "name": "JONDARYAN POST OFFICE",
+    "lat": -27.3674,
+    "lon": 151.5899,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041082",
+    "name": "PITTSWORTH",
+    "lat": -27.7228,
+    "lon": 151.6361,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041095",
+    "name": "STANTHORPE",
+    "lat": -28.6632,
+    "lon": 151.929,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "041404",
+    "name": "ELLANGOWAN",
+    "lat": -27.9583,
+    "lon": 151.6636,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "042023",
+    "name": "MILES POST OFFICE",
+    "lat": -26.6581,
+    "lon": 150.1844,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "042059",
+    "name": "AUBURN",
+    "lat": -25.9525,
+    "lon": 150.6142,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "043000",
+    "name": "AMBY",
+    "lat": -26.5478,
+    "lon": 148.185,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "043009",
+    "name": "FOREST VALE",
+    "lat": -25.9281,
+    "lon": 147.8717,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "043020",
+    "name": "MITCHELL POST OFFICE",
+    "lat": -26.4888,
+    "lon": 147.9777,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "043035",
+    "name": "SURAT",
+    "lat": -27.1591,
+    "lon": 149.0702,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "043038",
+    "name": "WALLUMBILLA POST OFFICE",
+    "lat": -26.585,
+    "lon": 149.1865,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "043043",
+    "name": "YULEBA GARDEN ST",
+    "lat": -26.6133,
+    "lon": 149.3878,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044004",
+    "name": "BEECHAL",
+    "lat": -27.1383,
+    "lon": 144.7392,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044006",
+    "name": "BIDDENHAM",
+    "lat": -25.8031,
+    "lon": 146.425,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044010",
+    "name": "BOLLON MARY ST",
+    "lat": -28.0338,
+    "lon": 147.4783,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044013",
+    "name": "BOOTHULLA",
+    "lat": -26.3833,
+    "lon": 145.2167,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044026",
+    "name": "CUNNAMULLA POST OFFICE",
+    "lat": -28.0689,
+    "lon": 145.6822,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "044029",
+    "name": "DILLALAH",
+    "lat": -26.8583,
+    "lon": 146.0278,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044031",
+    "name": "DYNEVOR DOWNS",
+    "lat": -28.0911,
+    "lon": 144.3586,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044040",
+    "name": "GUMBARDO",
+    "lat": -26.1108,
+    "lon": 144.8728,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "044044",
+    "name": "IVANHOE DOWNS",
+    "lat": -26.3453,
+    "lon": 147.1258,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044050",
+    "name": "MORVEN POST OFFICE",
+    "lat": -26.4156,
+    "lon": 147.1131,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044052",
+    "name": "MOUNT MORRIS",
+    "lat": -25.8128,
+    "lon": 145.5731,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044057",
+    "name": "NIVE DOWNS",
+    "lat": -25.4992,
+    "lon": 146.5442,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044070",
+    "name": "VICTORIA DOWNS",
+    "lat": -26.375,
+    "lon": 147.0394,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044075",
+    "name": "WOODLANDS",
+    "lat": -27.265,
+    "lon": 148.0814,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044081",
+    "name": "CHARLOTTE PLAINS",
+    "lat": -28.0814,
+    "lon": 146.1797,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044154",
+    "name": "WHYENBAH",
+    "lat": -28.3875,
+    "lon": 148.3111,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "044181",
+    "name": "HUNGERFORD (PAROO RIVER)",
+    "lat": -28.9972,
+    "lon": 144.4094,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045002",
+    "name": "BULLOO DOWNS",
+    "lat": -28.5267,
+    "lon": 142.9614,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045003",
+    "name": "SOUTH COMONGIN",
+    "lat": -26.9011,
+    "lon": 144.3386,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045004",
+    "name": "COMONGIN NORTH",
+    "lat": -26.5031,
+    "lon": 144.3286,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045005",
+    "name": "DURHAM DOWNS",
+    "lat": -27.0797,
+    "lon": 141.9078,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045010",
+    "name": "MT HOWITT",
+    "lat": -26.5122,
+    "lon": 142.2731,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045011",
+    "name": "MOUNT MARGARET",
+    "lat": -26.8989,
+    "lon": 143.3381,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045012",
+    "name": "NAPPA MERRIE",
+    "lat": -27.5964,
+    "lon": 141.1069,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045014",
+    "name": "NORLEY STATION",
+    "lat": -27.7722,
+    "lon": 143.8728,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "045018",
+    "name": "THYLUNGRA STATION",
+    "lat": -26.0853,
+    "lon": 143.4483,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045024",
+    "name": "NOCKATUNGA STATION",
+    "lat": -27.7217,
+    "lon": 142.7131,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045029",
+    "name": "ORIENTOS STATION",
+    "lat": -28.0722,
+    "lon": 141.5317,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045052",
+    "name": "NOOYEAH DOWNS",
+    "lat": -28.04,
+    "lon": 143.5542,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "045063",
+    "name": "CAMERON CORNER",
+    "lat": -28.9967,
+    "lon": 141.0,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046002",
+    "name": "WANAARING (BORRONA DOWNS)",
+    "lat": -29.7656,
+    "lon": 143.1142,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "046003",
+    "name": "YANCO GLEN (CORONA HOMESTEAD)",
+    "lat": -31.2873,
+    "lon": 141.4437,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046006",
+    "name": "TIBOOBURRA (FORT GREY)",
+    "lat": -29.0885,
+    "lon": 141.2033,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "046013",
+    "name": "BROKEN HILL (KOONAWARRA)",
+    "lat": -30.9719,
+    "lon": 142.3229,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046015",
+    "name": "BROKEN HILL (LANGAWIRRA)",
+    "lat": -31.4459,
+    "lon": 142.1352,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046022",
+    "name": "WILCANNIA (MOUNT MURCHISON)",
+    "lat": -31.4469,
+    "lon": 143.6548,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046033",
+    "name": "BROKEN HILL (STURTS MEADOWS)",
+    "lat": -31.2972,
+    "lon": 141.7103,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046043",
+    "name": "WILCANNIA (REID ST)",
+    "lat": -31.5631,
+    "lon": 143.3747,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "046052",
+    "name": "WANAARING (OWEN DOWNS)",
+    "lat": -29.4089,
+    "lon": 143.3808,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046093",
+    "name": "WHITE CLIFFS (KAYRUNNERA)",
+    "lat": -30.6682,
+    "lon": 142.5438,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046115",
+    "name": "TILPA (TREVALLYN)",
+    "lat": -31.3885,
+    "lon": 144.0422,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "046124",
+    "name": "TIBOOBURRA (BRINDIWILPA)",
+    "lat": -29.8718,
+    "lon": 142.434,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047000",
+    "name": "GUM LAKE (ALBEMARLE)",
+    "lat": -32.5271,
+    "lon": 143.371,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047019",
+    "name": "MENINDEE POST OFFICE",
+    "lat": -32.3937,
+    "lon": 142.4173,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "047031",
+    "name": "BROKEN HILL (STEPHENS CREEK RESERVOIR)",
+    "lat": -31.8803,
+    "lon": 141.593,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047033",
+    "name": "POONCARIE (TARCOOLA)",
+    "lat": -33.4268,
+    "lon": 142.5719,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047053",
+    "name": "WENTWORTH POST OFFICE",
+    "lat": -34.1065,
+    "lon": 141.9189,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "047062",
+    "name": "BROKEN HILL (BUCKALOW)",
+    "lat": -32.6569,
+    "lon": 141.2376,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047079",
+    "name": "CAL LAL (KULCURNA)",
+    "lat": -34.0452,
+    "lon": 141.0661,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047093",
+    "name": "WENTWORTH (BURTUNDY)",
+    "lat": -33.7492,
+    "lon": 142.2205,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "047100",
+    "name": "WENTWORTH LOCK 10 (MURRAY RIVER)",
+    "lat": -34.1117,
+    "lon": 141.9033,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048006",
+    "name": "ENNGONIA (BELALIE)",
+    "lat": -29.1581,
+    "lon": 145.8068,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048015",
+    "name": "BREWARRINA HOSPITAL",
+    "lat": -29.9614,
+    "lon": 146.8651,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "048027",
+    "name": "COBAR MO",
+    "lat": -31.484,
+    "lon": 145.8294,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048031",
+    "name": "COLLARENEBRI (ALBERT ST)",
+    "lat": -29.5406,
+    "lon": 148.5817,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048034",
+    "name": "COBAR (DOUBLE GATES)",
+    "lat": -31.6888,
+    "lon": 145.483,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "048047",
+    "name": "COLLARENEBRI (GOONDOOBLUIE)",
+    "lat": -29.1507,
+    "lon": 148.6251,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048079",
+    "name": "WANAARING POST OFFICE",
+    "lat": -29.7029,
+    "lon": 144.1484,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048115",
+    "name": "COBAR (TAMBUA)",
+    "lat": -31.424,
+    "lon": 145.2539,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "048168",
+    "name": "ANGLEDOOL (ANGLEDOOL STATION)",
+    "lat": -29.1173,
+    "lon": 147.8993,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "049002",
+    "name": "BALRANALD (RSL)",
+    "lat": -34.6398,
+    "lon": 143.561,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "049049",
+    "name": "HATFIELD (BENILKIE)",
+    "lat": -33.7272,
+    "lon": 144.0175,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "049063",
+    "name": "IVANHOE (KILFERA)",
+    "lat": -33.052,
+    "lon": 144.1444,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "049103",
+    "name": "IVANHOE (BADEN PARK)",
+    "lat": -32.1698,
+    "lon": 144.2007,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "050011",
+    "name": "TOTTENHAM (BURDENDA)",
+    "lat": -32.1266,
+    "lon": 147.4067,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "050014",
+    "name": "CONDOBOLIN RETIREMENT VILLAGE",
+    "lat": -33.0818,
+    "lon": 147.1524,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "050039",
+    "name": "DANDALOO (TYRIE HOMESTEAD)",
+    "lat": -32.2367,
+    "lon": 147.5538,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "050045",
+    "name": "YALGOGRIN NORTH (ROLOMA)",
+    "lat": -33.8466,
+    "lon": 146.8271,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "051033",
+    "name": "NYNGAN (MUDALL)",
+    "lat": -31.8576,
+    "lon": 147.1343,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "051034",
+    "name": "WARREN (MUMBLEBONE)",
+    "lat": -31.4986,
+    "lon": 147.6865,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "051038",
+    "name": "NEVERTIRE (CLYDE ST)",
+    "lat": -31.835,
+    "lon": 147.7189,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "051039",
+    "name": "NYNGAN AIRPORT",
+    "lat": -31.5495,
+    "lon": 147.1961,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "051057",
+    "name": "MARRA CREEK (WOMBOIN)",
+    "lat": -30.6998,
+    "lon": 147.2232,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "052020",
+    "name": "MUNGINDI POST OFFICE",
+    "lat": -28.9786,
+    "lon": 148.9899,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "052023",
+    "name": "PILLIGA POST OFFICE",
+    "lat": -30.3515,
+    "lon": 148.8843,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "052026",
+    "name": "WALGETT COUNCIL DEPOT",
+    "lat": -30.0236,
+    "lon": 148.1218,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "054003",
+    "name": "BARRABA (CLIFTON LANE)",
+    "lat": -30.3833,
+    "lon": 150.6083,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "054004",
+    "name": "BINGARA POST OFFICE",
+    "lat": -29.8673,
+    "lon": 150.5715,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "054029",
+    "name": "WARIALDA POST OFFICE",
+    "lat": -29.5416,
+    "lon": 150.5754,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "055003",
+    "name": "SOMERTON (BECTIVE ESTATE)",
+    "lat": -30.9702,
+    "lon": 150.7354,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "055006",
+    "name": "BLACKVILLE POST OFFICE",
+    "lat": -31.6405,
+    "lon": 150.2356,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "055049",
+    "name": "QUIRINDI POST OFFICE",
+    "lat": -31.5086,
+    "lon": 150.6793,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "055057",
+    "name": "WILLOW TREE (VALAIS)",
+    "lat": -31.7731,
+    "lon": 150.2856,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "056028",
+    "name": "URALLA (SALISBURY COURT)",
+    "lat": -30.7338,
+    "lon": 151.5105,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "056029",
+    "name": "EMMAVILLE (STRATHBOGIE)",
+    "lat": -29.4558,
+    "lon": 151.4791,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "056032",
+    "name": "TENTERFIELD (FEDERATION PARK)",
+    "lat": -29.0479,
+    "lon": 152.0172,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "056207",
+    "name": "MARYLAND",
+    "lat": -28.5417,
+    "lon": 151.9909,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "057023",
+    "name": "EBOR (WONGWIBINDA)",
+    "lat": -30.2892,
+    "lon": 152.1701,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "057103",
+    "name": "KOOKABOOKRA",
+    "lat": -30.0093,
+    "lon": 152.0101,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "058012",
+    "name": "YAMBA PILOT STATION",
+    "lat": -29.4325,
+    "lon": 153.3632,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060002",
+    "name": "BULAHDELAH POST OFFICE",
+    "lat": -32.4129,
+    "lon": 152.2079,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060013",
+    "name": "FORSTER - TUNCURRY MARINE RESCUE",
+    "lat": -32.1756,
+    "lon": 152.5089,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "060021",
+    "name": "KRAMBACH (FIREFLY RD)",
+    "lat": -32.0564,
+    "lon": 152.2646,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060024",
+    "name": "MOORLAND (DENRO-AN)",
+    "lat": -31.7816,
+    "lon": 152.6684,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060030",
+    "name": "TAREE (PATANGA CL)",
+    "lat": -31.8908,
+    "lon": 152.4709,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060033",
+    "name": "KRAMBACH (BELLEVUE)",
+    "lat": -32.0927,
+    "lon": 152.2471,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060065",
+    "name": "WOOTTON",
+    "lat": -32.2942,
+    "lon": 152.3047,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "060103",
+    "name": "KRAMBACH (TIPPERARY)",
+    "lat": -32.0641,
+    "lon": 152.1243,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "061014",
+    "name": "BRANXTON (DALWOOD VINEYARD)",
+    "lat": -32.6385,
+    "lon": 151.4173,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "061055",
+    "name": "NEWCASTLE NOBBYS SIGNAL STATION AWS",
+    "lat": -32.9184,
+    "lon": 151.7985,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "062009",
+    "name": "CASSILIS (DALKEITH)",
+    "lat": -31.9963,
+    "lon": 149.9856,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "062013",
+    "name": "GULGONG POST OFFICE",
+    "lat": -32.3634,
+    "lon": 149.5329,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "062021",
+    "name": "MUDGEE (GEORGE STREET)",
+    "lat": -32.5956,
+    "lon": 149.5956,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "062026",
+    "name": "RYLSTONE (ILFORD RD)",
+    "lat": -32.8079,
+    "lon": 149.977,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "063035",
+    "name": "HILL END POST OFFICE",
+    "lat": -33.0362,
+    "lon": 149.4146,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "063043",
+    "name": "KURRAJONG HEIGHTS (BELLS LINE OF ROAD)",
+    "lat": -33.5347,
+    "lon": 150.6337,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "064007",
+    "name": "NEILREX (CAIGAN)",
+    "lat": -31.7231,
+    "lon": 149.2558,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "064008",
+    "name": "COONABARABRAN (SHOWGROUNDS)",
+    "lat": -31.2786,
+    "lon": 149.2786,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "065034",
+    "name": "WELLINGTON (D&J RURAL)",
+    "lat": -32.5635,
+    "lon": 148.9503,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "065088",
+    "name": "FORBES IRON BRIDGE (LACHLAN RIVER)",
+    "lat": -33.4,
+    "lon": 148.0167,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "067015",
+    "name": "BRINGELLY (MARYLAND)",
+    "lat": -33.9696,
+    "lon": 150.725,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "068003",
+    "name": "BERRY (MUSUEM)",
+    "lat": -34.7751,
+    "lon": 150.6985,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "068007",
+    "name": "CAMDEN (BROWNLOW HILL)",
+    "lat": -34.0254,
+    "lon": 150.6455,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "068044",
+    "name": "MITTAGONG (ALFRED STREET)",
+    "lat": -34.4472,
+    "lon": 150.4566,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "068213",
+    "name": "NOWRA BOAT SHED (SHOALHAVEN RIVER)",
+    "lat": -34.8667,
+    "lon": 150.605,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069002",
+    "name": "BEGA (NEWTOWN ROAD)",
+    "lat": -36.6883,
+    "lon": 149.838,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069015",
+    "name": "EDEN (MARINE RESCUE EDEN)",
+    "lat": -37.075,
+    "lon": 149.914,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069017",
+    "name": "MONTAGUE ISLAND LIGHTHOUSE",
+    "lat": -36.2519,
+    "lon": 150.2275,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069018",
+    "name": "MORUYA HEADS PILOT STATION",
+    "lat": -35.9093,
+    "lon": 150.1532,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "069022",
+    "name": "NAROOMA (MARINE RESCUE)",
+    "lat": -36.2144,
+    "lon": 150.1358,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069032",
+    "name": "WAPENGO LAKE ROAD",
+    "lat": -36.6045,
+    "lon": 150.0191,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "069036",
+    "name": "BODALLA POST OFFICE",
+    "lat": -36.0876,
+    "lon": 150.051,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "069055",
+    "name": "GREEN CAPE LIGHTHOUSE",
+    "lat": -37.2614,
+    "lon": 150.0497,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "070005",
+    "name": "BOMBALA (THERRY STREET)",
+    "lat": -36.9113,
+    "lon": 149.2379,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "070025",
+    "name": "CROOKWELL POST OFFICE",
+    "lat": -34.4578,
+    "lon": 149.4693,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "070032",
+    "name": "FAIRLIGHT STATION",
+    "lat": -35.2286,
+    "lon": 148.9143,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "070064",
+    "name": "MICHELAGO (SOGLIO)",
+    "lat": -35.6797,
+    "lon": 149.1601,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "070080",
+    "name": "TARALGA (COMMUNITY GARDEN)",
+    "lat": -34.4002,
+    "lon": 149.8174,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "070131",
+    "name": "WOODHOUSELEE (LEESTON)",
+    "lat": -34.545,
+    "lon": 149.6246,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "072042",
+    "name": "TARCUTTA POST OFFICE",
+    "lat": -35.2765,
+    "lon": 147.7362,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "073029",
+    "name": "MURRUMBURRAH (HISTORICAL SOCIETY)",
+    "lat": -34.55,
+    "lon": 148.351,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "073055",
+    "name": "MUNDARLO (YABTREE)",
+    "lat": -35.0996,
+    "lon": 147.7767,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "074005",
+    "name": "BARELLAN POST OFFICE",
+    "lat": -34.2849,
+    "lon": 146.5714,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "074108",
+    "name": "DARLINGTON POINT (TUBBO)",
+    "lat": -34.6313,
+    "lon": 146.0941,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "074110",
+    "name": "URANA POST OFFICE",
+    "lat": -35.3305,
+    "lon": 146.2652,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "074128",
+    "name": "DENILIQUIN (VISITOR INFORMATION CENTRE)",
+    "lat": -35.5283,
+    "lon": 144.9651,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "074129",
+    "name": "MATHOURA (MATHOURA STATION)",
+    "lat": -35.7228,
+    "lon": 144.7865,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "075006",
+    "name": "BINYA POST OFFICE",
+    "lat": -34.2289,
+    "lon": 146.3444,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "075007",
+    "name": "BOOLIGAL (BELMONT)",
+    "lat": -33.8436,
+    "lon": 144.9073,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "075012",
+    "name": "WAKOOL (CALIMO)",
+    "lat": -35.4201,
+    "lon": 144.6002,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "075039",
+    "name": "LAKE CARGELLIGO AIRPORT",
+    "lat": -33.2832,
+    "lon": 146.3706,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "075054",
+    "name": "CONARGO (PUCKAWIDGEE)",
+    "lat": -35.2849,
+    "lon": 145.2098,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "075069",
+    "name": "BOOLIGAL (ULONGA)",
+    "lat": -34.0965,
+    "lon": 144.6529,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "077047",
+    "name": "TYRRELL DOWNS",
+    "lat": -35.3629,
+    "lon": 142.9853,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "078010",
+    "name": "DIMBOOLA",
+    "lat": -36.4644,
+    "lon": 142.0327,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "079016",
+    "name": "WARRANOOKE (GLENORCHY)",
+    "lat": -36.7266,
+    "lon": 142.7318,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "079028",
+    "name": "LONGERENONG",
+    "lat": -36.6722,
+    "lon": 142.2991,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "080015",
+    "name": "ECHUCA AERODROME",
+    "lat": -36.1639,
+    "lon": 144.7639,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "080023",
+    "name": "KERANG",
+    "lat": -35.7466,
+    "lon": 143.935,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "080024",
+    "name": "KERANG (MERAN DOWNS)",
+    "lat": -35.8679,
+    "lon": 143.7995,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "082001",
+    "name": "BEECHWORTH COMPOSITE",
+    "lat": -36.3702,
+    "lon": 146.7132,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "082024",
+    "name": "KOETONG",
+    "lat": -36.1523,
+    "lon": 147.4938,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "082045",
+    "name": "TALLANGATTA DCNR",
+    "lat": -36.2161,
+    "lon": 147.1764,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "083033",
+    "name": "WOODS POINT",
+    "lat": -37.5695,
+    "lon": 146.2543,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "084003",
+    "name": "BRUTHEN (POST OFFICE)",
+    "lat": -37.7073,
+    "lon": 147.8315,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "084016",
+    "name": "GABO ISLAND LIGHTHOUSE",
+    "lat": -37.5679,
+    "lon": 149.9158,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "085041",
+    "name": "INVERLOCH",
+    "lat": -38.6114,
+    "lon": 145.7053,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "085049",
+    "name": "LEONGATHA STH GIPPSLAND WATER",
+    "lat": -38.4842,
+    "lon": 145.9329,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "085073",
+    "name": "SEASPRAY (BURONG)",
+    "lat": -38.3183,
+    "lon": 147.1752,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "085091",
+    "name": "WALHALLA",
+    "lat": -37.9413,
+    "lon": 146.4524,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "085096",
+    "name": "WILSONS PROMONTORY LIGHTHOUSE",
+    "lat": -39.1297,
+    "lon": 146.4246,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "085137",
+    "name": "TARWIN LOWER (RIVERSIDE)",
+    "lat": -38.7197,
+    "lon": 145.9033,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "085282",
+    "name": "MIRBOO NORTH WATER BOARD",
+    "lat": -38.3712,
+    "lon": 146.1791,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "086079",
+    "name": "MORNINGTON",
+    "lat": -38.2358,
+    "lon": 145.0667,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "086085",
+    "name": "NARRE WARREN NORTH (NARRE WARREN NORTH",
+    "lat": -37.9886,
+    "lon": 145.3319,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "086194",
+    "name": "OUTTRIM",
+    "lat": -38.4949,
+    "lon": 145.7809,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "086338",
+    "name": "MELBOURNE (OLYMPIC PARK)",
+    "lat": -37.8255,
+    "lon": 144.9816,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "087036",
+    "name": "MACEDON FORESTRY",
+    "lat": -37.4155,
+    "lon": 144.5569,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "087046",
+    "name": "SCOTSBURN (MOUNT BONINYONG)",
+    "lat": -37.6719,
+    "lon": 143.94,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "088015",
+    "name": "CLUNES",
+    "lat": -37.3049,
+    "lon": 143.7776,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "088020",
+    "name": "DAYLESFORD",
+    "lat": -37.3431,
+    "lon": 144.1574,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "088029",
+    "name": "HEATHCOTE",
+    "lat": -36.9589,
+    "lon": 144.701,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "088043",
+    "name": "MARYBOROUGH",
+    "lat": -37.056,
+    "lon": 143.732,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090010",
+    "name": "BRANXHOLME (BASSETT)",
+    "lat": -37.8595,
+    "lon": 141.7708,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090013",
+    "name": "CAPE BRIDGEWATER",
+    "lat": -38.3215,
+    "lon": 141.406,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090015",
+    "name": "CAPE OTWAY LIGHTHOUSE",
+    "lat": -38.8557,
+    "lon": 143.513,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "090020",
+    "name": "CASTERTON (WARROCK)",
+    "lat": -37.435,
+    "lon": 141.3428,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "090045",
+    "name": "HAWKESDALE (POST OFFICE)",
+    "lat": -38.1058,
+    "lon": 142.3216,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090055",
+    "name": "MACARTHUR (POST OFFICE)",
+    "lat": -38.0339,
+    "lon": 141.9998,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090059",
+    "name": "NELSON",
+    "lat": -38.0329,
+    "lon": 141.0183,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090061",
+    "name": "PENNYROYAL CREEK",
+    "lat": -38.421,
+    "lon": 143.8348,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090067",
+    "name": "PORT CAMPBELL POST OFFICE",
+    "lat": -38.6197,
+    "lon": 142.9944,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090070",
+    "name": "PORTLAND",
+    "lat": -38.3453,
+    "lon": 141.5905,
+    "state": "VIC",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "090084",
+    "name": "WOOLSTHORPE",
+    "lat": -38.183,
+    "lon": 142.4677,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "090171",
+    "name": "PORTLAND AIRPORT",
+    "lat": -38.3148,
+    "lon": 141.4705,
+    "state": "VIC",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "091000",
+    "name": "DELORAINE (ATHOL)",
+    "lat": -41.5211,
+    "lon": 146.7158,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "091011",
+    "name": "CAPE GRIM (WOOLNORTH)",
+    "lat": -40.6842,
+    "lon": 144.7181,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "091040",
+    "name": "HAMPSHIRE (NEENA ROAD)",
+    "lat": -41.247,
+    "lon": 145.773,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "091044",
+    "name": "IRISHTOWN",
+    "lat": -40.9136,
+    "lon": 145.145,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "091053",
+    "name": "LILYDALE POST OFFICE",
+    "lat": -41.25,
+    "lon": 147.2169,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "091109",
+    "name": "YOLLA (SEA VIEW)",
+    "lat": -41.1415,
+    "lon": 145.7061,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092001",
+    "name": "APSLAWN",
+    "lat": -41.9525,
+    "lon": 148.1839,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092003",
+    "name": "BICHENO (COUNCIL DEPOT)",
+    "lat": -41.8739,
+    "lon": 148.3036,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092008",
+    "name": "CRANBROOK (CRANBROOK HOUSE)",
+    "lat": -42.0117,
+    "lon": 148.0747,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "092010",
+    "name": "MARIA ISLAND (DARLINGTON)",
+    "lat": -42.5844,
+    "lon": 148.0636,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092011",
+    "name": "GLADSTONE (OLD POST OFFICE)",
+    "lat": -40.9589,
+    "lon": 148.0086,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092024",
+    "name": "MATHINNA (FINGAL ROAD)",
+    "lat": -41.4703,
+    "lon": 147.8919,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092029",
+    "name": "ORMLEY",
+    "lat": -41.7197,
+    "lon": 147.8244,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "092040",
+    "name": "SWANSEA (BELMONT)",
+    "lat": -42.0694,
+    "lon": 148.0683,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092045",
+    "name": "LARAPUNA (EDDYSTONE POINT)",
+    "lat": -40.9928,
+    "lon": 148.3467,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "092053",
+    "name": "COLES BAY (FREYCINET)",
+    "lat": -42.1253,
+    "lon": 148.3025,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092124",
+    "name": "MARIA ISLAND (POINT LESUEUR)",
+    "lat": -42.6621,
+    "lon": 148.0179,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "092148",
+    "name": "SWANSEA (FRANCIS STREET)",
+    "lat": -42.1381,
+    "lon": 148.0736,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "093014",
+    "name": "OATLANDS POST OFFICE",
+    "lat": -42.3006,
+    "lon": 147.3711,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "094010",
+    "name": "CAPE BRUNY LIGHTHOUSE",
+    "lat": -43.4892,
+    "lon": 147.1453,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "094029",
+    "name": "HOBART (ELLERSLIE ROAD)",
+    "lat": -42.8897,
+    "lon": 147.3278,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "094030",
+    "name": "HOBART BOTANICAL GARDENS",
+    "lat": -42.8667,
+    "lon": 147.3322,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "094155",
+    "name": "TASMAN ISLAND",
+    "lat": -43.2397,
+    "lon": 148.0025,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "095003",
+    "name": "BUSHY PARK (BUSHY PARK ESTATES)",
+    "lat": -42.7097,
+    "lon": 146.8983,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "096046",
+    "name": "MIENA DAM",
+    "lat": -41.9822,
+    "lon": 146.7228,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097000",
+    "name": "CAPE SORELL",
+    "lat": -42.1986,
+    "lon": 145.17,
+    "state": "TAS",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "097014",
+    "name": "WARATAH (MOUNT ROAD)",
+    "lat": -41.4372,
+    "lon": 145.5258,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097020",
+    "name": "LAKE MARGARET POWER STATION",
+    "lat": -42.0042,
+    "lon": 145.5436,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097021",
+    "name": "RENISON BELL",
+    "lat": -41.7947,
+    "lon": 145.4373,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097023",
+    "name": "CORINNA",
+    "lat": -41.6508,
+    "lon": 145.0783,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097061",
+    "name": "STRATHGORDON (GORDON POWER STATION)",
+    "lat": -42.7411,
+    "lon": 145.9825,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097072",
+    "name": "STRAHAN AERODROME",
+    "lat": -42.155,
+    "lon": 145.2908,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "097080",
+    "name": "LOW ROCKY POINT",
+    "lat": -42.9831,
+    "lon": 145.5025,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "099000",
+    "name": "CAPE BARREN ISLAND (LONG BEACH)",
+    "lat": -40.3803,
+    "lon": 148.0061,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "099001",
+    "name": "DEAL ISLAND",
+    "lat": -39.4764,
+    "lon": 147.3153,
+    "state": "TAS",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200001",
+    "name": "MIDDLE PERCY ISLAND",
+    "lat": -21.6628,
+    "lon": 150.2711,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200283",
+    "name": "WILLIS ISLAND",
+    "lat": -16.2878,
+    "lon": 149.9652,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200284",
+    "name": "COCOS ISLAND AIRPORT",
+    "lat": -12.1892,
+    "lon": 96.8344,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200288",
+    "name": "NORFOLK ISLAND AERO",
+    "lat": -29.0389,
+    "lon": 167.9408,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200375",
+    "name": "LORD HOWE ISLAND (ORLANDO)",
+    "lat": -31.5526,
+    "lon": 159.0786,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200389",
+    "name": "LORD HOWE ISLAND (MILKY WAY)",
+    "lat": -31.5187,
+    "lon": 159.0592,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200704",
+    "name": "MARION REEF",
+    "lat": -19.0964,
+    "lon": 152.3892,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200731",
+    "name": "POINT FAWCETT",
+    "lat": -11.7628,
+    "lon": 130.03,
+    "state": "NT",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200733",
+    "name": "HOME ISLAND",
+    "lat": -12.1122,
+    "lon": 96.8933,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200735",
+    "name": "ADELE ISLAND",
+    "lat": -15.5114,
+    "lon": 123.1556,
+    "state": "WA",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200736",
+    "name": "CREAL REEF",
+    "lat": -20.5303,
+    "lon": 150.3773,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200783",
+    "name": "FLINDERS REEF",
+    "lat": -17.7195,
+    "lon": 148.4478,
+    "state": "QLD",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200784",
+    "name": "BROWSE ISLAND",
+    "lat": -14.1093,
+    "lon": 123.5476,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200786",
+    "name": "CAPE WESSEL",
+    "lat": -11.0047,
+    "lon": 136.7586,
+    "state": "NT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200790",
+    "name": "CHRISTMAS ISLAND AERO",
+    "lat": -10.4515,
+    "lon": 105.689,
+    "state": "WA",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200825",
+    "name": "NORFOLK ISLAND (CASCADE)",
+    "lat": -29.036,
+    "lon": 167.9708,
+    "state": "NSW",
+    "data_tier": "others"
+  },
+  {
+    "station_id": "200831",
+    "name": "GANNET CAY",
+    "lat": -21.9769,
+    "lon": 152.4707,
+    "state": "QLD",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "200839",
+    "name": "LORD HOWE ISLAND AERO",
+    "lat": -31.5421,
+    "lon": 159.0786,
+    "state": "NSW",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "300000",
+    "name": "DAVIS",
+    "lat": -68.5744,
+    "lon": 77.9672,
+    "state": "ANT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "300004",
+    "name": "MACQUARIE ISLAND",
+    "lat": -54.4994,
+    "lon": 158.9369,
+    "state": "ANT",
+    "data_tier": "selected"
+  },
+  {
+    "station_id": "300017",
+    "name": "CASEY",
+    "lat": -66.2825,
+    "lon": 110.5231,
+    "state": "ANT",
+    "data_tier": "selected"
+  }
+]

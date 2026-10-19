@@ -1,0 +1,79 @@
+/**
+ * DataTable - the exact values behind the chart (report §5.2; DR-05: every
+ * chart has a table equivalent). Same records as the chart, never a sample.
+ */
+
+import { useId, useState } from "react";
+import { formatDate } from "../utils/dates";
+import ExportLink from "./ExportLink";
+
+const PAGE_SIZE = 50;
+
+const QUALITY_LABEL = {
+  observed: "Quality-checked",
+  unverified: "Not yet checked",
+  interpolated: "Interpolated",
+  missing: "No reading",
+};
+
+export default function DataTable({ data }) {
+  const id = useId();
+  const records = data?.records ?? [];
+  const pages = Math.max(1, Math.ceil(records.length / PAGE_SIZE));
+  const queryKey = data ? `${data.query.station.station_id}|${data.query.variable.variable_code}|${data.query.start}|${data.query.end}` : "";
+  const [view, setView] = useState({ key: queryKey, page: 0 });
+  // A new query starts back on its first page.
+  const page = view.key === queryKey ? Math.min(view.page, pages - 1) : 0;
+  const goTo = (p) => setView({ key: queryKey, page: p });
+
+  if (!data || records.length === 0) return null;
+  const { unit, label } = data.query.variable;
+  const rows = records.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+
+  return (
+    <section className="data-table" aria-labelledby={`${id}-caption`}>
+      <ExportLink
+        query={{ stationId: data.query.station.station_id, variable: data.query.variable.variable_code, start: data.query.start, end: data.query.end }}
+        note={`${records.length.toLocaleString()} rows, the records in this table, with unit, quality flag and source`}
+      />
+      <div className="table-scroll">
+        <table>
+          <caption id={`${id}-caption`}>
+            {label} at {data.query.station.name}, {formatDate(data.query.start)} – {formatDate(data.query.end)}
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col" className="num">{label} ({unit})</th>
+              <th scope="col">Quality</th>
+              <th scope="col" className="num">Days covered</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.date}>
+                <td>{formatDate(r.date)}</td>
+                <td className="num">{r.value === null ? "—" : r.value}</td>
+                <td>{QUALITY_LABEL[r.quality_state]}</td>
+                <td className="num">{r.value === null ? "" : (r.accumulation_days ?? 1)}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      {pages > 1 && (
+        <nav className="pager" aria-label="Table pages">
+          <button type="button" onClick={() => goTo(page - 1)} disabled={page === 0}>
+            Previous
+          </button>
+          <span>
+            Page {page + 1} of {pages} · {records.length.toLocaleString()} days
+          </span>
+          <button type="button" onClick={() => goTo(page + 1)} disabled={page >= pages - 1}>
+            Next
+          </button>
+        </nav>
+      )}
+    </section>
+  );
+}
