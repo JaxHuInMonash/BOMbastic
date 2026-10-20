@@ -4,7 +4,17 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <title>BOMbastic</title>
+    <script>
+      // Set the theme before first paint so dark mode never flashes light.
+      // Same rule as src/utils/useColorScheme.js: saved choice, else the system.
+      try {
+        var saved = localStorage.getItem("bombastic-theme");
+        document.documentElement.dataset.theme =
+          saved === "light" || saved === "dark" ? saved
+          : matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

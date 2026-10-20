@@ -29,21 +29,21 @@
   -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --page: #0d0d0d;
-    --surface: #1a1a19;
-    --ink: #ffffff;
-    --ink-2: #c3c2b7;
-    --muted: #898781;
-    --grid: #2c2c2a;
-    --axis: #383835;
-    --ring: rgba(255, 255, 255, 0.1);
-    --accent: #3987e5;
-    --accent-wash: rgba(57, 135, 229, 0.16);
-    --critical: #d03b3b;
-  }
+/* Dark mode keys on <html data-theme="dark">, set from the system setting or
+   the toggle (utils/useColorScheme.js), not on the media query directly. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --page: #0d0d0d;
+  --surface: #1a1a19;
+  --ink: #ffffff;
+  --ink-2: #c3c2b7;
+  --muted: #898781;
+  --grid: #2c2c2a;
+  --axis: #383835;
+  --ring: rgba(255, 255, 255, 0.1);
+  --accent: #3987e5;
+  --accent-wash: rgba(57, 135, 229, 0.16);
+  --critical: #d03b3b;
 }
 
 * { box-sizing: border-box; }
@@ -94,13 +94,21 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 }
 
 .brand-lockup { display: flex; align-items: center; gap: 10px; padding-bottom: 2px; }
+/* The logo is a rounded square of its own, so only the shadow is added here. */
 .brand-mark {
-  display: grid; place-items: center; flex: none; width: 38px; height: 38px;
-  border-radius: 11px; background: var(--accent); color: #fff; font-size: 1.25rem; font-weight: 750;
-  box-shadow: 0 3px 10px rgba(42, 120, 214, 0.2);
+  display: block; flex: none; width: 68px; height: 68px;
+  border-radius: 13px; box-shadow: 0 3px 12px rgba(15, 42, 74, 0.28);
 }
-.brand-name { font-size: 1rem; line-height: 1.2; font-weight: 750; letter-spacing: 0.01em; }
-.brand-tagline { margin-top: 2px; color: var(--ink-2); font-size: 0.78rem; }
+.brand-lockup { gap: 14px; }
+.brand-name { font-size: 1.5rem; line-height: 1.15; font-weight: 750; letter-spacing: 0.01em; }
+.brand-tagline { margin-top: 3px; color: var(--ink-2); font-size: 0.92rem; }
+.header-actions { display: flex; gap: 8px; margin-left: auto; }
+.icon-button {
+  display: grid; place-items: center; flex: none; width: 34px; height: 34px;
+  padding: 0; border-radius: 8px; color: var(--ink-2); line-height: 1;
+}
+.icon-button:hover { color: var(--ink); }
+.close-button { font-size: 1.4rem; }
 .detail-header { display: grid; gap: 12px; padding: 14px; background: var(--surface); border: 1px solid var(--ring); border-radius: 10px; }
 .detail-header h1 { font-size: clamp(1.25rem, 1.8vw, 1.55rem); }
 .station-pickers { display: grid; gap: 8px; }
@@ -110,7 +118,7 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 .tabs button[aria-selected="true"] { color: var(--ink); font-weight: 600; border-bottom-color: var(--accent); }
 /* Compare: A and B wear their chart colours (chartTheme.js stationColor). */
 :root { --station-a: #2a78d6; --station-b: #eb6834; }
-@media (prefers-color-scheme: dark) { :root { --station-a: #3987e5; --station-b: #d95926; } }
+:root[data-theme="dark"] { --station-a: #3987e5; --station-b: #d95926; }
 .key-a, .key-b { display: inline-grid; place-items: center; width: 1.35em; height: 1.35em; border-radius: 4px; color: #fff; font-size: 0.8em; font-weight: 700; vertical-align: 0.1em; }
 .key-a { background: var(--station-a); }
 .key-b { background: var(--station-b); }
@@ -136,6 +144,20 @@ button:disabled, select:disabled { opacity: 0.5; cursor: default; }
 
 /* The selected station keeps the same pin, recoloured, and sits above the others. */
 .leaflet-marker-icon.station-pin--selected { filter: hue-rotate(160deg) saturate(1.6) brightness(1.05); }
+/* Rainfall-only stations: a lighter sky blue, so they don't read as Compare's station A. */
+.leaflet-marker-icon.station-pin--rainfall { filter: hue-rotate(-15deg) saturate(0.75) brightness(1.35); }
+/* Stations with temperature as well as rainfall: the same pin turned green. */
+.leaflet-marker-icon.station-pin--temperature { filter: hue-rotate(-80deg) saturate(1.3) brightness(0.95); }
+
+.map-legend {
+  position: absolute; z-index: 1000; left: 10px; bottom: 24px;
+  display: grid; gap: 4px; padding: 8px 10px; border-radius: 9px;
+  color: #17212d; background: rgba(255, 255, 255, 0.94); font-size: 0.76rem;
+  box-shadow: 0 3px 14px rgba(20, 36, 52, 0.16); pointer-events: none;
+}
+.map-legend span { display: flex; align-items: center; gap: 7px; }
+/* position: static undoes Leaflet's absolute positioning for marker images. */
+.map-legend img { position: static; width: 10px; height: 16px; margin: 0; }
 
 /* ---------------------------------------------------------------- controls */
 .control { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
@@ -215,12 +237,10 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
   --rain-4: #2a78d6; --rain-5: #1c5cab; --rain-6: #0d366b;
   --rain-missing: #cfcec7; --rain-hatch: #898781;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --rain-0: #26282b; --rain-1: #143a6b; --rain-2: #1c5cab; --rain-3: #2a78d6;
-    --rain-4: #5598e7; --rain-5: #86b6ef; --rain-6: #cde2fb;
-    --rain-missing: #3a3a37; --rain-hatch: #6e6d68;
-  }
+:root[data-theme="dark"] {
+  --rain-0: #26282b; --rain-1: #143a6b; --rain-2: #1c5cab; --rain-3: #2a78d6;
+  --rain-4: #5598e7; --rain-5: #86b6ef; --rain-6: #cde2fb;
+  --rain-missing: #3a3a37; --rain-hatch: #6e6d68;
 }
 .rain-calendar { position: relative; display: grid; gap: 6px; margin-top: 8px; }
 .rain-year-grid { display: block; width: 100%; max-width: 860px; height: auto; overflow: visible; }
@@ -241,7 +261,7 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .rain-multi { fill: var(--rain-0); }
 .rain-multi-dot { fill: var(--accent); }
 .rain-unverified { fill: var(--ink); opacity: 0.5; }
-@media (prefers-color-scheme: dark) { .rain-unverified { opacity: 0.3; } }
+:root[data-theme="dark"] .rain-unverified { opacity: 0.3; }
 .rain-legend { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 0.8rem; color: var(--ink-2); }
 .rain-legend li { display: inline-flex; align-items: center; gap: 5px; }
 .rain-legend svg { flex: none; }
@@ -276,7 +296,7 @@ fieldset.control > legend { float: left; margin-right: 8px; padding: 0; }
 .quality-key--missing, .quality-key--no_record { position: relative; }
 .quality-key--missing::before, .quality-key--no_record::before { content: "×"; position: absolute; inset: -4px 0 0; color: var(--muted); font-size: 15px; line-height: 1; text-align: center; }
 .quality-key--multi { border: 1.5px solid var(--accent); background: repeating-linear-gradient(135deg, var(--accent) 0 1.5px, transparent 1.5px 4px); }
-@media (prefers-color-scheme: dark) { .quality-key--unverified { background: rgba(195, 194, 183, 0.11); } }
+:root[data-theme="dark"] .quality-key--unverified { background: rgba(195, 194, 183, 0.11); }
 
 /* ---------------------------------------------------------------- table */
 .data-table { display: grid; gap: 8px; }

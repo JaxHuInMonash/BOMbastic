@@ -30,6 +30,7 @@ import { useObservations, useStations, useVariables } from "../api/hooks";
 import { resolveRange } from "../utils/ranges";
 import { canRelate } from "../utils/regression";
 import { companionOf } from "../utils/series";
+import logo from "../assets/logo.svg";
 import ChartPanel from "./ChartPanel";
 import CompareView from "./CompareView";
 import DataTable from "./DataTable";
@@ -37,6 +38,7 @@ import QualitySummary from "./QualitySummary";
 import QueryControls from "./QueryControls";
 import RegressionView from "./RegressionView";
 import StationMap from "./StationMap";
+import ThemeToggle from "./ThemeToggle";
 
 function effectiveVariable(station, chosen) {
   const has = (code) => station.variables.some((v) => v.variable_code === code);
@@ -76,6 +78,14 @@ export default function Dashboard() {
   const swap = () => {
     setCompareId(stationId);
     setStationId(compareId);
+  };
+  // The close button: back to the first screen, as if the page had just loaded.
+  const reset = () => {
+    setStationId(null);
+    setCompareId(null);
+    setChosenVariable("rainfall");
+    setRange({ preset: "1y" });
+    setMode("explore");
   };
   const variable = station ? effectiveVariable(station, chosenVariable) : null;
   const available = station?.variables.find((v) => v.variable_code === variable) ?? {};
@@ -124,10 +134,18 @@ export default function Dashboard() {
 
       <section className="detail-pane" aria-label="Selected station">
         <div className="brand-lockup">
-          <span className="brand-mark" aria-hidden="true">B</span>
+          <img className="brand-mark" src={logo} alt="" />
           <div>
             <p className="brand-name">BOMbastic</p>
             <p className="brand-tagline">Explore Australian weather data</p>
+          </div>
+          <div className="header-actions">
+            <ThemeToggle />
+            {station && (
+              <button type="button" className="icon-button close-button" onClick={reset} aria-label="Close and go back to the start" title="Back to the start">
+                ×
+              </button>
+            )}
           </div>
         </div>
         <header className="detail-header">
