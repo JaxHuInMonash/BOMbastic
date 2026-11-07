@@ -1,0 +1,191 @@
+"""
+Read-only access to the BOMbastic PostgreSQL database.
+
+Every query the API makes lives here, so the HTTP layer (api_v1.py) never
+writes SQL and can be tested against an in-memory stand-in.
+
+Connection settings come from the environment:
+    BOMBASTIC_DATABASE_URL   default postgresql://postgres@localhost:5432/bombastic
+    PGPASSWORD               read by the PostgreSQL client library itself, so
+                             the password never has to appear in the URL or code
+"""
+
+from __future__ import annotations
+
+import os
+from collections.abc import Generator
+from contextlib import contextmanager
+from datetime import date
+from decimal import Decimal
+from typing import TYPE_CHECKING, Literal, TypedDict, cast
+
+import psycopg
+from psycopg.rows import DictRow, dict_row
+
+if TYPE_CHECKING:   # LiteralString is in typing only from Python 3.11; only the type checker needs it
+    from typing_extensions import LiteralString
+
+DATABASE_URL = os.environ.get(
+    "BOMBASTIC_DATABASE_URL", "postgresql://postgres@localhost:5432/bombastic"
+)
+CONNECT_TIMEOUT_SECONDS = 5
+
+
+# ----------------------------------------------------------------- row shapes
+# What each query returns, column for column, so callers (and the type
+# checker) know the keys and types instead of seeing a bare dict.
+
+class VariableRow(TypedDict):
+    variable_code: str
+    label: str
+    unit: str
+    semantic_type: Literal["accumulation", "instantaneous", "extreme"]
+    default_chart: Literal["line", "bar", "scatter"]
+    interpolation_allowed: bool
+
+
+class StationRow(TypedDict):
+    station_id: str
+    name: str
+    state: str | None
+    latitude: float
+    longitude: float
+    is_active: bool
+
+
+class AvailabilityRow(TypedDict):
+    first_date: date | None
+    last_date: date | None
+
+
+class CoverageRow(StationRow):
+    variable_code: str
+    first_date: date
+    last_date: date
+    days_with_value: int
+
+
+class ObservationRow(TypedDict):
+    observed_date: date
+    value: Decimal | None
+    quality_state: Literal["observed", "unverified", "interpolated", "missing"]
+    accumulation_days: int | None
+    source_product: str | None
+    ingestion_run_id: int | None
+
+
+class DatabaseUnavailable(Exception):
+    """The database could not be reached. The API answers 503, not 500."""
+
+
+class SchemaOutOfDate(Exception):
+    """A table or view the API expects is missing: the schema script is older
+    than the code. The API answers 503 with the fix, rather than a bare 500."""
+
+
+@contextmanager
+def connect(url: str | None = None) -> Generator[psycopg.Connection[DictRow], None, None]:
+    try:
+        conn = psycopg.Connection[DictRow].connect(url or DATABASE_URL, row_factory=dict_row,
+                                                   autocommit=True, connect_timeout=CONNECT_TIMEOUT_SECONDS)
+    except psycopg.OperationalError as error:
+        raise DatabaseUnavailable(str(error).strip()) from error
+    try:
+        yield conn
+    finally:
+        conn.close()
+
+
+class Store:
+    """The queries the API needs, against one open connection."""
+
+    def __init__(self, conn: psycopg.Connection[DictRow]):
+        self.conn = conn
+
+    def ping(self) -> bool:
+        row = self.conn.execute("SELECT 1 AS ok").fetchone()
+        return row is not None and row["ok"] == 1
+
+    def variables(self) -> list[VariableRow]:
+        return cast(list[VariableRow], self.conn.execute("""
+            SELECT variable_code, label, unit, semantic_type, default_chart,
+                   interpolation_allowed
+            FROM bombastic.variables
+            ORDER BY variable_code
+        """).fetchall())
+
+    def variable(self, code: str) -> VariableRow | None:
+        return cast(VariableRow | None, self.conn.execute("""
+            SELECT variable_code, label, unit, semantic_type, default_chart,
+                   interpolation_allowed
+            FROM bombastic.variables
+            WHERE variable_code = %s
+        """, (code,)).fetchone())
+
+    def station(self, station_id: str) -> StationRow | None:
+        return cast(StationRow | None, self.conn.execute("""
+            SELECT station_id, name, state, latitude, longitude, is_active
+            FROM bombastic.stations
+            WHERE station_id = %s
+        """, (station_id,)).fetchone())
+
+    def availability(self, station_id: str, variable_code: str) -> AvailabilityRow:
+        """First and last date with a value, for this station and variable."""
+        row = self.conn.execute("""
+            SELECT MIN(observed_date) AS first_date, MAX(observed_date) AS last_date
+            FROM bombastic.observations
+            WHERE station_id = %s AND variable_code = %s AND value IS NOT NULL
+        """, (station_id, variable_code)).fetchone()
+        # An aggregate always returns one row; the check is for the type checker.
+        return cast(AvailabilityRow, row) if row else {"first_date": None, "last_date": None}
+
+    def station_coverage(self, station_ids: list[str] | None = None,
+                         variable_code: str | None = None,
+                         bbox: tuple[float, float, float, float] | None = None) -> list[CoverageRow]:
+        """One row per station and variable that has at least one value.
+
+        station_ids limits to those stations; variable_code keeps only stations
+        that have that variable (all their variables are still returned);
+        bbox is (min_lat, max_lat, min_lon, max_lon).
+        """
+        # LiteralString: only fixed SQL fragments are joined; values go in params.
+        where: list[LiteralString] = ["c.days_with_value > 0"]
+        params: list[object] = []
+        if station_ids is not None:
+            where.append("s.station_id = ANY(%s)")
+            params.append(station_ids)
+        if variable_code is not None:
+            where.append("""s.station_id IN (SELECT station_id FROM bombastic.station_coverage
+                                             WHERE variable_code = %s AND days_with_value > 0)""")
+            params.append(variable_code)
+        if bbox is not None:
+            where.append("s.latitude BETWEEN %s AND %s AND s.longitude BETWEEN %s AND %s")
+            params.extend(bbox)
+        try:
+            return cast(list[CoverageRow], self.conn.execute(f"""
+                SELECT s.station_id, s.name, s.state, s.latitude, s.longitude, s.is_active,
+                       c.variable_code, c.first_date, c.last_date, c.days_with_value
+                FROM bombastic.station_coverage c
+                JOIN bombastic.stations s USING (station_id)
+                WHERE {" AND ".join(where)}
+                ORDER BY s.station_id, c.variable_code
+            """, params).fetchall())
+        except psycopg.errors.UndefinedTable as error:
+            raise SchemaOutOfDate(
+                "bombastic.station_coverage does not exist. Re-run stations_database.sql, "
+                "which creates it, then any observations import refreshes it.") from error
+        except psycopg.errors.ObjectNotInPrerequisiteState as error:   # created WITH NO DATA
+            raise SchemaOutOfDate(
+                "bombastic.station_coverage has not been populated. Run "
+                "REFRESH MATERIALIZED VIEW bombastic.station_coverage;") from error
+
+    def observations(self, station_id: str, variable_code: str,
+                     start: date, end: date) -> list[ObservationRow]:
+        return cast(list[ObservationRow], self.conn.execute("""
+            SELECT observed_date, value, quality_state, accumulation_days,
+                   source_product, ingestion_run_id
+            FROM bombastic.observations
+            WHERE station_id = %s AND variable_code = %s
+              AND observed_date BETWEEN %s AND %s
+            ORDER BY observed_date
+        """, (station_id, variable_code, start, end)).fetchall())
